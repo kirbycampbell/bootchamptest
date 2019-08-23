@@ -1,44 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Contributor from "./Contributor";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_CONTRIBUTOR } from "./API/Queries";
 
-const LoggedInUser = () => (
-  <Query
-    query={gql`
-      {
-        contributors(where: { name: "Kirby Campbell" }) {
-          id
-          name
-          online
-          joinedDate
-          postItems {
-            id
-            title
-          }
-          upvoted {
-            id
-          }
-        }
-      }
-    `}
-  >
-    {({ loading, error, data }) => {
-      if (data.contributors !== undefined) {
-        console.log(data.contributors[0]);
-      }
-      if (loading) return <p>Good things take time....</p>;
-      if (error) return <p>Something went wrong...</p>;
+const LoggedInUser = props => {
+  const [typedUser, setTypedUser] = useState("");
+  const [user, setUser] = useState("Kirby Campbell");
 
-      return (
-        <div className="row">
-          {data.contributors.map(contributor => (
-            <Contributor key={contributor.id} contributor={contributor} />
-          ))}
-        </div>
-      );
-    }}
-  </Query>
-);
+  const { loading, error, data, refetch } = useQuery(GET_CONTRIBUTOR, {
+    variables: { name: user }
+  });
+
+  const searchForUser = () => {
+    setUser(typedUser);
+  };
+
+  return (
+    <div className="row">
+      <div>
+        <input
+          type="text"
+          placeholder="Type UserName"
+          value={typedUser}
+          onChange={e => setTypedUser(e.target.value)}
+        />
+        <button onClick={() => searchForUser()}>Search</button>
+      </div>
+
+      {!loading &&
+        !error &&
+        data.contributors.map(contributor => (
+          <Contributor key={contributor.id} contributor={contributor} />
+        ))}
+      {loading && <div>Loading!</div>}
+      {error && <div>Error!</div>}
+    </div>
+  );
+};
 
 export default LoggedInUser;
