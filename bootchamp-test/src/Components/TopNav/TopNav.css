@@ -1,0 +1,11 @@
+.Outer-TopNav {
+  width: 100%;
+  background-color: grey;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.Inner-TopNav {
+  text-align: center;
+  background-color: blue;
+}

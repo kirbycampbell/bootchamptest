@@ -25,6 +25,8 @@ const NewUser = props => {
       }
     });
   };
+
+  const signInContributor = () => {};
   const responseGoogle = response => {
     console.log(response);
   };
@@ -77,7 +79,7 @@ const NewUser = props => {
           <button
             className="btn-create"
             type="button"
-            onClick={() => mutateCreateContributor()}
+            onClick={() => signInContributor()}
           >
             Sign In
           </button>
