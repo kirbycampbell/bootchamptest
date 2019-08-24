@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Contributor from "./Contributor";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_CONTRIBUTOR } from "./API/Queries";
+import { GET_CONTRIBUTOR } from "../API/Queries";
 
 const LoggedInUser = props => {
   const [typedUser, setTypedUser] = useState("");
