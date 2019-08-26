@@ -2,9 +2,11 @@
   border: 1px solid rgba(0, 0, 0, 0.438);
   box-shadow: 3px 2px 15px 0px rgba(0, 0, 0, 0.514);
   border-radius: 5px;
-  padding: 40px;
-  height: 350px;
-  width: 350px;
+  padding: 4%;
+  height: 80%;
+  max-height: 350px;
+  width: 100%;
+  max-width: 350px;
   margin: auto;
 }
 
