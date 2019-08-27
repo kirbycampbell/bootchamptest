@@ -26,8 +26,8 @@ export const GET_CONTRIBUTOR = gql`
 `;
 
 export const SIGN_IN_CONTRIBUTOR = gql`
-  query SIGN_IN_CONTRIBUTOR($email: String!) {
-    contributors(where: { email: $email }) {
+  query SIGN_IN_CONTRIBUTOR($email: String!, $password: String!) {
+    contributors(where: { email: $email, password: $password }) {
       id
       name
       online

@@ -1,49 +1,94 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { NEW_CONTRIBUTOR_CREATE } from "../../API/Mutations";
 import { SIGN_IN_CONTRIBUTOR } from "../../API/Queries";
 import { GoogleLogin } from "react-google-login";
+import useInterval from "./../useInterval";
+
 import "./NewUser.css";
+var bcrypt = require("bcryptjs");
 
 const NewUser = props => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [createNewUser, { newlyMadeUser }] = useMutation(
-    NEW_CONTRIBUTOR_CREATE
-  );
+  const [createNewUser, { data }] = useMutation(NEW_CONTRIBUTOR_CREATE);
   const [signType, setSignType] = useState("Create");
-  const [userInfo, setUserInfo] = useState({ email: null });
+  const [userInfo, setUserInfo] = useState({});
   const [userQueryReturn, setUserQueryReturn] = useState({});
+  const [hashPass, setHashPass] = useState("");
+  const [hashTimer, setHashTimer] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const mutateCreateContributor = () => {
-    createNewUser({
-      variables: {
-        data: {
-          name: userName,
-          password: password,
-          email: email,
-          online: true,
-          status: "PUBLISHED"
-        }
-      }
-    });
-    console.log(newlyMadeUser);
-  };
-
-  const { loading, error, data } = useQuery(SIGN_IN_CONTRIBUTOR, {
-    variables: { email: userInfo.email }
-  });
-
-  if (userQueryReturn !== data) {
+  useEffect(() => {
     setUserQueryReturn(data);
     props.setUserInfo(data);
-    console.log("Password Correct");
-  }
+  }, [userInfo]);
 
-  const signInContributor = () => {
-    setUserInfo({ email: email });
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  // ::::::::::: Creating a Contributor ::::::::::::::::::::::::::::::
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  const createContributor = () => {
+    setHashTimer(true);
+    bcrypt.genSalt(10, function(err, salt) {
+      bcrypt.hash(password, salt, function(err, hash) {
+        //setHashPass(hash);
+        console.log("hashing bb");
+        createNewUser({
+          variables: {
+            data: {
+              name: userName,
+              password: hash,
+              email: email,
+              online: true,
+              status: "PUBLISHED"
+            }
+          }
+        });
+      });
+    });
   };
+
+  // // Adds 0.5s before adding hashed password to db - Hook for setInterval
+  // useInterval(() => {
+  //   if (hashTimer && count >= 0.5) {
+  //     setHashTimer(false);
+  //     addNewUser();
+  //   } else if (hashTimer && count < 0.5) {
+  //     setCount(count + 1);
+  //   }
+  // }, 1000);
+
+  // // This is called after the timer runs for 0.5s
+  // const addNewUser = async () => {
+  //   setUserInfo({ email: email, password: hashPass });
+  //   setUserName("");
+  //   setPassword("");
+  // };
+
+  // // Call to mutate DB
+  // const mutateCreateContributor = () => {
+  //   createNewUser({
+  //     variables: {
+  //       data: {
+  //         name: userName,
+  //         password: password,
+  //         email: email,
+  //         online: true,
+  //         status: "PUBLISHED"
+  //       }
+  //     }
+  //   });
+  // };
+  console.log(data);
+  const signInContributor = () => {};
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::
+  //::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  // Query Call to check sign in Credentials ::::::::::::::::::::::
+  const { loading, error, info } = useQuery(SIGN_IN_CONTRIBUTOR, {
+    variables: { email: userInfo.email, password: userInfo.password }
+  });
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // :::::::::::::::::: Google oAuth Reponse Methods :::::::::::::::
@@ -91,7 +136,7 @@ const NewUser = props => {
           <button
             className="btn-create"
             type="button"
-            onClick={() => mutateCreateContributor()}
+            onClick={() => createContributor()}
           >
             Create Account
           </button>

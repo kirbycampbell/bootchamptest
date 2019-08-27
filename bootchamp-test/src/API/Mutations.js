@@ -7,6 +7,7 @@ export const NEW_CONTRIBUTOR_CREATE = gql`
       name
       status
       online
+      password
     }
   }
 `;
