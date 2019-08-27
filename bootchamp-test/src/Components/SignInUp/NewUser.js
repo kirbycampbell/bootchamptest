@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { NEW_CONTRIBUTOR_CREATE } from "../../API/Mutations";
+import { SIGN_IN_CONTRIBUTOR } from "../../API/Queries";
 import { GoogleLogin } from "react-google-login";
 import "./NewUser.css";
 
@@ -8,9 +9,12 @@ const NewUser = props => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [createNewUser, { data }] = useMutation(NEW_CONTRIBUTOR_CREATE);
+  const [createNewUser, { newlyMadeUser }] = useMutation(
+    NEW_CONTRIBUTOR_CREATE
+  );
   const [signType, setSignType] = useState("Create");
-  console.log(data);
+  const [userInfo, setUserInfo] = useState({ email: null });
+  const [userQueryReturn, setUserQueryReturn] = useState({});
 
   const mutateCreateContributor = () => {
     createNewUser({
@@ -24,9 +28,26 @@ const NewUser = props => {
         }
       }
     });
+    console.log(newlyMadeUser);
   };
 
-  const signInContributor = () => {};
+  const { loading, error, data } = useQuery(SIGN_IN_CONTRIBUTOR, {
+    variables: { email: userInfo.email }
+  });
+
+  if (userQueryReturn !== data) {
+    setUserQueryReturn(data);
+    props.setUserInfo(data);
+    console.log("Password Correct");
+  }
+
+  const signInContributor = () => {
+    setUserInfo({ email: email });
+  };
+
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  // :::::::::::::::::: Google oAuth Reponse Methods :::::::::::::::
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   const responseGoogle = response => {
     console.log(response);
   };

@@ -10,6 +10,7 @@ const LoggedInUser = props => {
   const { loading, error, data, refetch } = useQuery(GET_CONTRIBUTOR, {
     variables: { name: user }
   });
+  console.log(data);
 
   const searchForUser = () => {
     setUser(typedUser);
