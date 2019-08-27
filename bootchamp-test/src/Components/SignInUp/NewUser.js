@@ -38,6 +38,9 @@ const NewUser = props => {
       });
     });
   };
+
+  // TODO TOMORROW: Seperate newUser and signIn into seperate components, switched
+  //between with the same toggle button. This will make the sign in query clearer.
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::
   //::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
