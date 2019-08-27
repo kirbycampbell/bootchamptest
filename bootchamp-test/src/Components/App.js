@@ -4,7 +4,10 @@ import LoggedInUser from "./LoggedInUser";
 import NewUser from "./SignInUp/NewUser";
 import TopNav from "./TopNav/TopNav";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import Topics from "./Topics/Topics";
+import Cities from "./Cities/Cities";
+import Resources from "./Resources/Resources";
+import Profile from "./Profile/Profile";
 function App() {
   const [createAccount, setCreateAccount] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
@@ -29,6 +32,10 @@ function App() {
               />
             )}
           />
+          <Route exact path="/Topics" render={() => <Topics />} />
+          <Route exact path="/Cities" render={() => <Cities />} />
+          <Route exact path="/Resources" render={() => <Resources />} />
+          <Route exact path="/Profile" render={() => <Profile />} />
           {/* <LoggedInUser /> */}
           {/* <LoggedInUser />
           <LoggedInUser />
