@@ -12,27 +12,17 @@ const NewUser = props => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [createNewUser, { data }] = useMutation(NEW_CONTRIBUTOR_CREATE);
+  const [createNewUser] = useMutation(NEW_CONTRIBUTOR_CREATE);
   const [signType, setSignType] = useState("Create");
   const [userInfo, setUserInfo] = useState({});
   const [userQueryReturn, setUserQueryReturn] = useState({});
-  const [hashPass, setHashPass] = useState("");
-  const [hashTimer, setHashTimer] = useState(false);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    setUserQueryReturn(data);
-    props.setUserInfo(data);
-  }, [userInfo]);
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // ::::::::::: Creating a Contributor ::::::::::::::::::::::::::::::
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   const createContributor = () => {
-    setHashTimer(true);
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, function(err, hash) {
-        //setHashPass(hash);
         console.log("hashing bb");
         createNewUser({
           variables: {
@@ -48,47 +38,35 @@ const NewUser = props => {
       });
     });
   };
-
-  // // Adds 0.5s before adding hashed password to db - Hook for setInterval
-  // useInterval(() => {
-  //   if (hashTimer && count >= 0.5) {
-  //     setHashTimer(false);
-  //     addNewUser();
-  //   } else if (hashTimer && count < 0.5) {
-  //     setCount(count + 1);
-  //   }
-  // }, 1000);
-
-  // // This is called after the timer runs for 0.5s
-  // const addNewUser = async () => {
-  //   setUserInfo({ email: email, password: hashPass });
-  //   setUserName("");
-  //   setPassword("");
-  // };
-
-  // // Call to mutate DB
-  // const mutateCreateContributor = () => {
-  //   createNewUser({
-  //     variables: {
-  //       data: {
-  //         name: userName,
-  //         password: password,
-  //         email: email,
-  //         online: true,
-  //         status: "PUBLISHED"
-  //       }
-  //     }
-  //   });
-  // };
-  console.log(data);
-  const signInContributor = () => {};
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::
   //::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  // ::::::::::: Signing in a Contributor ::::::::::::::::::::::::::::
+  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+  const signInContributor = () => {
+    setUserInfo({ email: email });
+  };
+
   // Query Call to check sign in Credentials ::::::::::::::::::::::
-  const { loading, error, info } = useQuery(SIGN_IN_CONTRIBUTOR, {
-    variables: { email: userInfo.email, password: userInfo.password }
+  const { loading, error, data } = useQuery(SIGN_IN_CONTRIBUTOR, {
+    variables: { email: userInfo.email }
   });
+
+  // useEffect(() => { TODO FIX THISSSSSSSS
+  //   console.log("new data");
+  //   console.log(data);
+  //   let hashedPass = data.constributors[0].password;
+  //   bcrypt.compare(password, hashedPass, function(err, res) {
+  //     // res === true
+  //     if (res) {
+  //       console.log("Matched");
+  //     } else {
+  //       console.log("No Match - or Bug!");
+  //     }
+  //   });
+  // }, [data]);
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // :::::::::::::::::: Google oAuth Reponse Methods :::::::::::::::
