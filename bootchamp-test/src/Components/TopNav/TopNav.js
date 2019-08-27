@@ -1,16 +1,27 @@
 import React from "react";
 import "./TopNav.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const TopNav = () => {
   return (
     <div className="Outer-TopNav">
       <div className="Inner-TopNav">
         <div className="Nav-Grps-Outer">
-          <div className="Nav-Grps">BootChamp</div>
-          <div className="Nav-Grps">Topics</div>
-          <div className="Nav-Grps">Cities</div>
-          <div className="Nav-Grps">Resources</div>
-          <div className="Nav-Grps">Profile</div>
+          <Link to="/" className="custom-link Nav-Grps">
+            BootChamp
+          </Link>
+          <Link to="/Topics" className="custom-link Nav-Grps">
+            Topics
+          </Link>
+          <Link to="/Cities" className="custom-link Nav-Grps">
+            Cities
+          </Link>{" "}
+          <Link to="/Resources" className="custom-link Nav-Grps">
+            Resources
+          </Link>{" "}
+          <Link to="/Profile" className="custom-link Nav-Grps">
+            Profile
+          </Link>
         </div>
       </div>
     </div>

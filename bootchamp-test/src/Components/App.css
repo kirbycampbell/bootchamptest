@@ -1,16 +1,13 @@
 .App {
   height: 100vh;
   width: 100vw;
-  margin: auto;
+  margin: 0;
+  padding: 0;
   max-width: 1400px;
 }
 
-.midSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
+.Main-Content {
+  margin-top: 90px;
 }
 
 .App-link {
