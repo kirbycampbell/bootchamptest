@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import LoggedInUser from "./LoggedInUser";
+//import LoggedInUser from "./Search/LoggedInUser";
 import NewUser from "./SignInUp/NewUser";
 import TopNav from "./TopNav/TopNav";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Topics from "./Topics/Topics";
 import Cities from "./Cities/Cities";
 import Resources from "./Resources/Resources";
@@ -12,9 +12,8 @@ function App() {
   const [createAccount, setCreateAccount] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
-  // console.log("Outer App userInfo");
+  console.log("Outer App userInfo");
   // console.log(userInfo);
-
   return (
     <Router>
       <div className="App">

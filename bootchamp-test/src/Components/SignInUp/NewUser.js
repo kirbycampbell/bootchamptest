@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { NEW_CONTRIBUTOR_CREATE } from "../../API/Mutations";
 import { SIGN_IN_CONTRIBUTOR } from "../../API/Queries";
 import { GoogleLogin } from "react-google-login";
-import useInterval from "./../useInterval";
-
+//import useInterval from "./../useInterval";
 import "./NewUser.css";
+import { URL } from "./../../constants/url";
+
+const uuidv1 = require("uuid/v1");
 var bcrypt = require("bcryptjs");
+const axios = require("axios");
 
 const NewUser = props => {
   const [userName, setUserName] = useState("");
@@ -15,7 +18,7 @@ const NewUser = props => {
   const [createNewUser] = useMutation(NEW_CONTRIBUTOR_CREATE);
   const [signType, setSignType] = useState("Create");
   const [userInfo, setUserInfo] = useState({});
-  const [userQueryReturn, setUserQueryReturn] = useState({});
+  //const [userQueryReturn, setUserQueryReturn] = useState({});
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // ::::::::::: Creating a Contributor ::::::::::::::::::::::::::::::
@@ -24,17 +27,42 @@ const NewUser = props => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, function(err, hash) {
         console.log("hashing bb");
-        createNewUser({
-          variables: {
-            data: {
-              name: userName,
-              password: hash,
-              email: email,
-              online: true,
-              status: "PUBLISHED"
-            }
-          }
-        });
+        // createNewUser({
+        //   variables: {
+        //     data: {
+        //       name: userName,
+        //       password: hash,
+        //       email: email,
+        //       online: true,
+        //       status: "PUBLISHED"
+        //     }
+        //   } // Note: Can move these types of functions to receive args
+        // }); //    in an external file within the API folder!
+        // get request for all contributors
+        // async function getUser() {
+        //   try {
+        //     const response = await axios.get(URL + "contributors/");
+        //     console.log(response);
+        //   } catch (error) {
+        //     console.error(error);
+        //   }
+        // }
+        // getUser();
+
+        axios
+          .post(URL + "contributors/", {
+            name: userName,
+            password: hash,
+            email: email,
+            online: true,
+            id: uuidv1()
+          })
+          .then(function(response) {
+            console.log(response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       });
     });
   };
