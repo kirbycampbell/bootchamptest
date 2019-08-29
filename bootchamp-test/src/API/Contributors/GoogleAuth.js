@@ -1,6 +1,5 @@
 import { URL } from "../../constants/url";
 
-//const uuidv1 = require("uuid/v1");
 var bcrypt = require("bcryptjs");
 const axios = require("axios");
 
@@ -16,7 +15,7 @@ export const GOOGLE_AUTH = res => {
         bcrypt.compare(res.tokenId, query.data.password, function(err, res) {
           if (res) {
             console.log("Matched");
-            return { auth: true, user: query };
+            console.log(res.data);
           } else {
             console.log("No Match - or Bug!");
             return { auth: false, user: null };

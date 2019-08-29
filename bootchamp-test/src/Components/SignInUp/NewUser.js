@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import "./NewUser.css";
 import { SIGN_IN } from "../../API/Contributors/SignIn";
 import { CREATE_CONTRIBUTOR } from "./../../API/Contributors/Create";
 import { GOOGLE_AUTH } from "../../API/Contributors/GoogleAuth";
 import GoogleComp from "./GoogleComp";
 
-const NewUser = props => {
+function NewUser() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -112,6 +111,6 @@ const NewUser = props => {
       </div>
     </div>
   );
-};
+}
 
 export default NewUser;
