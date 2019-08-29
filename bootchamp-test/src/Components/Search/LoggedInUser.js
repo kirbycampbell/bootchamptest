@@ -14,6 +14,16 @@ const LoggedInUser = props => {
 
   const searchForUser = () => {
     setUser(typedUser);
+    // get request for all contributors
+    // async function getUser() {
+    //   try {
+    //     const response = await axios.get(URL + "contributors/");
+    //     console.log(response);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // }
+    // getUser();
   };
 
   return (

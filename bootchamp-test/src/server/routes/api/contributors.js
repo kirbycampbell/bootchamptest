@@ -9,6 +9,16 @@ router.get("/", async (req, res) => {
   res.send(await contributors.find({}).toArray());
 });
 
+router.get("/login", async (req, res) => {
+  const contributors = await loadContributors();
+  res.send(
+    await contributors.findOne({
+      email: req.query.email
+    })
+  );
+  //console.log(req.query.email);
+});
+
 // add contributors
 router.post("/", async (req, res) => {
   const contributors = await loadContributors();

@@ -12,7 +12,7 @@ function App() {
   const [createAccount, setCreateAccount] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
-  console.log("Outer App userInfo");
+  //console.log("Outer App userInfo");
   // console.log(userInfo);
   return (
     <Router>

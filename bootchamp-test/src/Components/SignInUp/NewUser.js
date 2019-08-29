@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { NEW_CONTRIBUTOR_CREATE } from "../../API/Mutations";
-import { SIGN_IN_CONTRIBUTOR } from "../../API/Queries";
 import { GoogleLogin } from "react-google-login";
-//import useInterval from "./../useInterval";
 import "./NewUser.css";
 import { URL } from "./../../constants/url";
 
@@ -15,10 +11,7 @@ const NewUser = props => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [createNewUser] = useMutation(NEW_CONTRIBUTOR_CREATE);
   const [signType, setSignType] = useState("Create");
-  const [userInfo, setUserInfo] = useState({});
-  //const [userQueryReturn, setUserQueryReturn] = useState({});
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // ::::::::::: Creating a Contributor ::::::::::::::::::::::::::::::
@@ -27,28 +20,6 @@ const NewUser = props => {
     bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(password, salt, function(err, hash) {
         console.log("hashing bb");
-        // createNewUser({
-        //   variables: {
-        //     data: {
-        //       name: userName,
-        //       password: hash,
-        //       email: email,
-        //       online: true,
-        //       status: "PUBLISHED"
-        //     }
-        //   } // Note: Can move these types of functions to receive args
-        // }); //    in an external file within the API folder!
-        // get request for all contributors
-        // async function getUser() {
-        //   try {
-        //     const response = await axios.get(URL + "contributors/");
-        //     console.log(response);
-        //   } catch (error) {
-        //     console.error(error);
-        //   }
-        // }
-        // getUser();
-
         axios
           .post(URL + "contributors/", {
             name: userName,
@@ -67,46 +38,81 @@ const NewUser = props => {
     });
   };
 
-  // TODO TOMORROW: Seperate newUser and signIn into seperate components, switched
-  //between with the same toggle button. This will make the sign in query clearer.
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::
-  //::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // ::::::::::: Signing in a Contributor ::::::::::::::::::::::::::::
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
   const signInContributor = () => {
-    setUserInfo({ email: email });
+    axios
+      .get(URL + "contributors/login", {
+        params: {
+          email: email
+        }
+      })
+      .then(function(response) {
+        console.log(response);
+        bcrypt.compare(password, response.data.password, function(err, res) {
+          if (res) {
+            console.log("Matched");
+          } else {
+            console.log("No Match - or Bug!");
+          }
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
-
-  // Query Call to check sign in Credentials ::::::::::::::::::::::
-  const { loading, error, data } = useQuery(SIGN_IN_CONTRIBUTOR, {
-    variables: { email: userInfo.email }
-  });
-
-  // useEffect(() => { TODO FIX THISSSSSSSS
-  //   console.log("new data");
-  //   console.log(data);
-  //   let hashedPass = data.constributors[0].password;
-  //   bcrypt.compare(password, hashedPass, function(err, res) {
-  //     // res === true
-  //     if (res) {
-  //       console.log("Matched");
-  //     } else {
-  //       console.log("No Match - or Bug!");
-  //     }
-  //   });
-  // }, [data]);
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // :::::::::::::::::: Google oAuth Reponse Methods :::::::::::::::
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   const responseGoogle = response => {
-    console.log(response);
+    //console.log(response);
   };
-  const successSignIn = response => {
-    console.log(response);
+  const successSignIn = res => {
+    axios
+      .get(URL + "contributors/login", {
+        params: {
+          email: res.profileObj.email
+        }
+      })
+      .then(function(query) {
+        if (query.data !== "") {
+          console.log("Time to log the user in");
+          bcrypt.compare(res.tokenId, query.data.password, function(err, res) {
+            if (res) {
+              console.log("Matched");
+            } else {
+              console.log("No Match - or Bug!");
+            }
+          });
+        } else {
+          console.log("Time to create NEW USER");
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(res.tokenId, salt, function(err, hash) {
+              console.log("hashing bb");
+              axios
+                .post(URL + "contributors/", {
+                  name: res.profileObj.name,
+                  password: hash,
+                  email: res.profileObj.email,
+                  online: true,
+                  id: res.googleId
+                })
+                .then(function(res) {
+                  console.log(res);
+                })
+                .catch(function(error) {
+                  console.log(error);
+                });
+            });
+          });
+          console.log(res);
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -205,11 +211,3 @@ const NewUser = props => {
 };
 
 export default NewUser;
-
-// client id = 449733747094-9q8j6e8a2tm95p6tvk3m3tjjtjaaejk3.apps.googleusercontent.com
-//client secret = MnAska5__leRTVBSsli194dx
-
-// name: WE.profileObj.name
-// avatar: WE.profileObj.imageUrl
-// email: WE.profileObj.email
-// password:
