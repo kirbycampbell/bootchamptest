@@ -1,9 +1,8 @@
 import React from "react";
 import "./TopNav.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const TopNav = () => {
-  //console.log(Router, Route);
   return (
     <div className="Outer-TopNav">
       <div className="Inner-TopNav">

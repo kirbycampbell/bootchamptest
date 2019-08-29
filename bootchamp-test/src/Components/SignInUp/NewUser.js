@@ -1,118 +1,24 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "react-google-login";
 import "./NewUser.css";
-import { URL } from "./../../constants/url";
-
-const uuidv1 = require("uuid/v1");
-var bcrypt = require("bcryptjs");
-const axios = require("axios");
+import { SIGN_IN } from "../../API/Contributors/SignIn";
+import { CREATE_CONTRIBUTOR } from "./../../API/Contributors/Create";
+import { GOOGLE_AUTH } from "../../API/Contributors/GoogleAuth";
+import GoogleComp from "./GoogleComp";
 
 const NewUser = props => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [signType, setSignType] = useState("Create");
+  const [error, setError] = useState(null);
 
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  // ::::::::::: Creating a Contributor ::::::::::::::::::::::::::::::
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  const createContributor = () => {
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(password, salt, function(err, hash) {
-        console.log("hashing bb");
-        axios
-          .post(URL + "contributors/", {
-            name: userName,
-            password: hash,
-            email: email,
-            online: true,
-            id: uuidv1()
-          })
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      });
-    });
-  };
-
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  // ::::::::::: Signing in a Contributor ::::::::::::::::::::::::::::
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  const signInContributor = () => {
-    axios
-      .get(URL + "contributors/login", {
-        params: {
-          email: email
-        }
-      })
-      .then(function(response) {
-        console.log(response);
-        bcrypt.compare(password, response.data.password, function(err, res) {
-          if (res) {
-            console.log("Matched");
-          } else {
-            console.log("No Match - or Bug!");
-          }
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
-
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  // :::::::::::::::::: Google oAuth Reponse Methods :::::::::::::::
-  // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  const responseGoogle = response => {
-    //console.log(response);
-  };
   const successSignIn = res => {
-    axios
-      .get(URL + "contributors/login", {
-        params: {
-          email: res.profileObj.email
-        }
-      })
-      .then(function(query) {
-        if (query.data !== "") {
-          console.log("Time to log the user in");
-          bcrypt.compare(res.tokenId, query.data.password, function(err, res) {
-            if (res) {
-              console.log("Matched");
-            } else {
-              console.log("No Match - or Bug!");
-            }
-          });
-        } else {
-          console.log("Time to create NEW USER");
-          bcrypt.genSalt(10, function(err, salt) {
-            bcrypt.hash(res.tokenId, salt, function(err, hash) {
-              console.log("hashing bb");
-              axios
-                .post(URL + "contributors/", {
-                  name: res.profileObj.name,
-                  password: hash,
-                  email: res.profileObj.email,
-                  online: true,
-                  id: res.googleId
-                })
-                .then(function(res) {
-                  console.log(res);
-                })
-                .catch(function(error) {
-                  console.log(error);
-                });
-            });
-          });
-          console.log(res);
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    GOOGLE_AUTH(res);
+  };
+  const errorResponse = res => {
+    if (res) {
+      setError(res);
+    }
   };
 
   return (
@@ -151,7 +57,13 @@ const NewUser = props => {
           <button
             className="btn-create"
             type="button"
-            onClick={() => createContributor()}
+            onClick={() =>
+              CREATE_CONTRIBUTOR({
+                name: userName,
+                password: password,
+                email: email
+              })
+            }
           >
             Create Account
           </button>
@@ -160,25 +72,16 @@ const NewUser = props => {
           <button
             className="btn-create"
             type="button"
-            onClick={() => signInContributor()}
+            onClick={() => SIGN_IN(email, password)}
           >
             Sign In
           </button>
         )}
 
         <div className="Google-SignIn">
-          <div>
-            <GoogleLogin
-              clientId="449733747094-9q8j6e8a2tm95p6tvk3m3tjjtjaaejk3.apps.googleusercontent.com"
-              buttonText="Login with Google"
-              theme="dark"
-              icon="true"
-              onSuccess={successSignIn}
-              onFailure={responseGoogle}
-              cookiePolicy={"single_host_origin"}
-            />
-          </div>
+          <GoogleComp successSignIn={successSignIn} onFailure={errorResponse} />
         </div>
+        {error && <div>{error}</div>}
       </div>
       <div className="bottom-btn">
         {signType === "Create" && (
