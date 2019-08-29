@@ -3,24 +3,16 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./Components/App";
 import * as serviceWorker from "./serviceWorker";
-import { ApolloClient } from "apollo-client";
-import { HttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloProvider } from "react-apollo";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducers";
 
-// Replace this with your project's endpoint
-const GRAPHCMS_API =
-  "https://api-uswest.graphcms.com/v1/cjzm8bca21a0001g321q1644p/master";
-
-const client = new ApolloClient({
-  link: new HttpLink({ uri: GRAPHCMS_API }),
-  cache: new InMemoryCache()
-});
+const store = createStore(reducer);
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <Provider store={store}>
     <App />
-  </ApolloProvider>,
+  </Provider>,
   document.getElementById("root")
 );
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import "./NewUser.css";
 import { SIGN_IN } from "../../API/Contributors/SignIn";
 import { CREATE_CONTRIBUTOR } from "./../../API/Contributors/Create";
