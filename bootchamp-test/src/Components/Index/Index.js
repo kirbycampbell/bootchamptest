@@ -11,7 +11,16 @@ const Index = () => {
   return (
     <div>
       {posts.map(post => {
-        return <div key={post}>{post}</div>;
+        return (
+          <div
+            key={post}
+            onClick={() => {
+              setPosts(["item4", "item5"]);
+            }}
+          >
+            {post}
+          </div>
+        );
       })}
     </div>
   );
