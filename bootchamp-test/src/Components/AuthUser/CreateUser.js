@@ -19,7 +19,6 @@ const CreateUser = props => {
       props.email.length > 6
     ) {
       props.setLoading(true);
-
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(props.password, salt, function(err, hash) {
           axios

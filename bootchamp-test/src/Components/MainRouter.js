@@ -7,6 +7,7 @@ import Cities from "./Cities/Cities";
 import Resources from "./Resources/Resources";
 import Profile from "./Profile/Profile";
 import "./App.css";
+import Index from "./Index/Index";
 
 const MainRouter = props => {
   return (
@@ -14,7 +15,7 @@ const MainRouter = props => {
       <div className="App">
         <TopNav {...props} />
         <div className="Main-Content">
-          <Route exact path="/" render={() => <div>Homepage</div>} />
+          <Route exact path="/" render={() => <Index />} />
           <Route exact path="/LogIn" render={() => <AuthUser {...props} />} />
           <Route exact path="/Topics" render={() => <Topics {...props} />} />
           <Route
