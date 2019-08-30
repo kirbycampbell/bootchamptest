@@ -1,10 +1,11 @@
 import React from "react";
 import "./TopNav.css";
 import { Link } from "react-router-dom";
+import logo from "./BootchampLogo.png";
 
-const TopNav = () => {
-  return (
-    <div className="Outer-TopNav">
+const TopNav = props => {
+  const LinkBtns = () => {
+    return (
       <div className="Inner-TopNav">
         <div className="Nav-Grps-Outer">
           <Link to="/" className="custom-link Nav-Grps">
@@ -20,8 +21,24 @@ const TopNav = () => {
             Resources
           </Link>{" "}
           <Link to="/Profile" className="custom-link Nav-Grps">
-            Profile
+            {props.auth && "Profile"}
+            {!props.auth && "Login"}
           </Link>
+        </div>
+      </div>
+    );
+  };
+  return (
+    <div className="Outer-TopNav">
+      <LinkBtns />
+
+      <div className="Mobile-Nav">
+        <div className="Btn-Outer">
+          <i className="fas fa-bars icon-bars" />
+        </div>
+        <img className="BC-logo" src={logo} alt="Bootchamp Logo" />
+        <div className="Btn-Outer">
+          <i className="fas fa-plus icon-bars" />
         </div>
       </div>
     </div>

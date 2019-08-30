@@ -4,9 +4,13 @@
   margin: auto;
   max-width: 1400px;
 }
-
 .Main-Content {
   margin-top: 90px;
+}
+@media all and (max-width: 700px) {
+  .Main-Content {
+    margin-top: 20px;
+  }
 }
 
 .App-link {

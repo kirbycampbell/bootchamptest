@@ -60,3 +60,43 @@
   font-weight: bold;
   letter-spacing: 1.3px;
 }
+.Mobile-Nav {
+  display: none;
+}
+.icon-bars {
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media all and (max-width: 700px) {
+  .Inner-TopNav {
+    display: none;
+  }
+  .Mobile-Nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  .BC-logo {
+    height: 150%;
+    width: 60%;
+  }
+  .Btn-Outer {
+    width: 20%;
+    text-align: center;
+  }
+
+  .fas.icon-bars {
+    font-size: 30px;
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+  }
+  .fas.icon-bars:active {
+    color: blue;
+    background-color: rgb(255, 255, 255);
+  }
+}

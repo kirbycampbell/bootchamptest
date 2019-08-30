@@ -8,11 +8,33 @@
   width: 100%;
   max-width: 350px;
   margin: auto;
+  opacity: 1;
+  background: white;
+  transition: opacity 0.3s, background 0.3s ease-in-out;
+}
+.loading {
+  transition: all 0.3s ease-in-out;
+  opacity: 0.5;
+  background: grey;
+}
+
+@media all and (max-width: 700px) {
+  .Outer-SignUp {
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    padding: 1%;
+    max-width: 98%;
+    width: 100%;
+    margin: auto;
+    margin-top: 30px;
+  }
 }
 
 .Inner-SignUp {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .signUp-Title {
@@ -41,7 +63,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .btn-create:hover {
   background-color: rgb(216, 213, 213);
@@ -68,7 +90,10 @@
   margin: auto;
   text-align: center;
   margin-top: 14px;
-  cursor: pointer;
+}
+
+.bottom-btn:active {
+  background: none;
 }
 
 .signIn-Title {
@@ -76,4 +101,36 @@
   width: 100%;
   height: 24px;
   font-size: 14px;
+}
+
+.Message {
+  text-align: center;
+  color: rgba(39, 167, 82, 0.815);
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 19px;
+}
+
+.Error-Msg {
+  text-align: center;
+  color: rgba(202, 48, 48, 0.801);
+}
+.show {
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+  font-size: 14px;
+}
+
+.hide {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  font-size: 2px;
+}
+
+.Load-Spinner {
+  position: absolute;
+  top: 42%;
+  bottom: 58%;
+  left: 47.5%;
+  right: 52.5%;
 }

@@ -1,29 +1,26 @@
-import React from "react";
-
-import "./App.css";
-import NewUser from "./SignInUp/NewUser";
-import TopNav from "./TopNav/TopNav";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import Topics from "./Topics/Topics";
-import Cities from "./Cities/Cities";
-import Resources from "./Resources/Resources";
-import Profile from "./Profile/Profile";
+import MainRouter from "./MainRouter";
+import React, { useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
+  const user = useSelector(state => state.user);
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const loginUser = useCallback(
+    user => dispatch({ type: "LOGIN_USER", payload: user }),
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (!auth && localStorage.getItem("User")) {
+      let userObj = JSON.parse(localStorage.getItem("User"));
+      loginUser(userObj);
+    }
+  }, []);
   return (
-    <Router>
-      <div className="App">
-        <TopNav />
-        <div className="Main-Content">
-          <Route exact path="/" render={() => <NewUser />} />
-          <Route exact path="/Topics" render={() => <Topics />} />
-          <Route exact path="/Cities" render={() => <Cities />} />
-          <Route exact path="/Resources" render={() => <Resources />} />
-          <Route exact path="/Profile" render={() => <Profile />} />
-          {/*   <LoggedInUser /> */}
-        </div>
-      </div>
-    </Router>
+    <div>
+      <MainRouter user={user} auth={auth} />
+    </div>
   );
 };
 
