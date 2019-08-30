@@ -10,14 +10,13 @@ export const store = createStore(reducer, initialState);
 function reducer(state, action) {
   switch (action.type) {
     case "LOGIN_USER":
-      console.log("Inside of Login Reducer");
-      console.log(action.payload);
       localStorage.setItem("User", JSON.stringify(action.payload));
       return {
         user: action.payload,
         auth: true
       };
     case "LOGOUT_USER":
+      localStorage.removeItem("User");
       return {
         user: {},
         auth: false
@@ -30,4 +29,8 @@ function reducer(state, action) {
 export const loginUserAction = user => ({
   type: "LOGIN_USER",
   payload: user
+});
+
+export const logoutUserAction = user => ({
+  type: "LOGOUT_USER"
 });

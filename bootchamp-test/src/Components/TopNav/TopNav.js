@@ -20,7 +20,10 @@ const TopNav = props => {
           <Link to="/Resources" className="custom-link Nav-Grps">
             Resources
           </Link>{" "}
-          <Link to="/Profile" className="custom-link Nav-Grps">
+          <Link
+            to={props.auth ? "/Profile" : "/Login"}
+            className="custom-link Nav-Grps"
+          >
             {props.auth && "Profile"}
             {!props.auth && "Login"}
           </Link>
@@ -28,6 +31,9 @@ const TopNav = props => {
       </div>
     );
   };
+  // TODO IN MORNING - If I type in a url directly, it redirects back to home.
+  // This is probably because the app is always auth false at first.
+  // Fix idea:
   return (
     <div className="Outer-TopNav">
       <LinkBtns />

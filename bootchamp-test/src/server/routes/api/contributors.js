@@ -16,7 +16,6 @@ router.get("/login", async (req, res) => {
       email: req.query.email
     })
   );
-  //console.log(req.query.email);
 });
 
 // add contributors
@@ -28,7 +27,15 @@ router.post("/", async (req, res) => {
     password: req.body.password,
     email: req.body.email,
     createdAt: new Date(),
-    online: req.body.online
+    online: req.body.online,
+    likedTopics: [],
+    friends: [],
+    cities: [],
+    posts: [],
+    tags: [],
+    lastOnline: [],
+    avatar: "",
+    info: {}
   });
   res.status(201).send(
     await contributors.findOne({

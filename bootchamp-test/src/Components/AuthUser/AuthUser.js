@@ -6,6 +6,7 @@ import SignUpForm from "./SignUpForm";
 import "./AuthUser.css";
 import AuthButtons from "./AuthButtons";
 import Loader from "./../Loader/Loader";
+import { Redirect } from "react-router";
 
 const AuthUser = props => {
   const [userName, setUserName] = useState("");
@@ -20,7 +21,7 @@ const AuthUser = props => {
     setError("");
   }, [userName, password, email]);
 
-  if (props.auth) return <div>Already Logged In!</div>;
+  if (props.auth) return <Redirect to="/" />;
   if (!props.auth) {
     const localFns = {
       userName,
@@ -54,7 +55,7 @@ const AuthUser = props => {
         <div className="btn-section">
           {signType === "Create" && <CreateUser {...localFns} />}
           {signType === "SignIn" && <SignIn {...localFns} />}
-          <GoogleComp setError={setError} />
+          <GoogleComp {...localFns} />
         </div>
         <AuthButtons {...localFns} />
       </div>

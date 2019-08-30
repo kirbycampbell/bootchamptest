@@ -8,30 +8,33 @@ const SignUpForm = props => {
           <div>Sign Up to Post on BootChamp!</div>
         )}
         {props.signType === "SignIn" && <div>Welcome Back, Sign In Below!</div>}
-      </div>
-      {props.signType === "Create" && (
+      </div>{" "}
+      <form>
         <input
-          type="text"
-          placeholder="UserName"
+          type="email"
+          placeholder="Email"
           className="frm-itm"
-          value={props.userName}
-          onChange={e => props.setUserName(e.target.value)}
+          value={props.email}
+          onChange={e => props.setEmail(e.target.value)}
         />
-      )}
-      <input
-        type="email"
-        placeholder="Email"
-        className="frm-itm"
-        value={props.email}
-        onChange={e => props.setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        className="frm-itm"
-        value={props.password}
-        onChange={e => props.setPassword(e.target.value)}
-      />
+        {props.signType === "Create" && (
+          <input
+            type="text"
+            placeholder="Name"
+            className="frm-itm"
+            value={props.userName}
+            onChange={e => props.setUserName(e.target.value)}
+          />
+        )}
+
+        <input
+          type="password"
+          placeholder="Password"
+          className="frm-itm"
+          value={props.password}
+          onChange={e => props.setPassword(e.target.value)}
+        />
+      </form>
     </div>
   );
 };
