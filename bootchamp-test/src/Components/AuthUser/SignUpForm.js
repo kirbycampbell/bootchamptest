@@ -4,10 +4,11 @@ const SignUpForm = props => {
   return (
     <div className="Inner-SignUp">
       <div className="signUp-Title">
-        {props.signType === "Create" && (
+        {props.signType === "SignIn" ? (
+          <div>Welcome Back, Sign In Below!</div>
+        ) : (
           <div>Sign Up to Post on BootChamp!</div>
         )}
-        {props.signType === "SignIn" && <div>Welcome Back, Sign In Below!</div>}
       </div>{" "}
       <form>
         <input

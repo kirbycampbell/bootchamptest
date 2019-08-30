@@ -31,7 +31,7 @@ router.post("/", async (req, res) => {
     likedTopics: [],
     friends: [],
     cities: [],
-    posts: [],
+    topics: [],
     tags: [],
     lastOnline: [],
     avatar: "",
