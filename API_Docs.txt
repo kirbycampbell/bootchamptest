@@ -1,0 +1,41 @@
+::::::::::::::::::::::::::::::::::::::
+:::::::::::::: TOPICS ::::::::::::::::
+::::::::::::::::::::::::::::::::::::::
+
+1). Get all Topics:
+http://localhost:5000/api/topics
+--- returns: 
+[
+    {
+        "_id": "5d6c8bc47fcee93970891f7f",
+        "id": "123456",
+        "name": "New Test Yeaaa Topic!",
+        "content": {
+            "images": "link.jpg",
+            "code": "console.log(Date.now())",
+            "text": "Good Luck Everybody!"
+        },
+        "createdAt": "2019-09-02T03:25:56.889Z",
+        "updatedAt": "2019-09-02T03:26:39.035Z",
+        "createdBy": "0987",
+        "likedBy": [
+            "0987",
+            "9875"
+        ],
+        "cities": null,
+        "tags": null
+    }
+], ....
+
+2). Get id Specific topic:
+http://localhost:5000/api/topics/<topicID>
+--- returns: same structure as above
+
+3). Get topic with name containing a search term:
+
+
+4). Get All of a Contributor's Topics:
+http://localhost:5000/api/topics/<userID>
+--- returns: array of same structure above.
+
+5). 

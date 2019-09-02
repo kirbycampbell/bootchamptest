@@ -1,6 +1,5 @@
 const express = require("express");
 const mongodb = require("mongodb");
-
 const router = express.Router();
 
 // get topics -
@@ -17,6 +16,16 @@ router.get("/:id", async (req, res) => {
       id: req.params.id
     })
   );
+});
+
+router.get("/match", async (req, res) => {
+  const topics = await loadTopics();
+  res.send(
+    await topics.findOne({
+      name: { eq: req.params.searchTerm }
+    })
+  );
+  console.log("Search is happening");
 });
 
 // !
