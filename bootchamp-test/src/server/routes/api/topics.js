@@ -5,15 +5,12 @@ const router = express.Router ();
 
 // get topics -
 router.get ('/', async (req, res) => {
-  console.log ('In the basic ass bitch area');
   const topics = await loadTopics ();
   res.send (await topics.find ({}).toArray ());
 });
 
 // !
 router.get ('/:id', async (req, res) => {
-  console.log ('In the :id route!');
-  console.log (req.params.id);
   const topics = await loadTopics ();
   res.send (
     await topics.findOne ({
@@ -69,6 +66,30 @@ router.patch ('/:id', async (req, res) => {
         tags: req.body.tags,
         cities: req.body.cities,
         content: req.body.content,
+      },
+    }
+  );
+  res.status (201).send (
+    await topics.findOne ({
+      id: req.params.id,
+    })
+  );
+});
+
+router.patch ('/like/:id', async (req, res) => {
+  const topics = await loadTopics ();
+  let topicLike = await topics.findOne ({
+    id: req.params.id,
+  });
+
+  topicLike.likedBy.push ('NewLike');
+  await topics.updateOne (
+    {
+      id: req.params.id,
+    },
+    {
+      $set: {
+        likedBy: topicLike.likedBy,
       },
     }
   );
