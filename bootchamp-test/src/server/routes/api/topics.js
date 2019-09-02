@@ -2,13 +2,13 @@ const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
 
-// get topics -
+// get topics
 router.get("/", async (req, res) => {
   const topics = await loadTopics();
   res.send(await topics.find({}).toArray());
 });
 
-// !
+// Return specific topic by id
 router.get("/:id", async (req, res) => {
   const topics = await loadTopics();
   res.send(
@@ -18,17 +18,23 @@ router.get("/:id", async (req, res) => {
   );
 });
 
+// TODO - Search for topic name
 router.get("/match", async (req, res) => {
   const topics = await loadTopics();
+  let term = req.body.searchTerm.toLowerCase();
+  let regex = `/\b(w*${term}w*)/g`;
   res.send(
-    await topics.findOne({
-      name: { eq: req.params.searchTerm }
-    })
+    await topics
+      .find({
+        name: {
+          $regex: regex
+        }
+      })
+      .toArray()
   );
-  console.log("Search is happening");
 });
 
-// !
+// Query User's Topics
 router.get("/usertopics/:id", async (req, res) => {
   const topics = await loadTopics();
   res.send(
@@ -40,7 +46,34 @@ router.get("/usertopics/:id", async (req, res) => {
   );
 });
 
-// add topics - !
+// Query topic by city element
+router.get("/cities/:id", async (req, res) => {
+  const topics = await loadTopics();
+  let term = req.body.searchCity.toLowerCase();
+  res.send(
+    await topics
+      .find({
+        cities: new RegExp(term)
+      })
+      .toArray()
+  );
+});
+
+// Query topic by tag element
+router.get("/tags/:id", async (req, res) => {
+  const topics = await loadTopics();
+  res.send(
+    await topics
+      .find({
+        tags: {
+          $in: req.body.searchTags
+        }
+      })
+      .toArray()
+  );
+});
+
+// add topic
 router.post("/", async (req, res) => {
   const topics = await loadTopics();
   await topics.insertOne({
@@ -61,6 +94,7 @@ router.post("/", async (req, res) => {
   );
 });
 
+// Patch a topic fully
 router.patch("/:id", async (req, res) => {
   const topics = await loadTopics();
   await topics.updateOne(
@@ -85,20 +119,16 @@ router.patch("/:id", async (req, res) => {
   );
 });
 
+// Add a like to a topic
 router.patch("/like/:id", async (req, res) => {
   const topics = await loadTopics();
-  let topicLike = await topics.findOne({
-    id: req.params.id
-  });
-
-  topicLike.likedBy.push("NewLike");
   await topics.updateOne(
     {
       id: req.params.id
     },
     {
-      $set: {
-        likedBy: topicLike.likedBy
+      $addToSet: {
+        likedBy: req.body.likedBy
       }
     }
   );
@@ -109,7 +139,7 @@ router.patch("/like/:id", async (req, res) => {
   );
 });
 
-// delete topics - !
+// delete topic by id
 router.delete("/:id", async (req, res) => {
   const topics = await loadTopics();
   await topics.deleteOne({ id: req.params.id });

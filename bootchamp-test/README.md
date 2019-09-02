@@ -1,15 +1,3 @@
-cities:
-[
-{name: "Portland", state: "Oregon", MeetupList: [], members: [], resources: [], localTopics: []
-}
-];
-
-topics: [
-{
-name: "TopicName", content: [{picture: "", link: "", code: "", video: ""}], city:[], tags: [], likes: 1, createdAt: July 12, 2019
-}
-];
-
 {
 "id": "1",
 "name": "Test Topic!",
