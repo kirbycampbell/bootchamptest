@@ -20,8 +20,8 @@ app.use("/api/cities/", cities);
 const resources = require("./routes/api/resources");
 app.use("/api/resources/", resources);
 
-// const tags = require("./routes/api/tags");
-// app.use("/api/tags/", tags);
+const tags = require("./routes/api/tags");
+app.use("/api/tags/", tags);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/public/"));

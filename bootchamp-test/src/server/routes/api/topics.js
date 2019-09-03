@@ -62,7 +62,7 @@ router.get("/tags/:id", async (req, res) => {
 });
 
 // 6). Query topic by city element
-router.get("/cities/:id", async (req, res) => {
+router.get("/cities", async (req, res) => {
   const topics = await loadTopics();
   let term = req.body.searchCity.toLowerCase();
   res.send(
@@ -86,7 +86,7 @@ router.post("/", async (req, res) => {
   await topics.insertOne({
     id: req.body.id,
     name: req.body.name,
-    content: { images: [""], link: "", code: "", video: "", text: "" },
+    content: { images: [req.body.content.images], link: req.body.content.link, code: req.body.content.code, video: req.body.content.video, text: req.body.content.text },
     createdAt: new Date(),
     updatedAt: new Date(),
     createdBy: req.body.createdBy,

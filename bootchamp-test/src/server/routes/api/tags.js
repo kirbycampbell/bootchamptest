@@ -19,11 +19,13 @@ router.get("/:id", async (req, res) => {
   );
 });
 
-router.get("/:label", async (req, res) => {
+router.get("/search/:name", async (req, res) => {
   const tags = await loadTags();
+  // let term = req.body.searchLabel;
+  
   res.send(
     await tags.findOne({
-      id: req.params.label
+      label: req.params.name
     })
   );
 });
@@ -38,57 +40,6 @@ router.post("/", async (req, res) => {
   res.status(201).send(
     await tags.findOne({
       id: req.body.id
-    })
-  );
-});
-
-router.patch("/:id", async (req, res) => {
-  const tags = await loadTags();
-  await tags.updateOne(
-    {
-      id: req.params.id
-    },
-    {
-      $set: {
-        title: req.body.title,
-        state: req.body.state,
-        updatedAt: new Date(),
-        title: req.body.title,
-        content: {
-          text: "",
-          link: ""
-        },
-        city: ""
-      }
-    }
-  );
-  res.status(201).send(
-    await tags.findOne({
-      id: req.params.id
-    })
-  );
-});
-
-router.patch("/like/:id", async (req, res) => {
-  const tags = await loadTags();
-  let topicLike = await tags.findOne({
-    id: req.params.id
-  });
-
-  topicLike.likedBy.push("NewLike");
-  await tags.updateOne(
-    {
-      id: req.params.id
-    },
-    {
-      $set: {
-        likedBy: topicLike.likedBy
-      }
-    }
-  );
-  res.status(201).send(
-    await tags.findOne({
-      id: req.params.id
     })
   );
 });
