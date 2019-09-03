@@ -78,7 +78,7 @@ router.get("/cities/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const topics = await loadTopics();
   const contributors = await loadContributors();
-  const tags = await loadTags();
+  //const tags = await loadTags();
 
   //  await tags.updateMany({label: { $nin: req.body.tags}}
   //     , {$set: {a:2}}
