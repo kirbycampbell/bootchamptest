@@ -72,8 +72,8 @@ http://localhost:5000/api/topics/
 "id": "1",
 "name": "Test Topic!",
 "content": {"images": "link.jpg", "code": "console.log(Date.now())", "text": "Good Luck Everybody!"},
-"createdBy": "0987",
-"likedBy": ["0987", "9876"]
+"createdBy": "5d6ebe3ac3e0c934b8bf127b",
+"likedBy": []
 }
 
 8). Patch Topic: (make sure cities are lowercase and tags)

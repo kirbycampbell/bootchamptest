@@ -1,6 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
+const { loadTopics, loadContributors, loadTags } = require("./databases");
 
 // 1). get topics
 router.get("/", async (req, res) => {
@@ -73,9 +74,15 @@ router.get("/cities/:id", async (req, res) => {
   );
 });
 
-// 7). add new topic
+// 7). POST/ add new topic
 router.post("/", async (req, res) => {
   const topics = await loadTopics();
+  const contributors = await loadContributors();
+  const tags = await loadTags();
+
+  //  await tags.updateMany({label: { $nin: req.body.tags}}
+  //     , {$set: {a:2}}
+  //     , {upsert:true});
   await topics.insertOne({
     id: req.body.id,
     name: req.body.name,
@@ -87,6 +94,16 @@ router.post("/", async (req, res) => {
     cities: [],
     tags: []
   });
+  await contributors.updateOne(
+    {
+      id: req.body.createdBy
+    },
+    {
+      $addToSet: {
+        topics: [req.body.id]
+      }
+    }
+  );
   res.status(201).send(
     await topics.findOne({
       id: req.body.id
@@ -145,16 +162,5 @@ router.delete("/:id", async (req, res) => {
   await topics.deleteOne({ id: req.params.id });
   res.status(200).send();
 });
-
-//loadPostsCollection from MongoDB
-async function loadTopics() {
-  const client = await mongodb.MongoClient.connect(
-    "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
-    {
-      useNewUrlParser: true
-    }
-  );
-  return client.db("bootchamp").collection("topics");
-}
 
 module.exports = router;

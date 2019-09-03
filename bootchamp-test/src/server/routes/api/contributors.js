@@ -2,6 +2,7 @@ const express = require("express");
 const mongodb = require("mongodb");
 
 const router = express.Router();
+const { loadContributors } = require("./databases");
 
 // get contributors
 router.get("/", async (req, res) => {
@@ -14,6 +15,15 @@ router.get("/login", async (req, res) => {
   res.send(
     await contributors.findOne({
       email: req.query.email
+    })
+  );
+});
+
+router.get("/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  res.send(
+    await contributors.findOne({
+      id: req.params.id
     })
   );
 });
@@ -78,16 +88,5 @@ router.delete("/:id", async (req, res) => {
   await contributors.deleteOne({ _id: new mongodb.ObjectID(req.params.id) });
   res.status(200).send();
 });
-
-//loadPostsCollection from MongoDB
-async function loadContributors() {
-  const client = await mongodb.MongoClient.connect(
-    "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
-    {
-      useNewUrlParser: true
-    }
-  );
-  return client.db("bootchamp").collection("contributors");
-}
 
 module.exports = router;

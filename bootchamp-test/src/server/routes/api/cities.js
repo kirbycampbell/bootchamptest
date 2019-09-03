@@ -1,7 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
-
 const router = express.Router();
+const { loadCities, loadTopics } = require("./databases");
 
 // 1). Get cities -
 router.get("/", async (req, res) => {
@@ -144,27 +144,5 @@ router.delete("/:id", async (req, res) => {
   await cities.deleteOne({ id: req.params.id });
   res.status(200).send(true);
 });
-
-//loadPostsCollection from MongoDB
-async function loadCities() {
-  const client = await mongodb.MongoClient.connect(
-    "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
-    {
-      useNewUrlParser: true
-    }
-  );
-  return client.db("bootchamp").collection("cities");
-}
-
-// Extra functions using loadTopics()
-async function loadTopics() {
-  const client = await mongodb.MongoClient.connect(
-    "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
-    {
-      useNewUrlParser: true
-    }
-  );
-  return client.db("bootchamp").collection("topics");
-}
 
 module.exports = router;

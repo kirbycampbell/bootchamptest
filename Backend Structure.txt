@@ -63,3 +63,13 @@ Meetups: (Belong to "City")
     link: String,
     description: String
 }
+
+
+
+Reference Points:
+
+Creating Topic:
+    Create new topic... topic.createdBy = authUser; 
+    contributor.topics.push(topic.id);
+
+
