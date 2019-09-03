@@ -3,13 +3,13 @@ const mongodb = require("mongodb");
 
 const router = express.Router();
 
-// get cities -
+// 1). Get cities -
 router.get("/", async (req, res) => {
   const cities = await loadCities();
   res.send(await cities.find({}).toArray());
 });
 
-// !
+// 2). Get City by ID
 router.get("/:id", async (req, res) => {
   const cities = await loadCities();
   res.send(
@@ -19,25 +19,12 @@ router.get("/:id", async (req, res) => {
   );
 });
 
-// !
-router.get("/editcity/:id", async (req, res) => {
-  const cities = await loadCities();
-  res.send(
-    await cities
-      .find({
-        createdBy: req.params.id
-      })
-      .toArray()
-  );
-});
-
-// add cities - !
+// 3). Create a New City
 router.post("/", async (req, res) => {
   const cities = await loadCities();
   await cities.insertOne({
     id: req.body.id,
     createdAt: new Date(),
-    updatedAt: new Date(),
     name: req.body.name,
     state: req.body.state,
     meetupList: req.body.meetupList,
@@ -52,45 +39,95 @@ router.post("/", async (req, res) => {
   );
 });
 
-router.patch("/:id", async (req, res) => {
+// 4). Add new meetup to City's meetupList
+router.patch("/addMeetup/:id", async (req, res) => {
   const cities = await loadCities();
   await cities.updateOne(
     {
       id: req.params.id
+    },
+    {
+      $addToSet: {
+        meetupList: req.body.meetup
+      }
+    }
+  );
+  res.status(201).send(
+    await cities.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 5). Add new member to City's members array
+router.patch("/members/:id", async (req, res) => {
+  const cities = await loadCities();
+  await cities.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        members: req.body.members
+      }
+    }
+  );
+  res.status(201).send(
+    await cities.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 6). Add new resource to City's resources array
+router.patch("/addResource/:id", async (req, res) => {
+  const cities = await loadCities();
+  await cities.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        resources: req.body.newResource
+      }
+    }
+  );
+  res.status(201).send(
+    await cities.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 6). Add new topic to City's localTopics array
+router.patch("/addLocalTopic/:id", async (req, res) => {
+  const topics = await loadTopics();
+  const cities = await loadCities();
+  await topics.updateOne(
+    {
+      id: req.body.topicId
     },
     {
       $set: {
         name: req.body.name,
-        state: req.body.state,
+        likedBy: req.body.likedBy,
         updatedAt: new Date(),
-        meetupList: [],
-        members: [],
-        resources: [],
-        localTopics: []
+        tags: req.body.tags,
+        cities: req.body.cities,
+        content: req.body.content
       }
     }
   );
-  res.status(201).send(
-    await cities.findOne({
-      id: req.params.id
-    })
-  );
-});
-
-router.patch("/like/:id", async (req, res) => {
-  const cities = await loadCities();
-  let topicLike = await cities.findOne({
+  let cityTopic = await topics.findOne({
     id: req.params.id
   });
-
-  topicLike.likedBy.push("NewLike");
   await cities.updateOne(
     {
       id: req.params.id
     },
     {
-      $set: {
-        likedBy: topicLike.likedBy
+      $addToSet: {
+        localTopics: cityTopic.id
       }
     }
   );
@@ -101,11 +138,11 @@ router.patch("/like/:id", async (req, res) => {
   );
 });
 
-// delete cities - !
+// 10). delete cities
 router.delete("/:id", async (req, res) => {
   const cities = await loadCities();
   await cities.deleteOne({ id: req.params.id });
-  res.status(200).send();
+  res.status(200).send(true);
 });
 
 //loadPostsCollection from MongoDB
@@ -117,6 +154,17 @@ async function loadCities() {
     }
   );
   return client.db("bootchamp").collection("cities");
+}
+
+// Extra functions using loadTopics()
+async function loadTopics() {
+  const client = await mongodb.MongoClient.connect(
+    "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
+    {
+      useNewUrlParser: true
+    }
+  );
+  return client.db("bootchamp").collection("topics");
 }
 
 module.exports = router;

@@ -43,7 +43,8 @@ router.post("/", async (req, res) => {
       text: "",
       link: ""
     },
-    city: ""
+    city: "",
+    tags: []
   });
   res.status(201).send(
     await resources.findOne({

@@ -33,7 +33,6 @@ router.post("/", async (req, res) => {
     friends: [],
     cities: [],
     topics: [],
-    tags: [],
     lastOnline: [],
     avatar: "",
     info: {}
@@ -60,7 +59,6 @@ router.patch("/:id", async (req, res) => {
         friends: req.body.friends,
         cities: req.body.cities,
         topics: req.body.topics,
-        tags: req.body.tags,
         lastOnline: req.body.lastOnline,
         avatar: req.body.avatar,
         info: req.body.info

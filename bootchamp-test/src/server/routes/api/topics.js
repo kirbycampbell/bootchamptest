@@ -2,13 +2,13 @@ const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
 
-// get topics
+// 1). get topics
 router.get("/", async (req, res) => {
   const topics = await loadTopics();
   res.send(await topics.find({}).toArray());
 });
 
-// Return specific topic by id
+// 2). Return specific topic by id
 router.get("/:id", async (req, res) => {
   const topics = await loadTopics();
   res.send(
@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
   );
 });
 
-// TODO - Search for topic name
+// 3). TODO - Search for topic name - not working yet
 router.get("/match", async (req, res) => {
   const topics = await loadTopics();
   let term = req.body.searchTerm.toLowerCase();
@@ -34,7 +34,7 @@ router.get("/match", async (req, res) => {
   );
 });
 
-// Query User's Topics
+// 4). Query User's Topics
 router.get("/usertopics/:id", async (req, res) => {
   const topics = await loadTopics();
   res.send(
@@ -46,20 +46,7 @@ router.get("/usertopics/:id", async (req, res) => {
   );
 });
 
-// Query topic by city element
-router.get("/cities/:id", async (req, res) => {
-  const topics = await loadTopics();
-  let term = req.body.searchCity.toLowerCase();
-  res.send(
-    await topics
-      .find({
-        cities: new RegExp(term)
-      })
-      .toArray()
-  );
-});
-
-// Query topic by tag element
+// 5). Query topic by tag element
 router.get("/tags/:id", async (req, res) => {
   const topics = await loadTopics();
   res.send(
@@ -73,7 +60,20 @@ router.get("/tags/:id", async (req, res) => {
   );
 });
 
-// add topic
+// 6). Query topic by city element
+router.get("/cities/:id", async (req, res) => {
+  const topics = await loadTopics();
+  let term = req.body.searchCity.toLowerCase();
+  res.send(
+    await topics
+      .find({
+        cities: new RegExp(term)
+      })
+      .toArray()
+  );
+});
+
+// 7). add new topic
 router.post("/", async (req, res) => {
   const topics = await loadTopics();
   await topics.insertOne({
@@ -94,7 +94,7 @@ router.post("/", async (req, res) => {
   );
 });
 
-// Patch a topic fully
+// 8). Patch a topic fully
 router.patch("/:id", async (req, res) => {
   const topics = await loadTopics();
   await topics.updateOne(
@@ -119,7 +119,7 @@ router.patch("/:id", async (req, res) => {
   );
 });
 
-// Add a like to a topic
+// 9). Add a like to a topic
 router.patch("/like/:id", async (req, res) => {
   const topics = await loadTopics();
   await topics.updateOne(
@@ -139,7 +139,7 @@ router.patch("/like/:id", async (req, res) => {
   );
 });
 
-// delete topic by id
+// 10). delete topic by id
 router.delete("/:id", async (req, res) => {
   const topics = await loadTopics();
   await topics.deleteOne({ id: req.params.id });
