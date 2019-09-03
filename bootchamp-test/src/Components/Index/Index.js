@@ -19,6 +19,7 @@ const Index = () => {
             }}
           >
             {post}
+       
           </div>
         );
       })}
