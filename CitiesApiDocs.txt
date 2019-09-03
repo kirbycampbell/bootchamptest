@@ -1,0 +1,103 @@
+::::::::::::::::::::::::::::::::::::::
+:::::::::::::: CITIES ::::::::::::::::
+::::::::::::::::::::::::::::::::::::::
+
+:::QUERIES:::
+
+1). Get all Cities
+:::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities/
+--- returns data structure like this:
+{
+    "_id": "5d6d82047e76b94fac73aa9a",
+    "id": "001122",
+    "createdAt": "2019-09-02T20:56:36.657Z",
+    "updatedAt": "2019-09-02T20:56:36.657Z",
+    "name": "Portland",
+    "state": "Oregon",
+    "meetupList": [
+        {
+            "name": "Code Yea!",
+            "link": "www.meetup.com/codeyea",
+            "description": "Great meetup!"
+        }
+    ],
+    "members": [
+        "Kirby",
+        "Sage"
+    ],
+    "resources": [],
+    "localTopics": []
+}
+
+
+2). Get Specific City by ID 
+:::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities/<cityID>
+--- returns same data from above
+
+
+::: POSTS :::
+3). Create a new City Model
+::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities
+--- send data structured like this:
+    {
+    	"id": "005566",
+        "name": "Madison",
+        "state": "Wisconsin",
+        "meetupList": [
+            {
+        	"name": "Code Yea!",
+        	"link": "www.meetup.com/codeyea",
+    		"description": "Great meetup!"
+            }],
+        "members": ["Kirby"],
+        "resources": [],
+        "localTopics": []
+    }
+
+
+
+::: PATCHES:::
+
+4). Add Meetup to meetupList
+:::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities/addMeetup/<cityId>
+--- send data structured like this:
+   {
+        "meetup": {
+        	"name": "Code Yea!",
+        	"link": "www.meetup.com/codeyea",
+    		"description": "Great meetup!"
+        }
+    }
+
+5). Add Member to members array in City
+:::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities/members/<cityId>
+--- send data structured like this:
+    {
+        "members": "Kirby"
+    }
+
+6).  Add resource to City's resources array
+:::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/cities/addResource/<cityId>
+--- send data structure like this:
+{
+	"newResource": {
+		"title": "Great job board for Junior Devs",
+		"link": "www.portlandjobtech.org",
+		"description": "This is a great resource for finding jobs in the Portland Area"
+	}
+}
+
+7). 
+
+
+::: DELETE:::
+10). Delete City by id
+::::::::::::::::::::::::::
+http://localhost:5000/api/cities/<cityId>
+--- returns boolean if it is deleted

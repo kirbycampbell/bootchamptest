@@ -1,0 +1,65 @@
+Topics:
+{
+    id: uuid,
+    name: String,
+    content: { images: String, link: String, code: String, video: String, text: String },
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    createdBy: contributorId,
+    likedBy: [contributorId, contributorId...],
+    cities: [cityId, cityId...],
+    tags: [tagId, tagId...]
+}
+
+Contributor:
+{
+    id: uuid,
+    name: String,
+    password: hashedString,
+    email: string,
+    createdAt: new Date(),
+    online: Boolean,
+    likedTopics: [topicId, topicId...],
+    resourcesFollowed: [resourceId, resourceId...],
+    friends: [contributorId, contributorId...],
+    cities: [cityId, cityId...],
+    topics: [tagId, tagId...],
+    lastOnline: [dateArray],
+    avatar: String,
+    info: {bio: String, linkedIn: String, facebook: String, twitter: String, github: String}
+}
+
+Cities:
+{
+    id: uuid,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    title: String,
+    content: {
+      text: String,
+      link: String
+    },
+    city: String,
+    tags: [tagId, tagId...]
+}
+
+Tags: (Belongs to "Resources" and "Topics")
+{
+    id: uuid,
+    label: "String" (#react),
+}
+
+Resources: (Belong to "Cities" and "Users")
+{
+    id: uuid,
+    city: String,
+    tags: [tagId, tagId...]
+}
+
+Meetups: (Belong to "City")
+{
+    id: uuid,
+    name: String,
+    link: String,
+    description: String
+}

@@ -1,0 +1,113 @@
+::::::::::::::::::::::::::::::::::::::
+:::::::::::::: TOPICS ::::::::::::::::
+::::::::::::::::::::::::::::::::::::::
+
+1). Get all Topics:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics
+--- returns: 
+[
+    {
+        "_id": "5d6c8bc47fcee93970891f7f",
+        "id": "123456",
+        "name": "New Test Yeaaa Topic!",
+        "content": {
+            "images": "link.jpg",
+            "code": "console.log(Date.now())",
+            "text": "Good Luck Everybody!"
+        },
+        "createdAt": "2019-09-02T03:25:56.889Z",
+        "updatedAt": "2019-09-02T03:26:39.035Z",
+        "createdBy": "0987",
+        "likedBy": [
+            "0987",
+            "9875"
+        ],
+        "cities": ["portland, or", "sisters, or"],
+        "tags": ["#react", "#vue"]
+    }
+], ....
+
+2). Get id Specific topic:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/<topicID>
+--- returns: same structure as above
+::::::::::::::::::::::::::::::::::::::::::::::
+
+NOT IMP YET - 3). Get topic with name containing a search term:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/match
+-- send:
+{
+	"searchTerm": "Searchword"
+}
+
+4). Get All of a Contributor's Topics:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/<userID>
+--- returns: array of same structure above.
+
+
+5). Query for Topic by Tag:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/tags/<topicId>
+--- send an item structured like this:
+{
+	"searchTags": ["#vue"]
+}
+
+6). Query for Topic by City:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/cities/<topicId>
+--- send an item structured like this:
+{
+	"searchCity": "Portland"
+}
+
+7). POST new Topic:
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/
+-- send an item structured like this: 
+{
+"id": "1",
+"name": "Test Topic!",
+"content": {"images": "link.jpg", "code": "console.log(Date.now())", "text": "Good Luck Everybody!"},
+"createdBy": "0987",
+"likedBy": ["0987", "9876"]
+}
+
+8). Patch Topic: (make sure cities are lowercase and tags)
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/<topicId>
+-- send an item structured like this (everything is updated):
+{
+"name": "VERY very new name biaaatch",
+"likedBy": ["0986"],
+"tags": ["#react"],
+"cities": ["portland, or"],
+"content": {"images": "link.jpg", "code": "console.log(Date.now())", "text": "Good Luck Everybody!"}
+}
+
+9). Add like to a Topic: (Also add topic to user's likes)
+::::::::::::::::::::::::::::::::::::::::::::::
+http://localhost:5000/api/topics/like/<topicId>
+-- send an item structured like this:
+{
+    "likedBy": "0945"
+}
+
+
+10). Delete a topic by id
+http://localhost:5000/api/topics/<topicId>
+--- deletes a topic
+--- returns boolean if it is deleted
+
+
+
+TODO:
+Create a model for tags.  That way tags can be search themselves.
+Inject any new tag into the tag model array. Simple model.
+
+TODO: 
+Likes need to get injected into the user's likes,
+as well as the user ID injecting into likedBy array.

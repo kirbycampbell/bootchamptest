@@ -29,10 +29,10 @@ router.post("/", async (req, res) => {
     createdAt: new Date(),
     online: req.body.online,
     likedTopics: [],
+    resourcesFollowed: [],
     friends: [],
     cities: [],
     topics: [],
-    tags: [],
     lastOnline: [],
     avatar: "",
     info: {}
@@ -40,6 +40,34 @@ router.post("/", async (req, res) => {
   res.status(201).send(
     await contributors.findOne({
       id: req.body.id
+    })
+  );
+});
+
+router.patch("/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $set: {
+        name: req.body.name,
+        online: req.body.online,
+        likedTopics: req.body.likedTopics,
+        resourcesFollowed: req.body.resourcesFollowed,
+        friends: req.body.friends,
+        cities: req.body.cities,
+        topics: req.body.topics,
+        lastOnline: req.body.lastOnline,
+        avatar: req.body.avatar,
+        info: req.body.info
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
     })
   );
 });

@@ -9,8 +9,19 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const contributors = require("./routes/api/contributors");
-
 app.use("/api/contributors/", contributors);
+
+const topics = require("./routes/api/topics");
+app.use("/api/topics/", topics);
+
+const cities = require("./routes/api/cities");
+app.use("/api/cities/", cities);
+
+const resources = require("./routes/api/resources");
+app.use("/api/resources/", resources);
+
+// const tags = require("./routes/api/tags");
+// app.use("/api/tags/", tags);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/public/"));
