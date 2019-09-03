@@ -19,20 +19,21 @@ router.get("/:id", async (req, res) => {
   );
 });
 
+router.get("/:label", async (req, res) => {
+  const tags = await loadTags();
+  res.send(
+    await tags.findOne({
+      id: req.params.label
+    })
+  );
+});
+
 // add tags - !
 router.post("/", async (req, res) => {
   const tags = await loadTags();
   await tags.insertOne({
     id: req.body.id,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    title: req.body.title,
-    content: {
-      text: "",
-      link: ""
-    },
-    city: "",
-    tags: []
+    label: req.body.label
   });
   res.status(201).send(
     await tags.findOne({
