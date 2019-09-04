@@ -166,6 +166,26 @@ router.patch("/cities/:id", async (req, res) => {
   );
 });
 
+// 4.15). PATCH - Remove Contributor's Cities
+router.patch("/rem_cities/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $pull: {
+        cities: { $in: [req.query.city] }
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
 // 4.2). PATCH - Update Contributor's Topics
 router.patch("/topics/:id", async (req, res) => {
   const contributors = await loadContributors();
@@ -186,8 +206,28 @@ router.patch("/topics/:id", async (req, res) => {
   );
 });
 
+// 4.25). PATCH - Remove Contributor's Topics
+router.patch("/rem_topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $pull: {
+        topics: { $in: [req.query.topic] }
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
 // 4.3). PATCH - Update Contributor's Friends
-router.patch("/friends/:id", async (req, res) => {
+router.patch("/add_friend/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.updateOne(
     {
@@ -206,16 +246,56 @@ router.patch("/friends/:id", async (req, res) => {
   );
 });
 
-// 4.4). PATCH - Update Contributor's likedTopics
-router.patch("/liked-topics/:id", async (req, res) => {
+// 4.35). PATCH - Remove Contributor's Friend
+router.patch("/rem_friend/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.updateOne(
     {
       id: req.params.id
     },
     {
-      $addToSet: {
-        likedTopics: req.query.topic
+      $pull: {
+        friends: { $in: [req.query.friend] }
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.4). PATCH - Update Contributor's likedTopics
+router.patch("/add-liked-topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      // push, each, and position - place at i=0;
+      $push: {
+        likedTopics: { $each: [req.query.topic], $position: 0 }
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+// 4.45). PATCH - Remove Contributor's likedTopics
+router.patch("/rem-liked-topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $pull: {
+        likedTopics: { $in: [req.query.topic] }
       }
     }
   );
@@ -227,7 +307,7 @@ router.patch("/liked-topics/:id", async (req, res) => {
 });
 
 // 4.5). PATCH - Update Contributor's Resources
-router.patch("/resources/:id", async (req, res) => {
+router.patch("/add-resource/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.updateOne(
     {
@@ -236,6 +316,26 @@ router.patch("/resources/:id", async (req, res) => {
     {
       $addToSet: {
         resourcesFollowed: req.query.resource
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.55). PATCH - Remove Contributor's Resources
+router.patch("/rem-resource/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $pull: {
+        resourcesFollowed: { $in: [req.query.resource] }
       }
     }
   );

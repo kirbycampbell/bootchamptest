@@ -93,23 +93,48 @@ http://localhost:5000/api/contributors/cities/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {city: <cityId>}
 
+4.15). PATCH - Remove Contributor's Cities
+http://localhost:5000/api/contributors/rem_cities/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {city: <cityId>}
+
 4.2). PATCH - Update Contributor's Topics
 http://localhost:5000/api/contributors/topics/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {topic: <topicId>}
 
+4.25). PATCH - Remove Contributor's Topic
+http://localhost:5000/api/contributors/rem_topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
 4.3). PATCH - Update Contributor's Friends
-http://localhost:5000/api/contributors/friends/:id
+http://localhost:5000/api/contributors/add_friend/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {friend: <friendId>}
+
+4.35). PATCH - Remove Contributor's Friends
+http://localhost:5000/api/contributors/rem_friend/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {friend: <friendId>}
 
 4.4). PATCH - Update Contributor's likedTopics
-http://localhost:5000/api/contributors/liked-topics/:id
+http://localhost:5000/api/contributors/add-liked-topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
+4.45). PATCH - Remove Contributor's likedTopics
+http://localhost:5000/api/contributors/rem-liked-topics/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {topic: <topicId>}
 
 4.5). PATCH - Update Contributor's Resources
-http://localhost:5000/api/contributors/resources/:id
+http://localhost:5000/api/contributors/add-resource/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {resource: <resourceId>}
+
+4.5). PATCH - Remove Contributor's Resource
+http://localhost:5000/api/contributors/rem-resource/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {resource: <resourceId>}
 
