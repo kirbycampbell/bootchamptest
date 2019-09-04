@@ -28,6 +28,18 @@ router.get("/search/:name", async (req, res) => {
   );
 });
 
+router.get("/matches/:name", async (req, res) => {
+  const tags = await loadTags();
+  let term = req.params.name.toLowerCase();
+  res.send(
+    await tags
+      .find({
+        label: { $regex: new RegExp(req.params.name) }
+      })
+      .toArray()
+  );
+});
+
 // add tags - !
 router.post("/", async (req, res) => {
   const tags = await loadTags();
