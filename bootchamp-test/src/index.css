@@ -11,6 +11,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   width: 100vw;
+  background-color: rgb(26, 26, 26);
+  color: white;
+  font-family: "Arvo", serif;
 }
 
 code {
