@@ -7,24 +7,43 @@
 http://localhost:5000/api/contributors
 --- returns object like this:
 [
-    {
-        "_id": "5d6ebe3ac3e0c934b8bf127b",
-        "id": "102066094530440762337",
-        "name": "Kirby Campbell",
-        "password": "$2a$10$/AuKMdxK5ONYeQs8n0DX8uhOeOVpfjoOyb/IfumjvBt8Y/7Yw9zPC",
-        "email": "jkirbycampbell@gmail.com",
-        "createdAt": "2019-09-03T19:25:46.068Z",
-        "online": true,
-        "likedTopics": [],
-        "resourcesFollowed": [],
-        "friends": [],
-        "cities": [],
-        "topics": [ "003"
-        ],
-        "lastOnline": [],
-        "avatar": "",
-        "info": {}
-    }
+{
+    "_id": "5d6ebe3ac3e0c934b8bf127b",
+    "id": "102066094530440762337",
+    "name": "Kirby Campbell",
+    "password": "$2a$10$/AuKMdxK5ONYeQs8n0DX8uhOeOVpfjoOyb/IfumjvBt8Y/7Yw9zPC",
+    "email": "jkirbycampbell@gmail.com",
+    "createdAt": "2019-09-03T19:25:46.068Z",
+    "online": false,
+    "likedTopics": [
+        "689",
+        "688",
+        "643",
+        "644",
+        "641",
+        "640",
+        "649",
+        "658"
+    ],
+    "resourcesFollowed": [
+        "1111",
+        "1112"
+    ],
+    "friends": [
+        "1232132",
+        "3232132",
+        "3252132",
+        "3252139"
+    ],
+    "cities": [
+        "123123dsfsd",
+        "123123asdfsdf"
+    ],
+    "topics": ["97123jnr", "12983hfjn"],
+    "lastOnline": 1567567186303,
+    "avatar": "www.imgur/2321",
+    "info": {}
+}
 ], ....
 
 2). Get specific Contributor by Email (for login):
