@@ -1,0 +1,43 @@
+::::::::::::::::::::::::::::::
+:::::::::: TAGS ::::::::::::::
+::::::::::::::::::::::::::::::
+
+1).  Query all Tags:
+http://localhost:5000/api/tags
+--- returns object like below:
+[
+    {
+        "_id": "5d6ee264d4fd6e0120879e10",
+        "id": "65",
+        "label": "hooks"
+    }
+], ....
+
+2). Get Specific Tag by ID
+http://localhost:5000/api/tags/:id
+--- send Params Call
+{id: <tagId>}
+
+3). Search Tags for exact label match:
+http://localhost:5000/api/tags/search/:label
+--- send Params Call
+{label: <tagLabel>}
+
+4). Search Tags for part label match (while typing):
+http://localhost:5000/api/tags/matches/:label
+--- send Params Call
+{label: <tagName>}
+
+
+5). Create new Tag - POST
+http://localhost:5000/api/tags/
+--- send Body object like:
+{
+    "id": "uuid123123",
+    "label": "react"
+}
+
+6). Delete Specific Tag by ID
+http://localhost:5000/api/tags/:id
+--- send Params Call
+{id: <tagId>}
