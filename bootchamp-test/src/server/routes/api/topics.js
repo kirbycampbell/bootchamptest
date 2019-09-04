@@ -62,13 +62,13 @@ router.get("/tags/:id", async (req, res) => {
 });
 
 // 6). Query topic by city element
-router.get("/cities/:id", async (req, res) => {
+router.get("/cities/", async (req, res) => {
   const topics = await loadTopics();
   let term = req.body.searchCity.toLowerCase();
   res.send(
     await topics
       .find({
-        cities: new RegExp(term)
+        cities: [new RegExp(term)]
       })
       .toArray()
   );
