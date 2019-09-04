@@ -1,0 +1,120 @@
+::::::::::::::::::::::::::::::::::::::
+:::::::::::: Contributors ::::::::::::
+::::::::::::::::::::::::::::::::::::::
+
+
+::: TODO:::
+Add api calls for removing likedTopics, resourcesFollowed, friends, cities, and
+topics from the Contributor object.  
+--- Start rendering out Contributor data on the Profile page. Allowing user to edit.
+
+1). Get all Contributors - QUERY
+http://localhost:5000/api/contributors
+--- returns object like this:
+[
+    {
+        "_id": "5d6ebe3ac3e0c934b8bf127b",
+        "id": "102066094530440762337",
+        "name": "Kirby Campbell",
+        "password": "$2a$10$/AuKMdxK5ONYeQs8n0DX8uhOeOVpfjoOyb/IfumjvBt8Y/7Yw9zPC",
+        "email": "jkirbycampbell@gmail.com",
+        "createdAt": "2019-09-03T19:25:46.068Z",
+        "online": true,
+        "likedTopics": [],
+        "resourcesFollowed": [],
+        "friends": [],
+        "cities": [],
+        "topics": [
+            [
+                "003"
+            ]
+        ],
+        "lastOnline": [],
+        "avatar": "",
+        "info": {}
+    }
+], ....
+
+2). Get specific Contributor by Email (for login):
+http://localhost:5000/api/contributors/login
+--- send Query Params:
+{email: jkirbycampbell@gmail.com}
+
+2.25) Get (Search) For Contributor by Name (regex):
+http://localhost:5000/api/contributors/search/:name
+--- send Params: {email: <pieceOfName>}
+-- returns array of contribs, matching partially.
+
+2.40). Get specific Contributor by Email (regex):
+http://localhost:5000/api/contributors/search/:name
+--- send Params: {email: <pieceOfName>}
+-- returns array of contribs, matching partially.
+
+2.45). Search for Contributors by likedTopic
+http://localhost:5000/api/contributors/liked_topic/:id
+--- send Params: {id: <topicId>}
+
+2.5) Patch User for Login by id
+http://localhost:5000/api/contributors/login/:id
+--- send Params:
+{id: <contributorId>}
+
+2.75) Patch User for Logout by id
+http://localhost:5000/api/contributors/logout/:id
+--- send Params:
+{id: <contributorId>}
+
+
+3). POST - Create a new Contributor
+http://localhost:5000/api/contributors
+--- send Body object like:
+{
+    name: props.userName,
+    password: hash,
+    email: props.email,
+    online: true,
+    id: uuidv1()
+}
+
+4). PATCH - Update Contributor Object (profile)
+http://localhost:5000/api/contributors/:id
+--- send Params object like:
+{id: <contributorId>}
+--- send BODY object like:
+  {
+        "name": "Kirby Campbell",
+        "email": "jkirbycampbell@gmail.com",
+        "avatar": "www.imgur/2321",
+        "info": {}
+    }
+
+4.1). PATCH - Update Contributor's Cities
+http://localhost:5000/api/contributors/cities/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {city: <cityId>}
+
+4.2). PATCH - Update Contributor's Topics
+http://localhost:5000/api/contributors/topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
+4.3). PATCH - Update Contributor's Friends
+http://localhost:5000/api/contributors/friends/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {friend: <friendId>}
+
+4.4). PATCH - Update Contributor's likedTopics
+http://localhost:5000/api/contributors/liked-topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
+4.5). PATCH - Update Contributor's Resources
+http://localhost:5000/api/contributors/resources/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {resource: <resourceId>}
+
+5). DELETE - Remove Contributor Account by id
+http://localhost:5000/api/contributors/:id
+--- send Params like:
+{id: <contributorId>}
+---returns: true if successful

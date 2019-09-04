@@ -1,0 +1,61 @@
+:::::::::::::::::::::::::::::::
+:::::::::: Resources ::::::::::
+:::::::::::::::::::::::::::::::
+
+// Resources are only created in
+// City Models... Always joined together!
+
+1). Query All Resources:
+http://localhost:5000/api/resources/
+--- returns an object like:
+{
+    "_id": "5d6f0c6e1ed4df1cec1be5f3",
+    "id": "974",
+    "updatedAt": "2019-09-04T00:59:26.637Z",
+    "title": "Portland Job Site",
+    "content": {
+        "text": "Great site for your local job hunt!",
+        "link": "www.portlandtech.org"
+    },
+    "city": "001122",
+    "tags": [
+        "62"
+    ]
+}
+
+2). Get Specific Resource by id
+http://localhost:5000/api/resources/:id
+--- Send Params Get Request with:
+{id: <resourceId}
+
+3). Find Resources by City id
+http://localhost:5000/api/resources/find/:city
+--- send Params Get Request with:
+{city: cityId}
+
+4).  Create New Resource - POST
+http://localhost:5000/api/resources/
+--- Send Body object like:
+{
+	"id": "973",
+	"title": "Portland Job Site",
+	"content": {
+		"text": "Great site for your local job hunt!",
+		"link": "www.portlandtech.org"
+	},
+	"city": "001122",
+	"tags": ["62"]
+}
+
+5). Delete Resource by id
+http://localhost:5000/api/resources/
+--- Send Params like:
+{id: <resourceId>}
+
+6). Query Resource by tag
+http://localhost:5000/api/resources/:tag
+--- send Params like: {tag: <tagId>}
+
+7). Query Resource by tag & City
+http://localhost:5000/api/resources/:tag/:city
+--- send Params like: {tag: <tagId>, city: <cityId>}

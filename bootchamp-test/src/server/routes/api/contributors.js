@@ -4,12 +4,13 @@ const mongodb = require("mongodb");
 const router = express.Router();
 const { loadContributors } = require("./databases");
 
-// get contributors
+// 1). Get all Contributors - QUERY
 router.get("/", async (req, res) => {
   const contributors = await loadContributors();
   res.send(await contributors.find({}).toArray());
 });
 
+// 2). Get specific Contributor by Email (for login):
 router.get("/login", async (req, res) => {
   const contributors = await loadContributors();
   res.send(
@@ -19,16 +20,84 @@ router.get("/login", async (req, res) => {
   );
 });
 
-router.get("/:id", async (req, res) => {
+// 2.25). Get specific Contributor by Name (for search):
+router.get("/search/:name", async (req, res) => {
+  const contributors = await loadContributors();
+  let term = req.params.name.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await contributors
+      .find({
+        name: regex
+      })
+      .toArray()
+  );
+});
+
+// 2.40). Get specific Contributor by Email (for search):
+router.get("/search_email/:email", async (req, res) => {
+  const contributors = await loadContributors();
+  let term = req.params.email.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await contributors
+      .find({
+        email: regex
+      })
+      .toArray()
+  );
+});
+
+// 2.45). Get Contributors by likedTopic (for search):
+router.get("/liked_topic/:id", async (req, res) => {
   const contributors = await loadContributors();
   res.send(
+    await contributors
+      .find({
+        likedTopics: { $in: [req.params.id] }
+      })
+      .toArray()
+  );
+});
+
+// 2.5) Patch User for Login by id
+router.patch("/login/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    { id: req.params.id },
+    {
+      $set: {
+        online: true
+      }
+    }
+  );
+  res.status(201).send(
     await contributors.findOne({
       id: req.params.id
     })
   );
 });
 
-// add contributors
+// 2.75) Patch User for Logout by id
+router.patch("/logout/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    { id: req.params.id },
+    {
+      $set: {
+        online: false,
+        lastOnline: Date.now()
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 3). POST - Create a new Contributor
 router.post("/", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.insertOne({
@@ -54,6 +123,7 @@ router.post("/", async (req, res) => {
   );
 });
 
+// 4). PATCH - Update Contributor Object (profile)
 router.patch("/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.updateOne(
@@ -63,13 +133,7 @@ router.patch("/:id", async (req, res) => {
     {
       $set: {
         name: req.body.name,
-        online: req.body.online,
-        likedTopics: req.body.likedTopics,
-        resourcesFollowed: req.body.resourcesFollowed,
-        friends: req.body.friends,
-        cities: req.body.cities,
-        topics: req.body.topics,
-        lastOnline: req.body.lastOnline,
+        email: req.body.email,
         avatar: req.body.avatar,
         info: req.body.info
       }
@@ -82,7 +146,107 @@ router.patch("/:id", async (req, res) => {
   );
 });
 
-// delete contributors
+// 4.1). PATCH - Update Contributor's Cities
+router.patch("/cities/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        cities: req.query.city
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.2). PATCH - Update Contributor's Topics
+router.patch("/topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        topics: req.query.topic
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.3). PATCH - Update Contributor's Friends
+router.patch("/friends/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        friends: req.query.friend
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.4). PATCH - Update Contributor's likedTopics
+router.patch("/liked-topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        likedTopics: req.query.topic
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.5). PATCH - Update Contributor's Resources
+router.patch("/resources/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        resourcesFollowed: req.query.resource
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 5). DELETE - Remove Contributor Account by id
 router.delete("/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.deleteOne({ _id: new mongodb.ObjectID(req.params.id) });

@@ -52,6 +52,12 @@ Tags: (Belongs to "Resources" and "Topics")
 Resources: (Belong to "Cities" and "Users")
 {
     id: uuid,
+    updatedAt: new Date(),
+    title: req.body.title,
+    content: {
+      text: String,
+      link: String
+    },
     city: String,
     tags: [tagId, tagId...]
 }
@@ -63,8 +69,6 @@ Meetups: (Belong to "City")
     link: String,
     description: String
 }
-
-
 
 Reference Points:
 

@@ -23,6 +23,7 @@ const Profile = props => {
       <div>
         Profile
         <div>
+          <div className="pic-cont"></div>
           <button
             onClick={() => {
               logUserOut();
