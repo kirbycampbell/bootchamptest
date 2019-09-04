@@ -3,11 +3,6 @@
 ::::::::::::::::::::::::::::::::::::::
 
 
-::: TODO:::
-Add api calls for removing likedTopics, resourcesFollowed, friends, cities, and
-topics from the Contributor object.  
---- Start rendering out Contributor data on the Profile page. Allowing user to edit.
-
 1). Get all Contributors - QUERY
 http://localhost:5000/api/contributors
 --- returns object like this:
@@ -24,10 +19,7 @@ http://localhost:5000/api/contributors
         "resourcesFollowed": [],
         "friends": [],
         "cities": [],
-        "topics": [
-            [
-                "003"
-            ]
+        "topics": [ "003"
         ],
         "lastOnline": [],
         "avatar": "",
