@@ -1,0 +1,13 @@
+.pic-cont {
+  margin: auto;
+  width: 800px;
+  height: 800px;
+  border: 1px solid black;
+  padding: 40px;
+  object-fit: contain;
+}
+
+.pic {
+  object-fit: contain;
+  max-height: 100%;
+}
