@@ -23,6 +23,9 @@ app.use("/api/resources/", resources);
 const tags = require("./routes/api/tags");
 app.use("/api/tags/", tags);
 
+const meetups = require("./routes/api/meetups");
+app.use("/api/meetups/", meetups);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(__dirname + "/public/"));
 
