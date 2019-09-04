@@ -45,7 +45,8 @@ router.patch("/logout/:id", async (req, res) => {
     { id: req.params.id },
     {
       $set: {
-        online: false
+        online: false,
+        lastOnline: Date.now()
       }
     }
   );
@@ -92,15 +93,109 @@ router.patch("/:id", async (req, res) => {
     {
       $set: {
         name: req.body.name,
-        online: req.body.online,
-        likedTopics: req.body.likedTopics,
-        resourcesFollowed: req.body.resourcesFollowed,
-        friends: req.body.friends,
-        cities: req.body.cities,
-        topics: req.body.topics,
-        lastOnline: req.body.lastOnline,
+        email: req.body.email,
         avatar: req.body.avatar,
         info: req.body.info
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.1). PATCH - Update Contributor's Cities
+router.patch("/cities/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        cities: req.query.city
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.2). PATCH - Update Contributor's Topics
+router.patch("/topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        topics: req.query.topic
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.3). PATCH - Update Contributor's Friends
+router.patch("/friends/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        friends: req.query.friend
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.4). PATCH - Update Contributor's likedTopics
+router.patch("/liked-topics/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        likedTopics: req.query.topic
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 4.5). PATCH - Update Contributor's Resources
+router.patch("/resources/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id
+    },
+    {
+      $addToSet: {
+        resourcesFollowed: req.query.resource
       }
     }
   );

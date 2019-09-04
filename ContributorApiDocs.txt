@@ -63,23 +63,37 @@ http://localhost:5000/api/contributors/:id
 --- send BODY object like:
   {
         "name": "Kirby Campbell",
-        "password": "$2a$10$/AuKMdxK5ONYeQs8n0DX8uhOeOVpfjoOyb/IfumjvBt8Y/7Yw9zPC",
         "email": "jkirbycampbell@gmail.com",
-        "createdAt": "2019-09-03T19:25:46.068Z",
-        "online": true,
-        "likedTopics": [],
-        "resourcesFollowed": [],
-        "friends": [],
-        "cities": [],
-        "topics": [
-            [
-                "003"
-            ]
-        ],
-        "lastOnline": [],
-        "avatar": "",
+        "avatar": "www.imgur/2321",
         "info": {}
     }
+
+4.1). PATCH - Update Contributor's Cities
+http://localhost:5000/api/contributors/cities/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {city: <cityId>}
+
+4.2). PATCH - Update Contributor's Topics
+http://localhost:5000/api/contributors/topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
+4.3). PATCH - Update Contributor's Friends
+http://localhost:5000/api/contributors/friends/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {friend: <friendId>}
+
+4.4). PATCH - Update Contributor's likedTopics
+http://localhost:5000/api/contributors/liked-topics/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {topic: <topicId>}
+
+4.5). PATCH - Update Contributor's Resources
+http://localhost:5000/api/contributors/resources/:id
+--- send Params: {id: <contributorId>}
+--- send Query: {resource: <resourceId>}
+
+
 
 5). DELETE - Remove Contributor Account by id
 http://localhost:5000/api/contributors/:id
