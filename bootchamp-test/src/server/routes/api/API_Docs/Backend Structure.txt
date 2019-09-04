@@ -70,8 +70,6 @@ Meetups: (Belong to "City")
     description: String
 }
 
-
-
 Reference Points:
 
 Creating Topic:

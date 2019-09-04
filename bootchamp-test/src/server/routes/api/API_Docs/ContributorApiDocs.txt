@@ -44,6 +44,10 @@ http://localhost:5000/api/contributors/search/:name
 --- send Params: {email: <pieceOfName>}
 -- returns array of contribs, matching partially.
 
+2.45). Search for Contributors by likedTopic
+http://localhost:5000/api/contributors/liked_topic/:id
+--- send Params: {id: <topicId>}
+
 2.5) Patch User for Login by id
 http://localhost:5000/api/contributors/login/:id
 --- send Params:
