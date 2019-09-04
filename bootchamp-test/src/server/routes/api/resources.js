@@ -3,6 +3,9 @@ const mongodb = require("mongodb");
 const router = express.Router();
 const { loadResources } = require("./databases");
 
+// Resources are only created in
+// City Models... Always joined together!
+
 // 1). Query All Resources:
 router.get("/", async (req, res) => {
   const resources = await loadResources();

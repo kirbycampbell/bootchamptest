@@ -2,6 +2,9 @@
 :::::::::: Resources ::::::::::
 :::::::::::::::::::::::::::::::
 
+// Resources are only created in
+// City Models... Always joined together!
+
 1). Query All Resources:
 http://localhost:5000/api/resources/
 --- returns an object like:

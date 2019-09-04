@@ -4,12 +4,13 @@ const mongodb = require("mongodb");
 const router = express.Router();
 const { loadContributors } = require("./databases");
 
-// get contributors
+// 1). Get all Contributors - QUERY
 router.get("/", async (req, res) => {
   const contributors = await loadContributors();
   res.send(await contributors.find({}).toArray());
 });
 
+// 2). Get specific Contributor by Email (for login):
 router.get("/login", async (req, res) => {
   const contributors = await loadContributors();
   res.send(
@@ -19,16 +20,43 @@ router.get("/login", async (req, res) => {
   );
 });
 
-router.get("/:id", async (req, res) => {
+// 2.5) Patch User for Login by id
+router.patch("/login/:id", async (req, res) => {
   const contributors = await loadContributors();
-  res.send(
+  await contributors.updateOne(
+    { id: req.params.id },
+    {
+      $set: {
+        online: true
+      }
+    }
+  );
+  res.status(201).send(
     await contributors.findOne({
       id: req.params.id
     })
   );
 });
 
-// add contributors
+// 2.75) Patch User for Logout by id
+router.patch("/logout/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    { id: req.params.id },
+    {
+      $set: {
+        online: false
+      }
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id
+    })
+  );
+});
+
+// 3). POST - Create a new Contributor
 router.post("/", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.insertOne({
@@ -54,6 +82,7 @@ router.post("/", async (req, res) => {
   );
 });
 
+// 4). PATCH - Update Contributor Object (profile)
 router.patch("/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.updateOne(
@@ -82,7 +111,7 @@ router.patch("/:id", async (req, res) => {
   );
 });
 
-// delete contributors
+// 5). DELETE - Remove Contributor Account by id
 router.delete("/:id", async (req, res) => {
   const contributors = await loadContributors();
   await contributors.deleteOne({ _id: new mongodb.ObjectID(req.params.id) });
