@@ -37,5 +37,14 @@ module.exports = {
       }
     );
     return client.db("bootchamp").collection("tags");
+  },
+  loadResources: async function loadResources() {
+    const client = await mongodb.MongoClient.connect(
+      "mongodb://bootchampAdmin:adminBootchamp1@ds355357.mlab.com:55357/bootchamp",
+      {
+        useNewUrlParser: true
+      }
+    );
+    return client.db("bootchamp").collection("resources");
   }
 };
