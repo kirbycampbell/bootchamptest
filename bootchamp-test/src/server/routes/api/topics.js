@@ -1,7 +1,7 @@
 const express = require("express");
 const mongodb = require("mongodb");
 const router = express.Router();
-const { loadTopics, loadContributors, loadTags } = require("./databases");
+const { loadTopics, loadContributors } = require("./databases");
 
 // 1). get topics
 router.get("/", async (req, res) => {
@@ -20,15 +20,14 @@ router.get("/:id", async (req, res) => {
 });
 
 // 3). TODO - Search for topic name - not working yet
-router.get("/match", async (req, res) => {
+router.get("/match/:search", async (req, res) => {
   const topics = await loadTopics();
-  let term = req.body.searchTerm.toLowerCase();
-  let regex = `/\b(w*${term}w*)/g`;
+  let term = req.params.search.toLowerCase();
   res.send(
     await topics
       .find({
         name: {
-          $regex: regex
+          $regex: new RegExp(term)
         }
       })
       .toArray()
@@ -78,11 +77,6 @@ router.get("/cities/", async (req, res) => {
 router.post("/", async (req, res) => {
   const topics = await loadTopics();
   const contributors = await loadContributors();
-  //const tags = await loadTags();
-
-  //  await tags.updateMany({label: { $nin: req.body.tags}}
-  //     , {$set: {a:2}}
-  //     , {upsert:true});
   await topics.insertOne({
     id: req.body.id,
     name: req.body.name,

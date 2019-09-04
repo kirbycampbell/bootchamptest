@@ -34,6 +34,11 @@ http://localhost:5000/api/contributors/login
 --- send Query Params:
 {email: jkirbycampbell@gmail.com}
 
+2.25) Get (Search) For Contributor by Name (regex):
+http://localhost:5000/api/contributors/search/:name
+--- send Params: {email: <pieceOfName>}
+-- returns array of contribs, matching partially.
+
 2.5) Patch User for Login by id
 http://localhost:5000/api/contributors/login/:id
 --- send Params:
@@ -92,8 +97,6 @@ http://localhost:5000/api/contributors/liked-topics/:id
 http://localhost:5000/api/contributors/resources/:id
 --- send Params: {id: <contributorId>}
 --- send Query: {resource: <resourceId>}
-
-
 
 5). DELETE - Remove Contributor Account by id
 http://localhost:5000/api/contributors/:id

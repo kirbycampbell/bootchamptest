@@ -20,6 +20,20 @@ router.get("/login", async (req, res) => {
   );
 });
 
+// 2.25). Get specific Contributor by Name (for search):
+router.get("/search/:name", async (req, res) => {
+  const contributors = await loadContributors();
+  let term = req.params.name.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await contributors
+      .find({
+        name: regex
+      })
+      .toArray()
+  );
+});
+
 // 2.5) Patch User for Login by id
 router.patch("/login/:id", async (req, res) => {
   const contributors = await loadContributors();
