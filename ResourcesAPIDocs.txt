@@ -48,3 +48,11 @@ http://localhost:5000/api/resources/
 http://localhost:5000/api/resources/
 --- Send Params like:
 {id: <resourceId>}
+
+6). Query Resource by tag
+http://localhost:5000/api/resources/:tag
+--- send Params like: {tag: <tagId>}
+
+7). Query Resource by tag & City
+http://localhost:5000/api/resources/:tag/:city
+--- send Params like: {tag: <tagId>, city: <cityId>}

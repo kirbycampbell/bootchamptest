@@ -22,7 +22,6 @@ router.get("/:id", async (req, res) => {
 // 3). Find Resources by City id
 router.get("/find/:city", async (req, res) => {
   const resources = await loadResources();
-  let term = req.params.city.toLowerCase();
   res.send(
     await resources
       .find({
@@ -58,6 +57,31 @@ router.delete("/:id", async (req, res) => {
   const resources = await loadResources();
   await resources.deleteOne({ id: req.params.id });
   res.status(200).send();
+});
+
+// 6). Search for Resource by tags
+router.get("/find-tag/:tag", async (req, res) => {
+  const resources = await loadResources();
+  res.send(
+    await resources
+      .find({
+        tags: req.params.tag
+      })
+      .toArray()
+  );
+});
+
+// 7). Search for Resource by tags & city
+router.get("/find-tag/:tag/:city", async (req, res) => {
+  const resources = await loadResources();
+  res.send(
+    await resources
+      .find({
+        tags: req.params.tag,
+        city: req.params.city
+      })
+      .toArray()
+  );
 });
 
 module.exports = router;
