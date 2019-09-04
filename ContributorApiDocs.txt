@@ -39,6 +39,11 @@ http://localhost:5000/api/contributors/search/:name
 --- send Params: {email: <pieceOfName>}
 -- returns array of contribs, matching partially.
 
+2.40). Get specific Contributor by Email (regex):
+http://localhost:5000/api/contributors/search/:name
+--- send Params: {email: <pieceOfName>}
+-- returns array of contribs, matching partially.
+
 2.5) Patch User for Login by id
 http://localhost:5000/api/contributors/login/:id
 --- send Params:

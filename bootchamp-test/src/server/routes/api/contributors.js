@@ -34,6 +34,32 @@ router.get("/search/:name", async (req, res) => {
   );
 });
 
+// 2.40). Get specific Contributor by Email (for search):
+router.get("/search_email/:email", async (req, res) => {
+  const contributors = await loadContributors();
+  let term = req.params.email.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await contributors
+      .find({
+        email: regex
+      })
+      .toArray()
+  );
+});
+
+// 2.45). Get Contributors by likedTopic (for search):
+router.get("/liked_topic/:id", async (req, res) => {
+  const contributors = await loadContributors();
+  res.send(
+    await contributors
+      .find({
+        likedTopics: { $in: [req.params.id] }
+      })
+      .toArray()
+  );
+});
+
 // 2.5) Patch User for Login by id
 router.patch("/login/:id", async (req, res) => {
   const contributors = await loadContributors();
