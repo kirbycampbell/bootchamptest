@@ -1,7 +1,6 @@
 .Outer-Profile {
   height: 100%;
   width: 100%;
-  display: flex;
 }
 
 .Inner-Profile {
@@ -30,6 +29,8 @@
 }
 
 .Topic-List {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   height: 200px;
   width: 100%;

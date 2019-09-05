@@ -2,12 +2,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 import { Redirect } from "react-router";
-import { axios } from "axios";
+
 import { URL } from "./../../constants/url";
+const axios = require("axios");
 
 const Profile = props => {
   const [loggedOut, setLoggedOut] = useState(false);
-  const [topics, setTopics] = useState(null);
+  const [topics, setTopics] = useState([]);
+  const [loaded, setLoaded] = useState(false);
   const user = useSelector(state => state.user);
 
   const dispatch = useDispatch();
@@ -18,12 +20,21 @@ const Profile = props => {
     },
     [dispatch]
   );
-  console.log(user);
 
   // need tp make endpoint that matches all topics in array
-  // useEffect(() => {
-  //   axios.get(URL + "topics")
-  // }, []);
+  useEffect(() => {
+    if (user.name !== undefined) {
+      axios
+        .get(URL + "topics/usertopics/" + user.id)
+        .then(function(res) {
+          setTopics(res.data);
+          setLoaded(true);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }, [user]);
 
   if (!props.auth && loggedOut) {
     return <Redirect to="/LogIn" />;
@@ -38,7 +49,17 @@ const Profile = props => {
           <div className="pic-cont">
             <img className="pic" src={user.avatar} alt="Profile" />
           </div>
-          <div className="Topic-List">Topics</div>
+          <div className="Topic-List">
+            <h2>Topics</h2>
+            {topics.map(topic => {
+              return (
+                <div className="Outer-Profile" key={topic.id}>
+                  <div className="Topic-Name">{topic.name}</div>
+                  <div>{topic.content.text}</div>
+                </div>
+              );
+            })}
+          </div>
           <button
             onClick={() => {
               logUserOut();
