@@ -88,16 +88,6 @@ router.post("/", async (req, res) => {
     cities: [],
     tags: []
   });
-  await contributors.updateOne(
-    {
-      id: req.body.createdBy
-    },
-    {
-      $addToSet: {
-        topics: [req.body.id]
-      }
-    }
-  );
   res.status(201).send(
     await topics.findOne({
       id: req.body.id
