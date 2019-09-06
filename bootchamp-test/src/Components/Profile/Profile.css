@@ -1,13 +1,37 @@
-.pic-cont {
+.Outer-Profile {
+  height: 100%;
+  width: 100%;
+}
+
+.Inner-Profile {
   margin: auto;
-  width: 800px;
-  height: 800px;
-  border: 1px solid black;
-  padding: 40px;
-  object-fit: contain;
+  width: 95%;
+}
+
+.Profile-Title {
+  width: 20%;
+  margin: auto;
+}
+.pic-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  border-radius: 200px;
+  overflow: hidden;
 }
 
 .pic {
-  object-fit: contain;
-  max-height: 100%;
+  object-fit: cover;
+  max-height: 85%;
+}
+
+.Topic-List {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 200px;
+  width: 100%;
 }

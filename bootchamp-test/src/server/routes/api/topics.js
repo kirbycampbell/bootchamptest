@@ -19,16 +19,15 @@ router.get("/:id", async (req, res) => {
   );
 });
 
-// 3). TODO - Search for topic name - not working yet
+// 3).  Search for topic name - not working yet
 router.get("/match/:search", async (req, res) => {
   const topics = await loadTopics();
   let term = req.params.search.toLowerCase();
+  let regex = new RegExp("" + term, "i");
   res.send(
     await topics
       .find({
-        name: {
-          $regex: new RegExp(term)
-        }
+        name: regex
       })
       .toArray()
   );
@@ -60,14 +59,13 @@ router.get("/tags/:id", async (req, res) => {
   );
 });
 
-// 6). Query topic by city element
+// 6). Query topic by city element - needs to be an id
 router.get("/cities/", async (req, res) => {
   const topics = await loadTopics();
-  let term = req.body.searchCity.toLowerCase();
   res.send(
     await topics
       .find({
-        cities: [new RegExp(term)]
+        cities: req.body.searchCity
       })
       .toArray()
   );
@@ -88,16 +86,6 @@ router.post("/", async (req, res) => {
     cities: [],
     tags: []
   });
-  await contributors.updateOne(
-    {
-      id: req.body.createdBy
-    },
-    {
-      $addToSet: {
-        topics: [req.body.id]
-      }
-    }
-  );
   res.status(201).send(
     await topics.findOne({
       id: req.body.id

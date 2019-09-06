@@ -34,10 +34,10 @@ http://localhost:5000/api/topics/<topicID>
 --- returns: same structure as above
 ::::::::::::::::::::::::::::::::::::::::::::::
 
-NOT IMP YET - 3). Get topic with name containing a search term:
+3). Get topic with name containing a search term:
 ::::::::::::::::::::::::::::::::::::::::::::::
 http://localhost:5000/api/topics/match
--- send:
+-- send as Param Var:
 {
 	"searchTerm": "Searchword"
 }

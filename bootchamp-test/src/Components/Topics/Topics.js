@@ -22,7 +22,7 @@ const Topics = ({ id, name, content, tags}) => {
     <Tile />
   </div>
   )
-};
 
+};
 
 export default Topics;

@@ -8,7 +8,7 @@ import Resources from "./Resources/Resources";
 import Profile from "./Profile/Profile";
 import "./App.css";
 import Index from "./Index/Index";
-import Test from './P5test/p5.container'
+import Test from "./P5test/p5.container";
 
 const MainRouter = props => {
   return (
@@ -29,11 +29,14 @@ const MainRouter = props => {
             path="/Resources"
             render={() => <Resources user={props.user} auth={props.auth} />}
           />
-          <Route
-            exact
-            path="/Profile"
-            render={() => <Profile user={props.user} auth={props.auth} />}
-          />
+          {props.auth && (
+            <Route
+              exact
+              path="/Profile"
+              render={() => <Profile user={props.user} auth={props.auth} />}
+            />
+          )}
+
           <Route
             exact
             path="/Test"
