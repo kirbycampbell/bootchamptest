@@ -1,15 +1,25 @@
 import React, {useState} from "react";
-import "./Topics.css";
+import "./Topics.scss";
+import Tile from '../Tile/tile.component'
+import { URL } from '../../constants/url'
 
-import axios from 'axios'
+const axios = require('axios')
 
-const Topics = () => {
 
+const Topics = ({ id, name, content, tags}) => {
+
+  axios
+    .get(URL + 'topics/')
+    .then(function (response) {
+      let topics = response.data
+      console.log(topics)
+    })
 
   return (
 
-  <div>
-    Topics
+  <div className='topics'>
+    {console.log(topics)}
+    <Tile />
   </div>
   )
 };
