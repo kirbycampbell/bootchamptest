@@ -1,9 +1,15 @@
 .topics {
-  display: flex;
-  flex-direction: column-reverse;
-  flex-wrap: wrap;
-  justify-content: space-around;
+
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
+//   display: flex;
+//   flex-direction: column-reverse;
+//   flex-wrap: wrap;
+//   justify-content: space-around;
+// }
 
 .Outer-Topic {
   border: 1px solid white;
@@ -13,3 +19,4 @@
   margin-bottom: 20px;
   width: 80%;
 }
+
