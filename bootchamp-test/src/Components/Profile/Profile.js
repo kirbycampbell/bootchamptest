@@ -36,6 +36,10 @@ const Profile = props => {
     }
   }, [user]);
 
+  // TOMORROW:
+  // try querying topics for all topics in query array!
+  // could be a handy feature to add
+
   if (!props.auth && loggedOut) {
     return <Redirect to="/LogIn" />;
   } else if (!props.auth && !localStorage.getItem("User")) {
