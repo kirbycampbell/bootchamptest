@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import './tile.styles.scss'
 
-const Tile = ({id, name}) => (
+const Tile = ({name}) => (
     <div className='tile-item'>
     {/* <div className='image'
         style={{

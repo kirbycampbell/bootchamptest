@@ -28,10 +28,10 @@ const Topics = ({ id, name, content, tags}) => {
 
   <div className='topics'>
     {/* {console.log(topics)} */}
-    {topics.map((topic) => {
-      return <Tile name={topic.name}/>
-    })}
-    
+    {topics.map(({id, ...otherProps }) => (
+       <Tile key={id} {...otherProps} />
+    ))
+    }
   </div>
   )
 
