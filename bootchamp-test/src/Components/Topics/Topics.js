@@ -22,7 +22,7 @@ const Topics = ({ id, name, content, tags}) => {
     .catch(function(error) {
       console.log(error)
     })
-  })
+  }, [])
   
 
   return (
