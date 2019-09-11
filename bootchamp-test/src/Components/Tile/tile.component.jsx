@@ -1,18 +1,12 @@
-import React, { Component } from 'react'
+import React from "react";
+import "./tile.styles.scss";
 
-import './tile.styles.scss'
-
-const Tile = ({name}) => (
-    <div className='tile-item'>
-    {/* <div className='image'
-        style={{
-            backgroundImage: `url(${imageUrl})`
-        }}
-    /> */}
-        <div className='tile-footer'>
-            <span className='name'>{name}</span>
-        </div>
-</div>
-)
+const Tile = ({ name }) => (
+  <div className="tile-item">
+    <div className="tile-footer">
+      <span className="name">{name}</span>
+    </div>
+  </div>
+);
 
 export default Tile;
