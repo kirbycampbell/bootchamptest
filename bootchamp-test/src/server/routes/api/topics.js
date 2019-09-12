@@ -78,13 +78,13 @@ router.post("/", async (req, res) => {
   await topics.insertOne({
     id: req.body.id,
     name: req.body.name,
-    content: { images: [""], link: "", code: "", video: "", text: "" },
+    content: req.body.content,
     createdAt: new Date(),
     updatedAt: new Date(),
     createdBy: req.body.createdBy,
     likedBy: [],
-    cities: [],
-    tags: []
+    cities: req.body.cities,
+    tags: req.body.tags
   });
   res.status(201).send(
     await topics.findOne({

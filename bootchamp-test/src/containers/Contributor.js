@@ -1,12 +1,12 @@
 import React from "react";
 
-const Contributor = props => {
+const Contributor = ({ contributor: { name, joinedDate, id, createdAt } }) => {
   return (
     <React.Fragment>
-      <h2>{props.contributor.name}</h2>
-      <h3>{props.contributor.joinedDate}</h3>
-      <h4>{props.contributor.id}</h4>
-      <h5>Joined on: {props.contributor.createdAt}</h5>
+      <h2>{name}</h2>
+      <h3>{joinedDate}</h3>
+      <h4>{id}</h4>
+      <h5>Joined on: {createdAt}</h5>
     </React.Fragment>
   );
 };

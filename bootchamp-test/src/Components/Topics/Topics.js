@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Topics.scss";
 import Tile from "../Tile/tile.component";
 import { URL } from "../../constants/url";
+import CreateTopic from "./CreateTopic";
 
 const axios = require("axios");
 
@@ -20,12 +21,14 @@ const Topics = ({ id, name, content, tags }) => {
   }, []);
 
   return (
-    <div className="topics">
-      {/* {console.log(topics)} */}
-      {topics.map(({ id, ...otherProps }) => (
-        <Tile key={id} {...otherProps} />
-      ))}
-    </div>
+    <React.Fragment>
+      <CreateTopic />
+      <div className="topics">
+        {topics.map(({ id, ...otherProps }) => (
+          <Tile key={id} {...otherProps} />
+        ))}
+      </div>
+    </React.Fragment>
   );
 };
 

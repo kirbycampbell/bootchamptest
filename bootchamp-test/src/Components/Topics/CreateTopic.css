@@ -1,0 +1,39 @@
+.OuterTopicForm {
+  height: 32vh;
+  width: 95vw;
+  margin: auto;
+  text-align: center;
+  font-size: 18px;
+  background: rgb(78, 78, 155);
+  padding: 1vw;
+}
+
+h2 {
+  text-decoration: underline;
+}
+.topic-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+}
+
+.form-item {
+  width: 80%;
+  height: 6%;
+  min-height: 28px;
+  margin: auto;
+}
+
+.submit-btn {
+  width: 60%;
+  height: 10%;
+  min-height: 34px;
+  background-color: rgb(39, 105, 226);
+  color: white;
+  font-size: 22px;
+  margin: auto;
+  cursor: pointer;
+}
