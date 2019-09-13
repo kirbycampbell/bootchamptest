@@ -20,6 +20,7 @@ const Profile = props => {
     },
     [dispatch]
   );
+  console.log(loaded);
 
   // need tp make endpoint that matches all topics in array
   useEffect(() => {

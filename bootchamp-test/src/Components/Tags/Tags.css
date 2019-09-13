@@ -1,0 +1,12 @@
+.tag-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border: 1px dotted blue;
+  text-align: center;
+}

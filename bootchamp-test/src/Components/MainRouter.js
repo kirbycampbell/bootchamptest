@@ -8,7 +8,8 @@ import Resources from "./Resources/Resources";
 import Profile from "./Profile/Profile";
 import "./App.css";
 import Index from "./Index/Index";
-import Test from "./P5test/p5.container";
+// import Test from "./P5test/p5.container";
+import Tags from "./Tags/Tags";
 
 const MainRouter = props => {
   return (
@@ -37,10 +38,15 @@ const MainRouter = props => {
             />
           )}
 
-          <Route
+          {/* <Route
             exact
             path="/Test"
             render={() => <Test user={props.user} auth={props.auth} />}
+          /> */}
+          <Route
+            exact
+            path="/Tags"
+            render={() => <Tags user={props.user} auth={props.auth} />}
           />
         </div>
       </div>
