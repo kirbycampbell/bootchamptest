@@ -93,8 +93,8 @@ const CreateTopic = () => {
           placeholder="Tags"
           name="tags"
         />
-        <input
-          className="form-item"
+        <textarea
+          className="form-item-ta"
           type="text"
           placeholder="Text"
           name="text"
