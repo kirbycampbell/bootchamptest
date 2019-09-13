@@ -1,3 +1,36 @@
+.input-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  font-size: 20px;
+  text-align: left;
+  position: relative;
+  background-color: white;
+}
+.input-form {
+  height: 50px;
+  width: 99%;
+  padding: 0;
+  padding-left: 1%;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Tag-search-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border: 1% solid rgb(255, 255, 255);
+  text-align: center;
+}
+
 .tag-card {
   display: flex;
   justify-content: center;
@@ -5,10 +38,35 @@
   height: 50px;
   width: 40%;
   margin: auto;
-  margin-bottom: 10px;
   font-size: 20px;
   border: 1px dotted blue;
   text-align: center;
+  position: relative;
+}
+
+.ind-result {
+  width: 100%;
+  border-bottom: 1px solid grey;
+  background-color: rgba(128, 128, 128, 0);
+}
+.ind-result:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.247);
+}
+
+.create {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+  margin-left: 10px;
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+.create:hover {
+  color: rgba(72, 209, 72, 0.651);
+  cursor: pointer;
 }
 
 .chosen-tag {
@@ -16,13 +74,19 @@
   justify-content: center;
   align-items: center;
   background: grey;
-  padding: 0px 5px 0px 10px;
+  padding: 0px 0px 0px 10px;
   margin: 0px 5px;
 }
 .x-out {
   font-size: 12px;
   font-weight: bold;
-  padding: 0px 5px 0px 10px;
+  color: rgb(119, 0, 0);
+  margin: 0px 5px;
   margin-bottom: 5px;
   cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.x-out:hover {
+  color: red;
 }

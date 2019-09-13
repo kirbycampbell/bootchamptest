@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import "./Tags.css";
 import { URL } from "./../../constants/url";
 const axios = require("axios");
+const uuidv1 = require("uuid/v1");
 
 const Tags = () => {
   const [tags, setTags] = useState([]);
@@ -47,10 +48,34 @@ const Tags = () => {
     setQueryList(newList);
   };
 
+  const createTag = () => {
+    axios
+      .post(URL + "tags/", {
+        id: uuidv1(),
+        label: typeTag.toLowerCase()
+      })
+      .then(function(res) {
+        axios
+          .get(URL + "tags/")
+          .then(function(response) {
+            setTags(response.data);
+            let newList = queryList;
+            newList.push(res.data);
+            setQueryList(newList);
+            setTypeTag("");
+            setQueryMatch([]);
+            console.log(res);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      });
+  };
+
   return (
     <div>
       <div>
-        <div className="tag-card">
+        <div className="input-card">
           {/* ::::::::::: Chosen Tags :::::::::::::: */}
           {queryList.length > 0 &&
             queryList.map(item => {
@@ -65,19 +90,28 @@ const Tags = () => {
             })}
           {/* ::::::::::: Input Section :::::::::::::: */}
           <input
+            className="input-form"
             type="text"
             name="tag"
-            placeholder="Type Tag Name here"
+            placeholder="Type Tag"
             onChange={handleTyping}
             value={typeTag}
           />
+          {/* ::::::::::: Create Button :::::::::::::: */}
+          {typeTag.length > 2 && (
+            <i onClick={createTag} className="fas fa-check create"></i>
+          )}
         </div>
         {/* ::::::::::: List of Search Matches :::::::::::::: */}
         {queryMatch.length > 0 && (
-          <div>
+          <div className="Tag-search-results">
             {queryMatch.map(qTag => {
               return (
-                <div key={qTag.id} onClick={() => handleSelect(qTag)}>
+                <div
+                  className="ind-result"
+                  key={qTag.id}
+                  onClick={() => handleSelect(qTag)}
+                >
                   {qTag.label}
                 </div>
               );
@@ -85,12 +119,12 @@ const Tags = () => {
           </div>
         )}
       </div>
-      {/* ::::::::::: List of All Tags :::::::::::::: */}
+      {/* ::::::::::: List of All Tags - REMOVE :::::::::::::: */}
       <div>
         {tags.map(tag => {
           return (
             <div key={tag.id} className="tag-card">
-              {tag.label}-{tag.id}
+              {tag.label}
             </div>
           );
         })}
