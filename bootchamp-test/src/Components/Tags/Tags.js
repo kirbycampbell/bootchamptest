@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import "./Tags.css";
 import { URL } from "./../../constants/url";
 const axios = require("axios");
@@ -10,7 +9,6 @@ const Tags = () => {
   const [typeTag, setTypeTag] = useState("");
   const [queryMatch, setQueryMatch] = useState([]);
   const [queryList, setQueryList] = useState([]);
-  const user = useSelector(state => state.user);
 
   useEffect(() => {
     axios.get(URL + "tags/").then(function(response) {
@@ -49,27 +47,48 @@ const Tags = () => {
   };
 
   const createTag = () => {
-    axios
-      .post(URL + "tags/", {
-        id: uuidv1(),
-        label: typeTag.toLowerCase()
-      })
-      .then(function(res) {
-        axios
-          .get(URL + "tags/")
-          .then(function(response) {
-            setTags(response.data);
-            let newList = queryList;
-            newList.push(res.data);
-            setQueryList(newList);
-            setTypeTag("");
-            setQueryMatch([]);
-            console.log(res);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      });
+    let found = false;
+    let newList = queryList;
+    tags.filter(tag => {
+      if (tag.label === typeTag.toLowerCase()) {
+        found = true;
+        newList.push(tag);
+        setQueryList(newList);
+        setTypeTag("");
+        setQueryMatch([]);
+      }
+      return null;
+    });
+    if (!found) {
+      axios
+        .post(URL + "tags/", {
+          id: uuidv1(),
+          label: typeTag.toLowerCase()
+        })
+        .then(function(res) {
+          axios
+            .get(URL + "tags/")
+            .then(function(response) {
+              setTags(response.data);
+              newList.push(res.data);
+              setQueryList(newList);
+              setTypeTag("");
+              setQueryMatch([]);
+              console.log(res);
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        });
+    }
+  };
+
+  const handleKeyPress = event => {
+    if (event.key === "Enter") {
+      createTag();
+    } else if (event.key === ",") {
+      createTag();
+    }
   };
 
   return (
@@ -81,7 +100,8 @@ const Tags = () => {
             queryList.map(item => {
               return (
                 <span key={item.id} className="chosen-tag">
-                  {item.label}
+                  {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
+
                   <div className="x-out" onClick={() => removeTag(item)}>
                     X
                   </div>
@@ -91,10 +111,12 @@ const Tags = () => {
           {/* ::::::::::: Input Section :::::::::::::: */}
           <input
             className="input-form"
+            id="tagInput"
             type="text"
             name="tag"
             placeholder="Type Tag"
             onChange={handleTyping}
+            onKeyPress={handleKeyPress}
             value={typeTag}
           />
           {/* ::::::::::: Create Button :::::::::::::: */}
@@ -112,7 +134,7 @@ const Tags = () => {
                   key={qTag.id}
                   onClick={() => handleSelect(qTag)}
                 >
-                  {qTag.label}
+                  {qTag.label.charAt(0).toUpperCase() + qTag.label.slice(1)}
                 </div>
               );
             })}
@@ -121,10 +143,11 @@ const Tags = () => {
       </div>
       {/* ::::::::::: List of All Tags - REMOVE :::::::::::::: */}
       <div>
+        <h3>List of All Tags::::</h3>
         {tags.map(tag => {
           return (
             <div key={tag.id} className="tag-card">
-              {tag.label}
+              {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
             </div>
           );
         })}
