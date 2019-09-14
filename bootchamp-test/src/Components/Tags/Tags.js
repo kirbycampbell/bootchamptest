@@ -4,83 +4,75 @@ import { URL } from "./../../constants/url";
 const axios = require("axios");
 const uuidv1 = require("uuid/v1");
 
+// When calling this component, switch chosen tags to props
+// method so that the array of objs can be sent.
+
 const Tags = () => {
-  const [tags, setTags] = useState([]);
   const [typeTag, setTypeTag] = useState("");
   const [queryMatch, setQueryMatch] = useState([]);
-  const [queryList, setQueryList] = useState([]);
-
-  useEffect(() => {
-    axios.get(URL + "tags/").then(function(response) {
-      setTags(response.data);
-    });
-  }, []);
+  const [chosenTags, setChosenTags] = useState([]);
 
   useEffect(() => {
     if (typeTag.length > 2) {
       axios.get(URL + "tags/matches/" + typeTag).then(function(response) {
-        console.log(response.data);
         setQueryMatch(response.data);
       });
     }
   }, [typeTag]);
+
+  const handleForm = tag => {
+    let newList = chosenTags.filter(item => {
+      return item.id !== tag.id;
+    });
+    newList.push(tag);
+    setChosenTags(newList);
+    setTypeTag("");
+    setQueryMatch([]);
+  };
 
   const handleTyping = e => {
     setTypeTag(e.target.value);
   };
 
   const handleSelect = tag => {
-    let newList = queryList.filter(item => {
-      return item.id !== tag.id;
-    });
-    newList.push(tag);
-    setQueryList(newList);
-    setTypeTag("");
-    setQueryMatch([]);
+    handleForm(tag);
   };
 
   const removeTag = tag => {
-    let newList = queryList.filter(item => {
+    let newList = chosenTags.filter(item => {
       return item.id !== tag.id;
     });
-    setQueryList(newList);
+    setChosenTags(newList);
   };
 
   const createTag = () => {
     let found = false;
-    let newList = queryList;
-    tags.filter(tag => {
-      if (tag.label === typeTag.toLowerCase()) {
-        found = true;
-        newList.push(tag);
-        setQueryList(newList);
-        setTypeTag("");
-        setQueryMatch([]);
+    axios.get(URL + "tags/").then(function(response) {
+      response.data.filter(tag => {
+        if (tag.label === typeTag.toLowerCase()) {
+          found = true;
+          handleForm(tag);
+        }
+        return null;
+      });
+      if (!found) {
+        axios
+          .post(URL + "tags/", {
+            id: uuidv1(),
+            label: typeTag.toLowerCase()
+          })
+          .then(function(res) {
+            axios
+              .get(URL + "tags/")
+              .then(function(response) {
+                handleForm(res.data);
+              })
+              .catch(function(error) {
+                console.log(error);
+              });
+          });
       }
-      return null;
     });
-    if (!found) {
-      axios
-        .post(URL + "tags/", {
-          id: uuidv1(),
-          label: typeTag.toLowerCase()
-        })
-        .then(function(res) {
-          axios
-            .get(URL + "tags/")
-            .then(function(response) {
-              setTags(response.data);
-              newList.push(res.data);
-              setQueryList(newList);
-              setTypeTag("");
-              setQueryMatch([]);
-              console.log(res);
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
-        });
-    }
   };
 
   const handleKeyPress = event => {
@@ -92,65 +84,54 @@ const Tags = () => {
   };
 
   return (
-    <div>
-      <div>
-        <div className="input-card">
-          {/* ::::::::::: Chosen Tags :::::::::::::: */}
-          {queryList.length > 0 &&
-            queryList.map(item => {
-              return (
-                <span key={item.id} className="chosen-tag">
-                  {item.label.charAt(0).toUpperCase() + item.label.slice(1)}
+    <div className="Outer-TagComp">
+      <div className="input-card">
+        {/* ::::::::::: Chosen Tags :::::::::::::: */}
+        {chosenTags.length > 0 &&
+          chosenTags.map(tag => {
+            return (
+              <span key={tag.id} className="chosen-tag">
+                {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
 
-                  <div className="x-out" onClick={() => removeTag(item)}>
-                    X
-                  </div>
-                </span>
-              );
-            })}
-          {/* ::::::::::: Input Section :::::::::::::: */}
-          <input
-            className="input-form"
-            id="tagInput"
-            type="text"
-            name="tag"
-            placeholder="Type Tag"
-            onChange={handleTyping}
-            onKeyPress={handleKeyPress}
-            value={typeTag}
-          />
-          {/* ::::::::::: Create Button :::::::::::::: */}
-          {typeTag.length > 2 && (
-            <i onClick={createTag} className="fas fa-check create"></i>
-          )}
-        </div>
-        {/* ::::::::::: List of Search Matches :::::::::::::: */}
-        {queryMatch.length > 0 && (
+                <div className="x-out" onClick={() => removeTag(tag)}>
+                  <i className="far fa-times-circle iconb" />
+                </div>
+              </span>
+            );
+          })}
+        {/* ::::::::::: Input Section :::::::::::::: */}
+        <input
+          className="input-form"
+          id="tagInput"
+          type="text"
+          name="tag"
+          placeholder="Type Tag"
+          onChange={handleTyping}
+          onKeyPress={handleKeyPress}
+          value={typeTag}
+        />
+        {/* ::::::::::: Create Button :::::::::::::: */}
+        {typeTag.length > 2 && (
+          <i onClick={createTag} className="fas fa-check create"></i>
+        )}
+      </div>
+      {/* ::::::::::: List of Search Matches :::::::::::::: */}
+      <div className="Tag-Results">
+        {queryMatch.length > 0 && typeTag.length > 2 && (
           <div className="Tag-search-results">
-            {queryMatch.map(qTag => {
+            {queryMatch.map(tag => {
               return (
                 <div
                   className="ind-result"
-                  key={qTag.id}
-                  onClick={() => handleSelect(qTag)}
+                  key={tag.id}
+                  onClick={() => handleSelect(tag)}
                 >
-                  {qTag.label.charAt(0).toUpperCase() + qTag.label.slice(1)}
+                  {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
                 </div>
               );
             })}
           </div>
         )}
-      </div>
-      {/* ::::::::::: List of All Tags - REMOVE :::::::::::::: */}
-      <div>
-        <h3>List of All Tags::::</h3>
-        {tags.map(tag => {
-          return (
-            <div key={tag.id} className="tag-card">
-              {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
-            </div>
-          );
-        })}
       </div>
     </div>
   );

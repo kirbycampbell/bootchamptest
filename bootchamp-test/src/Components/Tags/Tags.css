@@ -1,9 +1,13 @@
+.Outer-TagComp {
+  width: 80%;
+  margin: auto;
+}
+
 .input-card {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
-  width: 90%;
   margin: auto;
   font-size: 20px;
   text-align: left;
@@ -21,42 +25,33 @@
   font-weight: bold;
 }
 
+.Tag-Results {
+  width: 100%;
+}
+
 .Tag-search-results {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 89%;
-  padding: 0px 0px 5px 0px;
-  margin: auto;
-
-  font-size: 20px;
-  border: 1% solid rgb(255, 255, 255);
-  text-align: center;
-}
-
-.tag-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  width: 40%;
+  width: 99%;
+  padding: 0px 1px 0px 1px;
   margin: auto;
   font-size: 20px;
-  border: 1px dotted blue;
   text-align: center;
-  position: relative;
+  background-image: linear-gradient(to bottom, blue, purple);
 }
-
 .ind-result {
-  margin-bottom: 10px;
-  width: 100%;
-  border-bottom: 1px solid grey;
-  background-color: rgba(128, 128, 128, 0);
+  margin: 1px;
+  width: 98%;
+  padding: 1%;
+  background-color: rgb(26, 26, 26);
+  transition: all 0.3s ease;
 }
 .ind-result:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.247);
+  background-color: rgba(26, 26, 26, 0.788);
+  transition: all 0.3s ease;
 }
 
 .create {
@@ -82,6 +77,9 @@
   padding: 0px 0px 0px 10px;
   margin: 0px 5px;
 }
+.iconb {
+  font-size: 15px;
+}
 .x-out {
   font-size: 12px;
   font-weight: bold;
@@ -89,7 +87,6 @@
   margin: 0px 5px;
   margin-bottom: 5px;
   cursor: pointer;
-  /* border: 1px solid red; */
 }
 
 .x-out:hover {
