@@ -1,8 +1,10 @@
+/*:::::::::::::::::::::::::::*/
+/*:::: Input Form Zone :::: */
+/*:::::::::::::::::::::::::::*/
 .Outer-TagComp {
   width: 80%;
   margin: auto;
 }
-
 .input-card {
   display: flex;
   justify-content: center;
@@ -24,18 +26,44 @@
   font-size: 20px;
   font-weight: bold;
 }
+.chosen-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: grey;
+  padding: 0px 0px 0px 10px;
+  margin: 0px 5px;
+}
 
+/*: Form Buttons :*/
+.iconb {
+  font-size: 15px;
+}
+.x-out {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(119, 0, 0);
+  margin: 0px 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.x-out:hover {
+  color: red;
+}
+
+/*:::::::::::::::::::::::::::*/
+/*:::: Tags Search Zone :::: */
+/*:::::::::::::::::::::::::::*/
 .Tag-Results {
   width: 100%;
 }
-
 .Tag-search-results {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 99%;
-  padding: 0px 1px 0px 1px;
+  padding: 1px 2px 1px 1px;
   margin: auto;
   font-size: 20px;
   text-align: center;
@@ -53,7 +81,7 @@
   background-color: rgba(26, 26, 26, 0.788);
   transition: all 0.3s ease;
 }
-
+/*: Create Buttons :*/
 .create {
   display: flex;
   justify-content: center;
@@ -67,28 +95,4 @@
 .create:hover {
   color: rgba(72, 209, 72, 0.651);
   cursor: pointer;
-}
-
-.chosen-tag {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: grey;
-  padding: 0px 0px 0px 10px;
-  margin: 0px 5px;
-}
-.iconb {
-  font-size: 15px;
-}
-.x-out {
-  font-size: 12px;
-  font-weight: bold;
-  color: rgb(119, 0, 0);
-  margin: 0px 5px;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.x-out:hover {
-  color: red;
 }

@@ -35,6 +35,7 @@ const GoogleComp = props => {
               return () => clearTimeout(timer);
             } else {
               props.setLoading(false);
+              console.log(query);
               props.setError("Incorrect Google Credentials...");
               return { auth: false, user: null };
             }

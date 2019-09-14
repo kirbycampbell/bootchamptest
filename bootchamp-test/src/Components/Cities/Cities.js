@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Cities.css";
-import CITY_DATA from './Cities.data'
+import { URL } from "./../../constants/url";
+//const axios = require("axios");
+//const uuidv1 = require("uuid/v1");
 
 const Cities = () => {
-
-  const [cities, setCities] = useState(CITY_DATA);
-
-  useEffect(() => {
-    setCities(CITY_DATA);
-  }, []);
-
   return (
     <div>
-      {cities.map(city => {
-        return <div key={city}>{city.name}</div>;
-      })}
+      <div>Cities</div>
     </div>
   );
-
-}
+};
 
 export default Cities;
