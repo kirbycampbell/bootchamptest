@@ -19,18 +19,31 @@ router.get("/:id", async (req, res) => {
   );
 });
 
+// 2.3). Search Cities for part label match (while typing):
+router.get("/matches/:city", async (req, res) => {
+  const cities = await loadCities();
+  let term = req.params.city.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await cities
+      .find({
+        name: regex
+      })
+      .toArray()
+  );
+});
+
 // 3). Create a New City
 router.post("/", async (req, res) => {
   const cities = await loadCities();
   await cities.insertOne({
     id: req.body.id,
-    createdAt: new Date(),
     name: req.body.name,
     state: req.body.state,
-    meetupList: req.body.meetupList,
-    members: req.body.members,
-    resources: req.body.resources,
-    localTopics: req.body.localTopics
+    meetupList: [],
+    members: [],
+    resources: [],
+    localTopics: []
   });
   res.status(201).send(
     await cities.findOne({

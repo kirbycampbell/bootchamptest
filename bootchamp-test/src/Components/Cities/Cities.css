@@ -1,0 +1,37 @@
+.Outer-City {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.city-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  font-size: 20px;
+  margin: auto;
+}
+
+.input-city {
+  width: 80%;
+  height: 50px;
+  margin: auto;
+}
+.input-citysbm {
+  width: 80%;
+  height: 50px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.CityList {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+}
