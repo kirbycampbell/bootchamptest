@@ -24,27 +24,19 @@ const Cities = props => {
     });
   }, []);
 
+  // Sorting Methods
   function sortByState(a, b) {
     const stateA = a.state.toUpperCase();
     const stateB = b.state.toUpperCase();
     let comparison = 0;
-    if (stateA > stateB) {
-      comparison = 1;
-    } else if (stateA < stateB) {
-      comparison = -1;
-    }
+    stateA > stateB ? (comparison = 1) : (comparison = -1);
     return comparison;
   }
-
   function sortByCity(a, b) {
     const cityA = a.name.toUpperCase();
     const cityB = b.name.toUpperCase();
     let comparison = 0;
-    if (cityA > cityB) {
-      comparison = 1;
-    } else if (cityA < cityB) {
-      comparison = -1;
-    }
+    cityA > cityB ? (comparison = 1) : (comparison = -1);
     return comparison;
   }
 
@@ -62,7 +54,7 @@ const Cities = props => {
 
   // Type into State and return Regex Cities
   useEffect(() => {
-    if (state.length <= 2) {
+    if (state.length <= 2 && cityName.length === 0) {
       setCityQuery([]);
     } else if (state.length > 2 && cityName.length === 0) {
       axios.get(URL + "cities/state_matches/" + state).then(function(res) {
@@ -104,6 +96,7 @@ const Cities = props => {
   // Error Checks before submitting new City
   const handleForm = e => {
     let found = false;
+    let foundCity = {};
     e.preventDefault();
     cityList.filter(el => {
       if (
@@ -111,6 +104,7 @@ const Cities = props => {
         el.state.toLowerCase() === state.toLocaleLowerCase()
       ) {
         found = true;
+        foundCity = el;
       }
       return null;
     });
@@ -120,7 +114,8 @@ const Cities = props => {
         state: state
       });
     } else {
-      setError("City Already Exists!");
+      setSelCity(foundCity);
+      console.log(foundCity);
     }
   };
 
