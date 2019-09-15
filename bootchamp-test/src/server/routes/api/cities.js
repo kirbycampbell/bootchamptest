@@ -33,6 +33,20 @@ router.get("/matches/:city", async (req, res) => {
   );
 });
 
+// 2.4). Search State for part label match (while typing):
+router.get("/state_matches/:state", async (req, res) => {
+  const cities = await loadCities();
+  let term = req.params.state.toLowerCase();
+  let regex = new RegExp("^" + term, "i");
+  res.send(
+    await cities
+      .find({
+        state: regex
+      })
+      .toArray()
+  );
+});
+
 // 3). Create a New City
 router.post("/", async (req, res) => {
   const cities = await loadCities();

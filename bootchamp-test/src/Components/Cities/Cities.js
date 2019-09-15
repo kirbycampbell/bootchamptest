@@ -4,7 +4,7 @@ import { URL } from "./../../constants/url";
 const axios = require("axios");
 const uuidv1 = require("uuid/v1");
 
-const Cities = () => {
+const Cities = props => {
   const [cityName, setCityName] = useState("");
   const [state, setState] = useState("");
   const [cityForm, setCityForm] = useState({
@@ -14,27 +14,40 @@ const Cities = () => {
   const [cityQuery, setCityQuery] = useState([]);
   const [cityList, setCityList] = useState([]);
   const [error, setError] = useState("");
+  const [selCity, setSelCity] = useState({}); // Replace with props
 
+  // Queries All Cities - Temp Feature
   useEffect(() => {
     axios.get(URL + "cities/").then(function(res) {
-      console.log(res.data);
       setCityList(res.data);
     });
   }, []);
 
+  // Type into CityName and return Regex Cities
   useEffect(() => {
     if (cityName.length <= 2) {
       setCityQuery([]);
     } else if (cityName.length > 2) {
       axios.get(URL + "cities/matches/" + cityName).then(function(res) {
-        console.log(res.data);
         setCityQuery(res.data);
       });
     }
   }, [cityName]);
 
+  // Type into State and return Regex Cities
   useEffect(() => {
-    if (cityName.length > 3) {
+    if (state.length <= 2) {
+      setCityQuery([]);
+    } else if (state.length > 2 && cityName.length === 0) {
+      axios.get(URL + "cities/state_matches/" + state).then(function(res) {
+        setCityQuery(res.data);
+      });
+    }
+  }, [state]);
+
+  // Post Axios Request - Create New City
+  useEffect(() => {
+    if (cityName.length > 3 && state.length > 2) {
       axios
         .post(URL + "cities/", {
           id: uuidv1(),
@@ -48,15 +61,20 @@ const Cities = () => {
           });
           resetForm();
         });
+    } else if (cityName.length > 0) {
+      setError("Enter Proper City & State Name");
     }
   }, [cityForm]);
 
+  // Reset Form and Query List
   const resetForm = () => {
     setCityName("");
     setState("");
+    setError("");
     setCityForm({ city: "", state: "" });
   };
 
+  // Error Checks before submitting new City
   const handleForm = e => {
     let found = false;
     e.preventDefault();
@@ -65,29 +83,30 @@ const Cities = () => {
         el.name.toLowerCase() === cityName.toLowerCase() &&
         el.state.toLowerCase() === state.toLocaleLowerCase()
       ) {
-        console.log("Already Exists!");
         found = true;
       }
       return null;
     });
     if (!found) {
       setCityForm({
-        name: e.target.city.value,
-        state: e.target.state.value
+        name: cityName,
+        state: state
       });
     } else {
       setError("City Already Exists!");
-      console.log("City Already Exists");
     }
   };
 
+  // Selecting Existing City - Temp - Props call above
   const handleSelect = c => {
     console.log(c);
+    setSelCity(c);
   };
 
   return (
     <div className="Outer-City">
-      <form className="city-form" onSubmit={handleForm}>
+      {/* :::::::::::: City Input Form ::::::::::::: */}
+      <form className="city-form">
         <input
           className="input-city"
           type="text"
@@ -95,6 +114,7 @@ const Cities = () => {
           onChange={e => setCityName(e.target.value)}
           value={cityName}
           name="city"
+          autoComplete="off"
         />
         <input
           className="input-city"
@@ -103,10 +123,15 @@ const Cities = () => {
           onChange={e => setState(e.target.value)}
           value={state}
           name="state"
+          autoComplete="off"
         />
-        <input className="input-citysbm" type="submit" value="submit" />
+        <div className="input-citysbm" onClick={handleForm}>
+          <i className="fas fa-check check"></i>
+          Add
+        </div>
       </form>
-
+      {/* :::::::::  Error Message  :::::::::: */}
+      {error && <div className="cityError">{error}</div>}
       {/* ::::::::::: List of Search Matches :::::::::::::: */}
       <div className="Tag-Results">
         {cityQuery.length > 0 && (
@@ -125,9 +150,12 @@ const Cities = () => {
           </div>
         )}
       </div>
+      {/* List of all Cities that Exist in DB - TEMP FEATURE*/}
 
-      {/* List of all Cities that Exist in DB */}
       <div className="CityList">
+        List of All Cities (Temporary Feature):
+        <br />
+        <br />
         {cityList.map(city => {
           return (
             <div key={city.id}>
