@@ -65,3 +65,10 @@
   font-size: 16px;
   text-align: center;
 }
+.citymsg {
+  width: 60%;
+  margin: auto;
+  color: green;
+  font-size: 16px;
+  text-align: center;
+}

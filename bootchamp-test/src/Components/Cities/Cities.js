@@ -14,6 +14,7 @@ const Cities = props => {
   const [cityQuery, setCityQuery] = useState([]);
   const [cityList, setCityList] = useState([]);
   const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
   const [selCity, setSelCity] = useState({}); // Replace with props
 
   // Queries All Cities - Temp Feature
@@ -74,10 +75,13 @@ const Cities = props => {
           state: state
         })
         .then(function(res) {
-          axios.get(URL + "cities/").then(function(res) {
-            let sortedCities = res.data.sort(sortByState);
+          axios.get(URL + "cities/").then(function(resp) {
+            let sortedCities = resp.data.sort(sortByState);
             setCityList(sortedCities);
           });
+          setMsg("Successfully Created City!");
+          setSelCity(res.data);
+          console.log(res.data);
           resetForm();
         });
     } else if (cityName.length > 0) {
@@ -105,6 +109,7 @@ const Cities = props => {
       ) {
         found = true;
         foundCity = el;
+        resetForm();
       }
       return null;
     });
@@ -115,6 +120,7 @@ const Cities = props => {
       });
     } else {
       setSelCity(foundCity);
+      setMsg("Successfully Added!");
       console.log(foundCity);
     }
   };
@@ -122,7 +128,9 @@ const Cities = props => {
   // Selecting Existing City - Temp - Props call above
   const handleSelect = c => {
     console.log(c);
+    setMsg("Successfully Added!");
     setSelCity(c);
+    resetForm();
   };
 
   return (
@@ -173,6 +181,7 @@ const Cities = props => {
       </div>
       {/* :::::::::  Error Message  :::::::::: */}
       {error && <div className="cityError">{error}</div>}
+      {msg && <div className="citymsg">{msg}</div>}
       {/* List of all Cities that Exist in DB - TEMP FEATURE*/}
 
       <div className="CityList">
