@@ -19,9 +19,34 @@ const Cities = props => {
   // Queries All Cities - Temp Feature
   useEffect(() => {
     axios.get(URL + "cities/").then(function(res) {
-      setCityList(res.data);
+      let sortedCities = res.data.sort(sortByState);
+      setCityList(sortedCities);
     });
   }, []);
+
+  function sortByState(a, b) {
+    const stateA = a.state.toUpperCase();
+    const stateB = b.state.toUpperCase();
+    let comparison = 0;
+    if (stateA > stateB) {
+      comparison = 1;
+    } else if (stateA < stateB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+  function sortByCity(a, b) {
+    const cityA = a.name.toUpperCase();
+    const cityB = b.name.toUpperCase();
+    let comparison = 0;
+    if (cityA > cityB) {
+      comparison = 1;
+    } else if (cityA < cityB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
 
   // Type into CityName and return Regex Cities
   useEffect(() => {
@@ -29,7 +54,8 @@ const Cities = props => {
       setCityQuery([]);
     } else if (cityName.length > 2) {
       axios.get(URL + "cities/matches/" + cityName).then(function(res) {
-        setCityQuery(res.data);
+        let sortedQuery = res.data.sort(sortByState);
+        setCityQuery(sortedQuery);
       });
     }
   }, [cityName]);
@@ -40,7 +66,8 @@ const Cities = props => {
       setCityQuery([]);
     } else if (state.length > 2 && cityName.length === 0) {
       axios.get(URL + "cities/state_matches/" + state).then(function(res) {
-        setCityQuery(res.data);
+        let sortedCities = res.data.sort(sortByCity);
+        setCityQuery(sortedCities);
       });
     }
   }, [state]);
@@ -56,8 +83,8 @@ const Cities = props => {
         })
         .then(function(res) {
           axios.get(URL + "cities/").then(function(res) {
-            console.log(res.data);
-            setCityList(res.data);
+            let sortedCities = res.data.sort(sortByState);
+            setCityList(sortedCities);
           });
           resetForm();
         });
