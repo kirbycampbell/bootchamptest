@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 98%;
   margin: auto;
 }
 
@@ -53,7 +53,7 @@
 }
 
 .CityList {
-  width: 100%;
+  width: 99%;
   text-align: center;
   margin: auto;
   margin-top: 40px;

@@ -4,7 +4,7 @@ import { URL } from "./../../constants/url";
 const axios = require("axios");
 const uuidv1 = require("uuid/v1");
 
-const Cities = props => {
+const Cities = ({ city, setCity }) => {
   const [cityName, setCityName] = useState("");
   const [state, setState] = useState("");
   const [cityForm, setCityForm] = useState({
@@ -15,14 +15,16 @@ const Cities = props => {
   const [cityList, setCityList] = useState([]);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
-  const [selCity, setSelCity] = useState({}); // Replace with props
+  //const [selCity, setSelCity] = useState({}); // Replace with props
 
   // Queries All Cities - Temp Feature
   useEffect(() => {
-    axios.get(URL + "cities/").then(function(res) {
-      let sortedCities = res.data.sort(sortByState);
-      setCityList(sortedCities);
-    });
+    if (cityList.length < 2) {
+      axios.get(URL + "cities/").then(function(res) {
+        let sortedCities = res.data.sort(sortByState);
+        setCityList(sortedCities);
+      });
+    }
   }, []);
 
   // Sorting Methods
@@ -80,7 +82,7 @@ const Cities = props => {
             setCityList(sortedCities);
           });
           setMsg("Successfully Created City!");
-          setSelCity(res.data);
+          setCity(res.data);
           console.log(res.data);
           resetForm();
         });
@@ -119,7 +121,8 @@ const Cities = props => {
         state: state
       });
     } else {
-      setSelCity(foundCity);
+      setCity(foundCity);
+      console.log(city);
       setMsg("Successfully Added!");
       console.log(foundCity);
     }
@@ -129,7 +132,7 @@ const Cities = props => {
   const handleSelect = c => {
     console.log(c);
     setMsg("Successfully Added!");
-    setSelCity(c);
+    setCity(c);
     resetForm();
   };
 
@@ -184,7 +187,7 @@ const Cities = props => {
       {msg && <div className="citymsg">{msg}</div>}
       {/* List of all Cities that Exist in DB - TEMP FEATURE*/}
 
-      <div className="CityList">
+      {/* <div className="CityList">
         List of All Cities (Temporary Feature):
         <br />
         <br />
@@ -195,7 +198,7 @@ const Cities = props => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

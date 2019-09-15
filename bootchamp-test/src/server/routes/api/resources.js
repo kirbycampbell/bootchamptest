@@ -34,6 +34,18 @@ router.get("/find/:city", async (req, res) => {
   );
 });
 
+// 3.5). Find Resources by Contributor id
+router.get("/contributor/:id", async (req, res) => {
+  const resources = await loadResources();
+  res.send(
+    await resources
+      .find({
+        createdBy: req.params.id
+      })
+      .toArray()
+  );
+});
+
 // 4).  Create New Resource - POST
 router.post("/", async (req, res) => {
   const resources = await loadResources();
@@ -41,12 +53,14 @@ router.post("/", async (req, res) => {
     id: req.body.id,
     updatedAt: new Date(),
     title: req.body.title,
-    content: {
-      text: req.body.content.text,
-      link: req.body.content.link
-    },
+    text: req.body.text,
+    link: req.body.link,
     city: req.body.city,
-    tags: req.body.tags
+    tags: req.body.tags,
+    createdBy: {
+      name: req.body.createdBy.name,
+      id: req.body.createdBy.id
+    }
   });
   res.status(201).send(
     await resources.findOne({

@@ -1,3 +1,77 @@
-.image {
-    height: 30vw;
+.Outer-resource {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+}
+
+.resource-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 99%;
+  margin: auto;
+}
+
+.input-resource {
+  padding-left: 2%;
+  width: 97%;
+  height: 40px;
+  font-size: 24px;
+  margin: auto;
+  margin-bottom: 5px;
+}
+.input-resourcesbm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  width: 10%;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  padding: 0% 1%;
+  margin: auto;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.171);
+  border-radius: 20px;
+  box-shadow: 4px -2px 6px rgb(49, 56, 95);
+  transition: box-shadow 0.4s ease;
+  background-image: linear-gradient(to bottom, blue, purple);
+}
+.input-resourcesbm:hover {
+  box-shadow: 2px -1px 2px rgb(49, 56, 95);
+  transition: box-shadow 0.4s ease;
+}
+.check {
+  color: green;
+}
+
+.resourceList {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  margin-top: 40px;
+}
+.resourceError {
+  width: 60%;
+  margin: auto;
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}
+.resourcemsg {
+  width: 60%;
+  margin: auto;
+  color: green;
+  font-size: 16px;
+  text-align: center;
+}
+
+.resource-render {
+  margin-bottom: 10px;
 }

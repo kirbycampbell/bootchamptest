@@ -7,10 +7,10 @@ const uuidv1 = require("uuid/v1");
 // When calling this component, switch chosen tags to props
 // method so that the array of objs can be sent.
 
-const Tags = () => {
+const Tags = ({ tags, setTags }) => {
   const [typeTag, setTypeTag] = useState("");
   const [queryMatch, setQueryMatch] = useState([]);
-  const [chosenTags, setChosenTags] = useState([]);
+  //const [tags, settags] = useState([]);
 
   useEffect(() => {
     if (typeTag.length > 2) {
@@ -21,11 +21,11 @@ const Tags = () => {
   }, [typeTag]);
 
   const handleForm = tag => {
-    let newList = chosenTags.filter(item => {
+    let newList = tags.filter(item => {
       return item.id !== tag.id;
     });
     newList.push(tag);
-    setChosenTags(newList);
+    setTags(newList);
     setTypeTag("");
     setQueryMatch([]);
   };
@@ -39,10 +39,10 @@ const Tags = () => {
   };
 
   const removeTag = tag => {
-    let newList = chosenTags.filter(item => {
+    let newList = tags.filter(item => {
       return item.id !== tag.id;
     });
-    setChosenTags(newList);
+    setTags(newList);
   };
 
   const createTag = () => {
@@ -87,8 +87,8 @@ const Tags = () => {
     <div className="Outer-TagComp">
       <div className="input-card">
         {/* ::::::::::: Chosen Tags :::::::::::::: */}
-        {chosenTags.length > 0 &&
-          chosenTags.map(tag => {
+        {tags.length > 0 &&
+          tags.map(tag => {
             return (
               <span key={tag.id} className="chosen-tag">
                 {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
@@ -109,6 +109,7 @@ const Tags = () => {
           onChange={handleTyping}
           onKeyPress={handleKeyPress}
           value={typeTag}
+          autoComplete="off"
         />
         {/* ::::::::::: Create Button :::::::::::::: */}
         {typeTag.length > 2 && (
