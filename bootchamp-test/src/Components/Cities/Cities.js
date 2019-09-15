@@ -130,8 +130,7 @@ const Cities = props => {
           Add
         </div>
       </form>
-      {/* :::::::::  Error Message  :::::::::: */}
-      {error && <div className="cityError">{error}</div>}
+
       {/* ::::::::::: List of Search Matches :::::::::::::: */}
       <div className="Tag-Results">
         {cityQuery.length > 0 && (
@@ -150,6 +149,8 @@ const Cities = props => {
           </div>
         )}
       </div>
+      {/* :::::::::  Error Message  :::::::::: */}
+      {error && <div className="cityError">{error}</div>}
       {/* List of all Cities that Exist in DB - TEMP FEATURE*/}
 
       <div className="CityList">
