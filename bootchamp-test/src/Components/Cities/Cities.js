@@ -15,7 +15,7 @@ const Cities = ({ city, setCity }) => {
   const [cityList, setCityList] = useState([]);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
-  //const [selCity, setSelCity] = useState({}); // Replace with props
+  const [selCity, setSelCity] = useState(null); // Replace with props
 
   // Queries All Cities - Temp Feature
   useEffect(() => {
@@ -26,6 +26,11 @@ const Cities = ({ city, setCity }) => {
       });
     }
   }, []);
+
+  useEffect(() => {
+    setError("");
+    setMsg("");
+  }, [selCity]);
 
   // Sorting Methods
   function sortByState(a, b) {
@@ -83,6 +88,7 @@ const Cities = ({ city, setCity }) => {
           });
           setMsg("Successfully Created City!");
           setCity(res.data);
+          setSelCity(res.data);
           console.log(res.data);
           resetForm();
         });
@@ -133,36 +139,52 @@ const Cities = ({ city, setCity }) => {
     console.log(c);
     setMsg("Successfully Added!");
     setCity(c);
+    setSelCity(c);
     resetForm();
   };
 
   return (
     <div className="Outer-City">
       {/* :::::::::::: City Input Form ::::::::::::: */}
-      <form className="city-form">
-        <input
-          className="input-city"
-          type="text"
-          placeholder="City"
-          onChange={e => setCityName(e.target.value)}
-          value={cityName}
-          name="city"
-          autoComplete="off"
-        />
-        <input
-          className="input-city"
-          type="text"
-          placeholder="State"
-          onChange={e => setState(e.target.value)}
-          value={state}
-          name="state"
-          autoComplete="off"
-        />
-        <div className="input-citysbm" onClick={handleForm}>
-          <i className="fas fa-check check"></i>
-          Add
+      {!selCity && (
+        <form className="city-form">
+          <input
+            className="input-city"
+            type="text"
+            placeholder="City"
+            onChange={e => setCityName(e.target.value)}
+            value={cityName}
+            name="city"
+            autoComplete="off"
+          />
+          <input
+            className="input-city"
+            type="text"
+            placeholder="State"
+            onChange={e => setState(e.target.value)}
+            value={state}
+            name="state"
+            autoComplete="off"
+          />
+          <div className="input-citysbm" onClick={handleForm}>
+            <i className="fas fa-check check"></i>
+            Add
+          </div>
+        </form>
+      )}
+      {selCity && (
+        <div className="chosen-city">
+          <div>
+            {selCity.name}, {selCity.state}
+          </div>
+          <div className="x-out" onClick={e => setSelCity(null)}>
+            <i className="far fa-times-circle iconb" />
+          </div>
         </div>
-      </form>
+      )}
+
+      {error && <div className="citymsg error">{error}</div>}
+      {msg && <div className="citymsg">{msg}</div>}
 
       {/* ::::::::::: List of Search Matches :::::::::::::: */}
       <div className="Tag-Results">
@@ -183,8 +205,7 @@ const Cities = ({ city, setCity }) => {
         )}
       </div>
       {/* :::::::::  Error Message  :::::::::: */}
-      {error && <div className="cityError">{error}</div>}
-      {msg && <div className="citymsg">{msg}</div>}
+
       {/* List of all Cities that Exist in DB - TEMP FEATURE*/}
 
       {/* <div className="CityList">

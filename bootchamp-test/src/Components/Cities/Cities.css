@@ -52,23 +52,40 @@
   color: green;
 }
 
-.CityList {
+.chosen-city {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
   width: 99%;
-  text-align: center;
-  margin: auto;
-  margin-top: 40px;
+  background-color: white;
+  padding-left: 2%;
+  height: 50px;
+  font-size: 24px;
+  color: grey;
+  margin-bottom: 15px;
 }
-.cityError {
-  width: 60%;
-  margin: auto;
+
+.CityList {
+  max-width: 97%;
+}
+
+.error {
   color: red;
-  font-size: 16px;
-  text-align: center;
 }
 .citymsg {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(38, 38, 80),
+    rgb(39, 68, 85)
+  );
+  border-radius: 3px 4px;
+  z-index: 10;
+  box-shadow: 2px -3px 4px rgb(139, 162, 175);
   width: 60%;
   margin: auto;
+  position: absolute;
   color: green;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
 }

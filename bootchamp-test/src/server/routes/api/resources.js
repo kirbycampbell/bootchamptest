@@ -48,23 +48,28 @@ router.get("/contributor/:id", async (req, res) => {
 
 // 4).  Create New Resource - POST
 router.post("/", async (req, res) => {
+  let r = req.body;
   const resources = await loadResources();
   await resources.insertOne({
-    id: req.body.id,
+    id: r.id,
     updatedAt: new Date(),
-    title: req.body.title,
-    text: req.body.text,
-    link: req.body.link,
-    city: req.body.city,
-    tags: req.body.tags,
+    title: r.title,
+    text: r.text,
+    link: r.link,
+    city: {
+      name: r.city.name,
+      state: r.city.state,
+      id: r.city.id
+    },
+    tags: r.tags,
     createdBy: {
-      name: req.body.createdBy.name,
-      id: req.body.createdBy.id
+      name: r.createdBy.name,
+      id: r.createdBy.id
     }
   });
   res.status(201).send(
     await resources.findOne({
-      id: req.body.id
+      id: r.id
     })
   );
 });

@@ -90,14 +90,6 @@ const Resources = () => {
           value={link}
           autoComplete="off"
         />
-        {/* <input
-          className="input-resource"
-          type="text"
-          placeholder="City"
-          onChange={e => setCity(e.target.value)}
-          value={city}
-          autoComplete="off"
-        /> */}
         <Cities setCity={setCity} city={city} />
 
         <Tags setTags={setTags} tags={tags} />

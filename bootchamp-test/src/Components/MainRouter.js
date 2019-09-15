@@ -23,7 +23,7 @@ const MainRouter = props => {
           <Route
             exact
             path="/Cities"
-            render={() => <Cities user={props.user} auth={props.auth} />}
+            render={() => <div>To Play with Cities go to Resources</div>}
           />
           <Route
             exact
@@ -38,11 +38,6 @@ const MainRouter = props => {
             />
           )}
 
-          {/* <Route
-            exact
-            path="/Test"
-            render={() => <Test user={props.user} auth={props.auth} />}
-          /> */}
           <Route
             exact
             path="/Tags"
