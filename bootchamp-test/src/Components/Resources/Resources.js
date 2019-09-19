@@ -1,42 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import "./Resources.css";
-import { URL } from "./../../constants/url";
-import Tags from "../Tags/Tags";
-import Cities from "../Cities/Cities";
-const axios = require("axios");
-const uuidv1 = require("uuid/v1");
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import './Resources.css';
+import {URL} from './../../constants/url';
+import Tags from '../Tags/Tags';
+import Cities from '../Cities/Cities';
+const axios = require('axios');
+const uuidv1 = require('uuid/v1');
 
 const Resources = () => {
   const user = useSelector(state => state.user);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [link, setLink] = useState("");
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [link, setLink] = useState('');
   const [city, setCity] = useState([]);
   const [tags, setTags] = useState([]);
   const [resourceList, setResourceList] = useState([]);
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
+  const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
 
   useEffect(() => {
-    axios.get(URL + "resources/").then(function(res) {
+    axios.get(URL + 'resources/').then(function(res) {
       setResourceList(res.data);
     });
-    console.log("calling query");
+    console.log('calling query');
   }, []);
 
   const resetForm = () => {
-    setTitle("");
-    setText("");
-    setLink("");
+    setTitle('');
+    setText('');
+    setLink('');
     setCity([]);
     setTags([]);
   };
 
   const handleResourceForm = () => {
-    console.log("button pressed");
+    console.log('button pressed');
     axios
-      .post(URL + "resources/", {
+      .post(URL + 'resources/', {
         id: uuidv1(),
         title: title,
         text: text,
@@ -45,12 +45,12 @@ const Resources = () => {
         tags: tags,
         createdBy: {
           name: user.name,
-          id: user.id
-        }
+          id: user.id,
+        },
       })
       .then(function(res) {
-        setMsg("Created New Resource");
-        axios.get(URL + "resources/").then(function(response) {
+        setMsg('Created New Resource');
+        axios.get(URL + 'resources/').then(function(response) {
           setResourceList(response.data);
         });
         resetForm();
@@ -74,25 +74,19 @@ const Resources = () => {
           name="title"
           autoComplete="off"
         />
-        <input
-          className="input-resource"
-          type="text"
+
+        <Cities setCity={setCity} city={city} />
+
+        <Tags setTags={setTags} tags={tags} />
+        <textarea
+          className="text-inp-box"
+          type="textarea"
           placeholder="Text"
           onChange={e => setText(e.target.value)}
           value={text}
           autoComplete="off"
         />
-        <input
-          className="input-resource"
-          type="text"
-          placeholder="Link"
-          onChange={e => setLink(e.target.value)}
-          value={link}
-          autoComplete="off"
-        />
-        <Cities setCity={setCity} city={city} />
 
-        <Tags setTags={setTags} tags={tags} />
         <div className="input-resourcesbm" onClick={handleResourceForm}>
           <i className="fas fa-check check"></i>
           Submit
