@@ -19,7 +19,7 @@
 
 .input-resource {
   padding-left: 2%;
-  width: 97%;
+  width: 97.3%;
   height: 40px;
   font-size: 24px;
   margin: auto;
@@ -53,8 +53,8 @@
   min-height: 80px;
   padding: 1% 2%;
   width: 95.4%;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: normal;
   margin: auto;
   margin-bottom: 5px;
 }

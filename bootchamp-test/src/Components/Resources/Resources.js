@@ -73,6 +73,7 @@ const Resources = () => {
           value={title}
           name="title"
           autoComplete="off"
+          maxLength="60"
         />
 
         <Cities setCity={setCity} city={city} />
@@ -81,10 +82,11 @@ const Resources = () => {
         <textarea
           className="text-inp-box"
           type="textarea"
-          placeholder="Text"
+          placeholder="Something to Say? ..."
           onChange={e => setText(e.target.value)}
           value={text}
           autoComplete="off"
+          maxLength="260"
         />
 
         <div className="input-resourcesbm" onClick={handleResourceForm}>

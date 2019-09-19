@@ -1,73 +1,69 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import "./CreateTopic.css";
-import { URL } from "./../../constants/url";
-const uuidv1 = require("uuid/v1");
-const axios = require("axios");
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import './CreateTopic.css';
+import {URL} from './../../constants/url';
+import Cities from '../Cities/Cities';
+import Tags from '../Tags/Tags';
+const uuidv1 = require('uuid/v1');
+const axios = require('axios');
 
 const CreateTopic = () => {
   const user = useSelector(state => state.user);
   const [topicForm, setTopicForm] = useState({
-    name: "",
+    name: '',
     content: {},
     cities: [],
-    tags: []
+    tags: [],
   });
-  const createTopic = event => {
-    event.preventDefault();
-    setTopicForm({
-      name: event.target.name.value,
-      content: {
-        images: event.target.images.value,
-        code: event.target.code.value,
-        text: event.target.text.value
-      },
+  const [name, setName] = useState('');
+  const [text, setText] = useState('');
+  const [link, setLink] = useState('');
+  const [city, setCity] = useState([]);
+  const [tags, setTags] = useState([]);
 
-      cities: [event.target.cities.value],
-      tags: [event.target.tags.value]
-    });
+  const resetForm = () => {
+    setName('');
+    setText('');
+    setLink('');
+    setCity([]);
+    setTags([]);
   };
 
-  useEffect(() => {
-    if (topicForm.name !== "") {
-      const topicMutation = async () => {
-        axios
-          .post(URL + "topics/", {
-            id: uuidv1(),
-            name: topicForm.name,
-            content: topicForm.content,
-            cities: topicForm.cities,
-            tags: topicForm.tags,
-            createdBy: user.id
-          })
-          .then(function(response) {
-            console.log("success");
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log("error");
-            console.log(error);
-          });
-      };
-      topicMutation();
+  const createTopic = event => {
+    if (topicForm.name !== '') {
+      axios
+        .post(URL + 'topics/', {
+          id: uuidv1(),
+          name: name,
+          content: topicForm.content,
+          cities: city,
+          tags: tags,
+          createdBy: user.id,
+        })
+        .then(function(response) {
+          console.log('success');
+          console.log(response);
+          resetForm();
+        })
+        .catch(function(error) {
+          console.log('error');
+          console.log(error);
+        });
     }
-  }, [topicForm]);
+  };
 
   return (
     <div className="OuterTopicForm">
       <h2>Create Topic Form</h2>
       <form className="topic-form" onSubmit={createTopic}>
         <input
-          className="form-item"
+          className="input-resource"
           type="text"
           placeholder="Title"
-          name="name"
-        />
-        <input
-          className="form-item"
-          type="text"
-          placeholder="Link"
-          name="link"
+          onChange={e => setName(e.target.value)}
+          value={name}
+          autoComplete="off"
+          maxLength="60"
         />
         <input
           className="form-item"
@@ -81,25 +77,26 @@ const CreateTopic = () => {
           placeholder="Code"
           name="code"
         />
-        <input
-          className="form-item"
-          type="text"
-          placeholder="City"
-          name="cities"
-        />
-        <input
-          className="form-item"
-          type="text"
-          placeholder="Tags"
-          name="tags"
-        />
+
         <textarea
-          className="form-item-ta"
-          type="text"
-          placeholder="Text"
-          name="text"
+          className="text-inp-box"
+          type="textarea"
+          placeholder="Add some Text to your topic..."
+          onChange={e => setText(e.target.value)}
+          value={text}
+          autoComplete="off"
+          maxLength="260"
         />
-        <input className="submit-btn" type="submit" placeholder="Post Topic" />
+        <Cities setCity={setCity} city={city} />
+
+        <Tags setTags={setTags} tags={tags} />
+
+        <input
+          className="submit-btn"
+          placeholder="Post Topic"
+          onClick={createTopic}
+          type="submit"
+        />
       </form>
     </div>
   );
