@@ -2,8 +2,10 @@
   height: 50vh;
   text-align: center;
   font-size: 18px;
-  background: rgb(78, 78, 155);
   padding: 1vw;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -41,4 +43,29 @@ h2 {
   font-size: 22px;
   margin: auto;
   cursor: pointer;
+}
+
+.CheckSection {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.check-btn {
+  width: 15%;
+}
+.imgBox {
+  font-size: 30px;
+  color: rgb(139, 43, 177);
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+.imgBox:hover {
+  color: rgba(233, 64, 233, 0.795);
+  transition: color 0.3s ease-in-out;
 }

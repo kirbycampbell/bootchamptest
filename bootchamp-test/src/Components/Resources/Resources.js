@@ -17,6 +17,7 @@ const Resources = () => {
   const [resourceList, setResourceList] = useState([]);
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
+  const [cityCheck, setCityCheck] = useState(false);
 
   useEffect(() => {
     axios.get(URL + 'resources/').then(function(res) {

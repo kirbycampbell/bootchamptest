@@ -57,6 +57,7 @@
   font-weight: normal;
   margin: auto;
   margin-bottom: 5px;
+  resize: none;
 }
 
 .check {

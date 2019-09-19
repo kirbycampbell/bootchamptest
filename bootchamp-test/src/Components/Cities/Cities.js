@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import "./Cities.css";
-import { URL } from "./../../constants/url";
-const axios = require("axios");
-const uuidv1 = require("uuid/v1");
+import React, {useState, useEffect} from 'react';
+import './Cities.css';
+import {URL} from './../../constants/url';
+const axios = require('axios');
+const uuidv1 = require('uuid/v1');
 
-const Cities = ({ city, setCity }) => {
-  const [cityName, setCityName] = useState("");
-  const [state, setState] = useState("");
+const Cities = ({city, setCity, setCityCheck}) => {
+  const [cityName, setCityName] = useState('');
+  const [state, setState] = useState('');
   const [cityForm, setCityForm] = useState({
-    city: "",
-    state: ""
+    city: '',
+    state: '',
   });
   const [cityQuery, setCityQuery] = useState([]);
   const [cityList, setCityList] = useState([]);
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
+  const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
   const [selCity, setSelCity] = useState(null); // Replace with props
 
   // Queries All Cities - Temp Feature
   useEffect(() => {
     if (cityList.length < 2) {
-      axios.get(URL + "cities/").then(function(res) {
+      axios.get(URL + 'cities/').then(function(res) {
         let sortedCities = res.data.sort(sortByState);
         setCityList(sortedCities);
       });
@@ -28,8 +28,8 @@ const Cities = ({ city, setCity }) => {
   }, []);
 
   useEffect(() => {
-    setError("");
-    setMsg("");
+    setError('');
+    setMsg('');
   }, [selCity]);
 
   // Sorting Methods
@@ -53,7 +53,7 @@ const Cities = ({ city, setCity }) => {
     if (cityName.length <= 2) {
       setCityQuery([]);
     } else if (cityName.length > 2) {
-      axios.get(URL + "cities/matches/" + cityName).then(function(res) {
+      axios.get(URL + 'cities/matches/' + cityName).then(function(res) {
         let sortedQuery = res.data.sort(sortByState);
         setCityQuery(sortedQuery);
       });
@@ -65,7 +65,7 @@ const Cities = ({ city, setCity }) => {
     if (state.length <= 2 && cityName.length === 0) {
       setCityQuery([]);
     } else if (state.length > 2 && cityName.length === 0) {
-      axios.get(URL + "cities/state_matches/" + state).then(function(res) {
+      axios.get(URL + 'cities/state_matches/' + state).then(function(res) {
         let sortedCities = res.data.sort(sortByCity);
         setCityQuery(sortedCities);
       });
@@ -76,33 +76,33 @@ const Cities = ({ city, setCity }) => {
   useEffect(() => {
     if (cityName.length > 3 && state.length > 2) {
       axios
-        .post(URL + "cities/", {
+        .post(URL + 'cities/', {
           id: uuidv1(),
           name: cityName,
-          state: state
+          state: state,
         })
         .then(function(res) {
-          axios.get(URL + "cities/").then(function(resp) {
+          axios.get(URL + 'cities/').then(function(resp) {
             let sortedCities = resp.data.sort(sortByState);
             setCityList(sortedCities);
           });
-          setMsg("Successfully Created City!");
+          setMsg('Successfully Created City!');
           setCity(res.data);
           setSelCity(res.data);
           console.log(res.data);
           resetForm();
         });
     } else if (cityName.length > 0) {
-      setError("Enter Proper City & State Name");
+      setError('Enter Proper City & State Name');
     }
   }, [cityForm]);
 
   // Reset Form and Query List
   const resetForm = () => {
-    setCityName("");
-    setState("");
-    setError("");
-    setCityForm({ city: "", state: "" });
+    setCityName('');
+    setState('');
+    setError('');
+    setCityForm({city: '', state: ''});
   };
 
   // Error Checks before submitting new City
@@ -124,12 +124,12 @@ const Cities = ({ city, setCity }) => {
     if (!found) {
       setCityForm({
         name: cityName,
-        state: state
+        state: state,
       });
     } else {
       setCity(foundCity);
       console.log(city);
-      setMsg("Successfully Added!");
+      setMsg('Successfully Added!');
       console.log(foundCity);
     }
   };
@@ -137,7 +137,7 @@ const Cities = ({ city, setCity }) => {
   // Selecting Existing City - Temp - Props call above
   const handleSelect = c => {
     console.log(c);
-    setMsg("Successfully Added!");
+    setMsg('Successfully Added!');
     setCity(c);
     setSelCity(c);
     resetForm();
@@ -166,10 +166,17 @@ const Cities = ({ city, setCity }) => {
             name="state"
             autoComplete="off"
           />
-          <div className="input-citysbm" onClick={handleForm}>
-            <i className="fas fa-check check"></i>
-            Add
-          </div>
+          {cityName.length === 0 && setCityCheck ? (
+            <div className="input-citysbm" onClick={() => setCityCheck(false)}>
+              <i className="fas fa-check check"></i>
+              Cancel
+            </div>
+          ) : (
+            <div className="input-citysbm" onClick={handleForm}>
+              <i className="fas fa-check check"></i>
+              Add
+            </div>
+          )}
         </form>
       )}
       {selCity && (
