@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import './Topics.css';
-import Tile from '../Tile/tile.component';
 import {URL} from '../../constants/url';
 import CreateTopic from './CreateTopic';
 var moment = require('moment');

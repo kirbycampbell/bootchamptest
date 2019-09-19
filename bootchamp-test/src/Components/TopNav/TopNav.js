@@ -1,7 +1,7 @@
-import React from "react";
-import "./TopNav.css";
-import { Link } from "react-router-dom";
-import logo from "./BootchampLogo.png";
+import React from 'react';
+import './TopNav.css';
+import {Link} from 'react-router-dom';
+import logo from './BootchampLogo.png';
 
 const TopNav = props => {
   const LinkBtns = () => {
@@ -14,18 +14,15 @@ const TopNav = props => {
           <Link to="/Topics" className="custom-link Nav-Grps">
             Topics
           </Link>
-          <Link to="/Cities" className="custom-link Nav-Grps">
-            Cities
-          </Link>{" "}
           <Link to="/Resources" className="custom-link Nav-Grps">
             Resources
-          </Link>{" "}
+          </Link>
           <Link
-            to={props.auth ? "/Profile" : "/Login"}
+            to={props.auth ? '/Profile' : '/Login'}
             className="custom-link Nav-Grps"
           >
-            {props.auth && "Profile"}
-            {!props.auth && "Login"}
+            {props.auth && 'Profile'}
+            {!props.auth && 'Login'}
           </Link>
         </div>
       </div>

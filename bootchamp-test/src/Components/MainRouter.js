@@ -21,11 +21,6 @@ const MainRouter = props => {
           <Route exact path="/Topics" render={() => <Topics {...props} />} />
           <Route
             exact
-            path="/Cities"
-            render={() => <div>To Play with Cities go to Resources</div>}
-          />
-          <Route
-            exact
             path="/Resources"
             render={() => <Resources user={props.user} auth={props.auth} />}
           />
