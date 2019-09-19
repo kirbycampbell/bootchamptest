@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 98%;
-  margin: auto;
+  width: 99.5%;
+  margin: 0;
 }
 
 .city-form {
@@ -14,16 +14,17 @@
   flex-direction: row;
   width: 100%;
   margin: auto;
+  margin-left: 0;
   margin-bottom: 5px;
 }
 
 .input-city {
   padding-left: 2%;
-  width: 40%;
+  width: 41%;
   height: 50px;
   font-size: 24px;
   margin: auto;
-  margin-right: 2%;
+  margin-left: 0;
 }
 .input-citysbm {
   display: flex;

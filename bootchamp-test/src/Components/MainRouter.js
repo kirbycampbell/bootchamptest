@@ -1,15 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import AuthUser from "./AuthUser/AuthUser";
-import TopNav from "./TopNav/TopNav";
-import Topics from "./Topics/Topics";
-import Cities from "./Cities/Cities";
-import Resources from "./Resources/Resources";
-import Profile from "./Profile/Profile";
-import "./App.css";
-import Index from "./Index/Index";
+import React from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import AuthUser from './AuthUser/AuthUser';
+import TopNav from './TopNav/TopNav';
+import Topics from './Topics/Topics';
+import Resources from './Resources/Resources';
+import Profile from './Profile/Profile';
+import './App.css';
+import Index from './Index/Index';
 // import Test from "./P5test/p5.container";
-import Tags from "./Tags/Tags";
+import Tags from './Tags/Tags';
 
 const MainRouter = props => {
   return (
