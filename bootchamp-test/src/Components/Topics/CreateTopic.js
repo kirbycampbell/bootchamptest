@@ -20,7 +20,7 @@ const CreateTopic = () => {
   const [tags, setTags] = useState([]);
 
   // Check box state
-  const [imgCheck, setImgCheck] = useState(true);
+  const [imgCheck, setImgCheck] = useState(false);
   const [cityCheck, setCityCheck] = useState(false);
 
   const resetForm = () => {
@@ -28,6 +28,7 @@ const CreateTopic = () => {
     setContent('');
     setCity([]);
     setTags([]);
+    setImgLink('');
   };
 
   const createTopic = () => {
@@ -38,9 +39,9 @@ const CreateTopic = () => {
           name: name,
           content: content,
           images: imgLink,
-          cities: city,
+          cities: {id: city.id, name: city.name, state: city.state},
           tags: tags,
-          createdBy: user.id,
+          createdBy: {id: user.id, name: user.name},
         })
         .then(function(response) {
           console.log('success');
@@ -79,7 +80,9 @@ const CreateTopic = () => {
         />
         <Tags setTags={setTags} tags={tags} />
         {cityCheck && (
-          <Cities setCity={setCity} city={city} setCityCheck={setCityCheck} />
+          <React.Fragment>
+            <Cities setCity={setCity} city={city} setCityCheck={setCityCheck} />
+          </React.Fragment>
         )}
         {imgCheck && (
           <ImageForm setImgLink={setImgLink} setImgCheck={setImgCheck} />
@@ -89,14 +92,18 @@ const CreateTopic = () => {
             <i
               className="fas fa-city imgBox"
               onClick={() => setCityCheck(!cityCheck)}
-            ></i>
+            >
+              <span className="tooltiptext">Add City</span>
+            </i>
           </div>
 
           <div className="check-btn">
             <i
               className="far fa-images imgBox"
               onClick={() => setImgCheck(!imgCheck)}
-            ></i>
+            >
+              <span className="tooltiptext">Add Image</span>
+            </i>
           </div>
         </div>
 

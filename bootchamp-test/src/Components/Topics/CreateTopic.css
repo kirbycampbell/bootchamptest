@@ -54,7 +54,7 @@ h2 {
   align-items: center;
 }
 .check-btn {
-  width: 15%;
+  width: 25%;
 }
 .imgBox {
   font-size: 30px;
@@ -62,10 +62,30 @@ h2 {
   height: 100%;
   width: 100%;
   text-align: center;
+  position: relative;
+  display: inline-block;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
 }
 .imgBox:hover {
   color: rgba(233, 64, 233, 0.795);
   transition: color 0.3s ease-in-out;
+}
+.imgBox .tooltiptext {
+  visibility: hidden;
+  align-items: center;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 2px;
+  background-color: rgb(24, 32, 30);
+  color: rgb(152, 190, 233);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+}
+
+.imgBox:hover .tooltiptext {
+  visibility: visible;
 }

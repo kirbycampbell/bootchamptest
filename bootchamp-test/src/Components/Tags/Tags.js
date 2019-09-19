@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import "./Tags.css";
-import { URL } from "./../../constants/url";
-const axios = require("axios");
-const uuidv1 = require("uuid/v1");
+import React, {useState, useEffect} from 'react';
+import './Tags.css';
+import {URL} from './../../constants/url';
+const axios = require('axios');
+const uuidv1 = require('uuid/v1');
 
 // When calling this component, switch chosen tags to props
 // method so that the array of objs can be sent.
 
-const Tags = ({ tags, setTags }) => {
-  const [typeTag, setTypeTag] = useState("");
+const Tags = ({tags, setTags}) => {
+  const [typeTag, setTypeTag] = useState('');
   const [queryMatch, setQueryMatch] = useState([]);
   //const [tags, settags] = useState([]);
 
   useEffect(() => {
     if (typeTag.length > 2) {
-      axios.get(URL + "tags/matches/" + typeTag).then(function(response) {
+      axios.get(URL + 'tags/matches/' + typeTag).then(function(response) {
         setQueryMatch(response.data);
       });
     }
@@ -26,7 +26,7 @@ const Tags = ({ tags, setTags }) => {
     });
     newList.push(tag);
     setTags(newList);
-    setTypeTag("");
+    setTypeTag('');
     setQueryMatch([]);
   };
 
@@ -47,7 +47,7 @@ const Tags = ({ tags, setTags }) => {
 
   const createTag = () => {
     let found = false;
-    axios.get(URL + "tags/").then(function(response) {
+    axios.get(URL + 'tags/').then(function(response) {
       response.data.filter(tag => {
         if (tag.label === typeTag.toLowerCase()) {
           found = true;
@@ -57,13 +57,13 @@ const Tags = ({ tags, setTags }) => {
       });
       if (!found) {
         axios
-          .post(URL + "tags/", {
+          .post(URL + 'tags/', {
             id: uuidv1(),
-            label: typeTag.toLowerCase()
+            label: typeTag.toLowerCase(),
           })
           .then(function(res) {
             axios
-              .get(URL + "tags/")
+              .get(URL + 'tags/')
               .then(function(response) {
                 handleForm(res.data);
               })
@@ -76,9 +76,9 @@ const Tags = ({ tags, setTags }) => {
   };
 
   const handleKeyPress = event => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       createTag();
-    } else if (event.key === ",") {
+    } else if (event.key === ',') {
       createTag();
     }
   };
@@ -105,7 +105,7 @@ const Tags = ({ tags, setTags }) => {
           id="tagInput"
           type="text"
           name="tag"
-          placeholder="Type Tag"
+          placeholder="Enter Tags..."
           onChange={handleTyping}
           onKeyPress={handleKeyPress}
           value={typeTag}
