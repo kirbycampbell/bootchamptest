@@ -4,9 +4,7 @@ import TopicStateless from '../Topics/TopicStateless';
 import {
   getContributor,
   getContributorTopics,
-} from '../../apiFuncs/contrib_apis';
-
-const axios = require('axios');
+} from '../../apiFuncs/contrib_apis'; // move backend calls here - seperate by type
 
 const Contributor = props => {
   const [contributor, setContributor] = useState([]);
@@ -29,4 +27,3 @@ const Contributor = props => {
 };
 
 export default Contributor;
-//2b136ad0-da5c-11e9-833b-d95c4ce25c99
