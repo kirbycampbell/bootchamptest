@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "./Profile.css";
-import { Redirect } from "react-router";
+import React, {useState, useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import './Profile.css';
+import {Redirect} from 'react-router';
 
-import { URL } from "./../../constants/url";
-const axios = require("axios");
+import {URL} from './../../constants/url';
+const axios = require('axios');
 
 const Profile = props => {
   const [loggedOut, setLoggedOut] = useState(false);
@@ -15,7 +15,7 @@ const Profile = props => {
   const dispatch = useDispatch();
   const logUserOut = useCallback(
     user => {
-      dispatch({ type: "LOGOUT_USER" });
+      dispatch({type: 'LOGOUT_USER'});
       setLoggedOut(true);
     },
     [dispatch]
@@ -26,7 +26,7 @@ const Profile = props => {
   useEffect(() => {
     if (user.name !== undefined) {
       axios
-        .get(URL + "topics/usertopics/" + user.id)
+        .get(URL + 'topics/usertopics/' + user.id)
         .then(function(res) {
           setTopics(res.data);
           setLoaded(true);
@@ -37,13 +37,9 @@ const Profile = props => {
     }
   }, [user]);
 
-  // TOMORROW:
-  // try querying topics for all topics in query array!
-  // could be a handy feature to add
-
   if (!props.auth && loggedOut) {
     return <Redirect to="/LogIn" />;
-  } else if (!props.auth && !localStorage.getItem("User")) {
+  } else if (!props.auth && !localStorage.getItem('User')) {
     return <div>Please Login Properly!</div>;
   } else {
     return (

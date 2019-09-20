@@ -39,7 +39,7 @@ router.get('/usertopics/:id', async (req, res) => {
   res.send(
     await topics
       .find({
-        createdBy: req.params.id,
+        'createdBy.id': req.params.id,
       })
       .toArray()
   );

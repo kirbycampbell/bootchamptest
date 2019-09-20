@@ -22,7 +22,6 @@ const Resources = () => {
     axios.get(URL + 'resources/').then(function(res) {
       setResourceList(res.data);
     });
-    console.log('calling query');
   }, []);
 
   const resetForm = () => {

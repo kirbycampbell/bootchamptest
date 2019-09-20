@@ -9,6 +9,7 @@ import './App.css';
 import Index from './Index/Index';
 // import Test from "./P5test/p5.container";
 import Tags from './Tags/Tags';
+import Contributor from './Contributor/Contributor';
 
 const MainRouter = props => {
   return (
@@ -36,6 +37,12 @@ const MainRouter = props => {
             exact
             path="/Tags"
             render={() => <Tags user={props.user} auth={props.auth} />}
+          />
+          <Route
+            path="/Contributor/:id"
+            render={props => (
+              <Contributor user={props.user} auth={props.auth} {...props} />
+            )}
           />
         </div>
       </div>
