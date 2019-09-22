@@ -1,6 +1,7 @@
 .topics {
   width: 100%;
   display: flex;
+  min-height: 200px;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 20px;

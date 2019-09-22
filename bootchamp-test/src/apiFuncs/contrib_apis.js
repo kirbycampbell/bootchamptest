@@ -7,5 +7,8 @@ export async function getContributor(id) {
 }
 
 export async function getContributorTopics(id) {
-  return await axios.get(URL + 'topics//usertopics/' + id).then(res => res);
+  return await axios.get(URL + 'topics/usertopics/' + id).then(res => res);
+}
+export async function getContributorResources(id) {
+  return await axios.get(URL + 'resources/contributor/' + id).then(res => res);
 }

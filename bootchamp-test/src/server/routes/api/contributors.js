@@ -156,6 +156,26 @@ router.patch('/:id', async (req, res) => {
   );
 });
 
+// 4.05). PATCH - Update Avatar
+router.patch('/avatar/:id', async (req, res) => {
+  const contributors = await loadContributors();
+  await contributors.updateOne(
+    {
+      id: req.params.id,
+    },
+    {
+      $set: {
+        avatar: req.body.avatar,
+      },
+    }
+  );
+  res.status(201).send(
+    await contributors.findOne({
+      id: req.params.id,
+    })
+  );
+});
+
 // 4.1). PATCH - Update Contributor's Cities
 router.patch('/cities/:id', async (req, res) => {
   const contributors = await loadContributors();
