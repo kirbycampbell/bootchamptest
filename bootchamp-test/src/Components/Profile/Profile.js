@@ -14,7 +14,7 @@ import ResourceStateless from "../Resources/ResourceStateless";
 import Cities from "../Cities/Cities";
 import { getUserTopics, patchUserAvatar } from "../../API_Front/topic_api";
 
-const Profile = props => {
+const Profile = () => {
   const [loggedOut, setLoggedOut] = useState(false);
   const [contributor, setContributor] = useState([]);
   const [topics, setTopics] = useState([]);
@@ -22,7 +22,7 @@ const Profile = props => {
   const [avatar, setAvatar] = useState("");
   const [resourceList, setResourceList] = useState([]);
   const [city, setCity] = useState(null);
-
+  const auth = useSelector(state => state.auth);
   const user = useSelector(state => state.user);
 
   const dispatch = useDispatch();
@@ -70,9 +70,9 @@ const Profile = props => {
     patchContributorCities(user.id, city).then(res => console.log(res.data));
   };
 
-  if (!props.auth && loggedOut) {
+  if (!auth && loggedOut) {
     return <Redirect to="/LogIn" />;
-  } else if (!props.auth && !localStorage.getItem("User")) {
+  } else if (!auth && !localStorage.getItem("User")) {
     return <div>Please Login Properly!</div>;
   } else {
     return (

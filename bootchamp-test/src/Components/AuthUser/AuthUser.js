@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import GoogleComp from "./GoogleComp";
 import SignIn from "./SignIn";
 import CreateUser from "./CreateUser";
@@ -8,7 +9,7 @@ import AuthButtons from "./AuthButtons";
 import Loader from "./../Loader/Loader";
 import { Redirect } from "react-router";
 
-const AuthUser = props => {
+const AuthUser = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,13 +17,14 @@ const AuthUser = props => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const auth = useSelector(state => state.auth);
 
   useEffect(() => {
     setError("");
   }, [userName, password, email]);
 
-  if (props.auth) return <Redirect to="/" />;
-  if (!props.auth) {
+  if (auth) return <Redirect to="/" />;
+  if (!auth) {
     const localFns = {
       userName,
       setUserName,

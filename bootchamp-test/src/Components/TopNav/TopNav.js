@@ -1,9 +1,11 @@
-import React from 'react';
-import './TopNav.css';
-import {Link} from 'react-router-dom';
-import logo from './BootchampLogo.png';
+import React from "react";
+import "./TopNav.css";
+import { Link } from "react-router-dom";
+import logo from "./BootchampLogo.png";
+import { useSelector } from "react-redux";
 
-const TopNav = props => {
+const TopNav = () => {
+  const auth = useSelector(state => state.auth);
   const LinkBtns = () => {
     return (
       <div className="Inner-TopNav">
@@ -18,11 +20,11 @@ const TopNav = props => {
             Resources
           </Link>
           <Link
-            to={props.auth ? '/Profile' : '/Login'}
+            to={auth ? "/Profile" : "/Login"}
             className="custom-link Nav-Grps"
           >
-            {props.auth && 'Profile'}
-            {!props.auth && 'Login'}
+            {auth && "Profile"}
+            {!auth && "Login"}
           </Link>
         </div>
       </div>
