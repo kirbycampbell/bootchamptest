@@ -1,22 +1,24 @@
-import React, {useState, useEffect} from 'react';
-import './Tags.css';
-import {URL} from './../../constants/url';
-const axios = require('axios');
-const uuidv1 = require('uuid/v1');
+import React, { useState, useEffect } from "react";
+import "./Tags.css";
+import {
+  searchTagsByRegex,
+  searchAllTags,
+  createTagMutate
+} from "../../API_Front/tag_api";
 
 // When calling this component, switch chosen tags to props
 // method so that the array of objs can be sent.
 
-const Tags = ({tags, setTags}) => {
-  const [typeTag, setTypeTag] = useState('');
+const Tags = ({ tags, setTags }) => {
+  const [typeTag, setTypeTag] = useState("");
   const [queryMatch, setQueryMatch] = useState([]);
   //const [tags, settags] = useState([]);
 
   useEffect(() => {
     if (typeTag.length > 2) {
-      axios.get(URL + 'tags/matches/' + typeTag).then(function(response) {
-        setQueryMatch(response.data);
-      });
+      searchTagsByRegex(typeTag).then(res => setQueryMatch(res));
+    } else {
+      setQueryMatch([]);
     }
   }, [typeTag]);
 
@@ -26,7 +28,7 @@ const Tags = ({tags, setTags}) => {
     });
     newList.push(tag);
     setTags(newList);
-    setTypeTag('');
+    setTypeTag("");
     setQueryMatch([]);
   };
 
@@ -46,39 +48,22 @@ const Tags = ({tags, setTags}) => {
   };
 
   const createTag = () => {
-    let found = false;
-    axios.get(URL + 'tags/').then(function(response) {
-      response.data.filter(tag => {
-        if (tag.label === typeTag.toLowerCase()) {
-          found = true;
-          handleForm(tag);
-        }
-        return null;
-      });
-      if (!found) {
-        axios
-          .post(URL + 'tags/', {
-            id: uuidv1(),
-            label: typeTag.toLowerCase(),
-          })
-          .then(function(res) {
-            axios
-              .get(URL + 'tags/')
-              .then(function(response) {
-                handleForm(res.data);
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
-          });
+    searchAllTags(typeTag).then(res => {
+      if (res) {
+        handleForm(res);
+      } else {
+        createTagMutate(typeTag).then(function(res) {
+          handleForm(res.data);
+          console.log(res.data);
+        });
       }
     });
   };
 
   const handleKeyPress = event => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       createTag();
-    } else if (event.key === ',') {
+    } else if (event.key === ",") {
       createTag();
     }
   };

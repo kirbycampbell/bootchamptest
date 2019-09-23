@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
-
-import { URL } from "./../../constants/url";
 import TopicStateless from "../Topics/TopicStateless";
 import {
   getContributor,
@@ -14,8 +12,7 @@ import {
 } from "../../API_Front/contrib_apis"; // move backend calls here - seperate by type
 import ResourceStateless from "../Resources/ResourceStateless";
 import Cities from "../Cities/Cities";
-
-const axios = require("axios");
+import { getUserTopics, patchUserAvatar } from "../../API_Front/topic_api";
 
 const Profile = props => {
   const [loggedOut, setLoggedOut] = useState(false);
@@ -36,7 +33,6 @@ const Profile = props => {
     },
     [dispatch]
   );
-  console.log(loaded);
 
   useEffect(() => {
     getContributor(user.id).then(res => setContributor(res.data));
@@ -47,9 +43,8 @@ const Profile = props => {
   // need to make endpoint that matches all topics in array
   useEffect(() => {
     if (user.name !== undefined) {
-      axios
-        .get(URL + "topics/usertopics/" + user.id)
-        .then(function(res) {
+      getUserTopics(user.id)
+        .then(res => {
           setTopics(res.data);
           setLoaded(true);
         })
@@ -61,10 +56,7 @@ const Profile = props => {
 
   const addAvatar = () => {
     setLoaded(false);
-    axios
-      .patch(URL + "contributors/avatar/" + user.id, {
-        avatar: avatar
-      })
+    patchUserAvatar(user.id, avatar)
       .then(function(res) {
         console.log(res);
         setLoaded(true);

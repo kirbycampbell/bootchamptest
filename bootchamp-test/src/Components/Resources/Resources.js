@@ -1,56 +1,55 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector} from 'react-redux';
-import './Resources.css';
-import {URL} from './../../constants/url';
-import Tags from '../Tags/Tags';
-import Cities from '../Cities/Cities';
-const axios = require('axios');
-const uuidv1 = require('uuid/v1');
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import "./Resources.css";
+import Tags from "../Tags/Tags";
+import Cities from "../Cities/Cities";
+import {
+  createResourceMutate,
+  getResources
+} from "../../API_Front/resource_api";
 
 const Resources = () => {
   const user = useSelector(state => state.user);
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
-  const [link, setLink] = useState('');
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [link, setLink] = useState("");
   const [city, setCity] = useState([]);
   const [tags, setTags] = useState([]);
   const [resourceList, setResourceList] = useState([]);
-  const [error, setError] = useState('');
-  const [msg, setMsg] = useState('');
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    axios.get(URL + 'resources/').then(function(res) {
+    getResources().then(function(res) {
       setResourceList(res.data);
     });
   }, []);
 
   const resetForm = () => {
-    setTitle('');
-    setText('');
-    setLink('');
+    setTitle("");
+    setText("");
+    setLink("");
     setCity([]);
     setTags([]);
   };
 
   const handleResourceForm = () => {
-    console.log('button pressed');
-    axios
-      .post(URL + 'resources/', {
-        id: uuidv1(),
-        title: title,
-        text: text,
-        link: link,
-        city: city,
-        tags: tags,
-        createdBy: {
-          name: user.name,
-          id: user.id,
-        },
-      })
+    let data = {
+      title: title,
+      text: text,
+      link: link,
+      city: city,
+      tags: tags,
+      createdBy: {
+        name: user.name,
+        id: user.id
+      }
+    };
+    createResourceMutate(data)
       .then(function(res) {
-        setMsg('Created New Resource');
-        axios.get(URL + 'resources/').then(function(response) {
-          setResourceList(response.data);
+        setMsg("Created New Resource");
+        getResources().then(function(res) {
+          setResourceList(res.data);
         });
         resetForm();
       })

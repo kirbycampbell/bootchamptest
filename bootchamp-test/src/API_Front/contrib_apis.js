@@ -1,5 +1,4 @@
 import { URL } from "../constants/url";
-
 const axios = require("axios");
 
 export async function getContributor(id) {

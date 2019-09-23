@@ -1,16 +1,16 @@
-import React, {useCallback} from 'react';
-import {Link} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import '../Topics/Topics.css';
+import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import "../Topics/Topics.css";
 
-var moment = require('moment');
+var moment = require("moment");
 
-const ResourceStateless = ({topic}) => {
+const ResourceStateless = ({ topic }) => {
   //const tags = useSelector(state => state.tags);
   const dispatch = useDispatch();
   const addSelectedTags = useCallback(
     tags => {
-      dispatch({type: 'SELECT_TAGS', payload: tags});
+      dispatch({ type: "SELECT_TAGS", payload: tags });
     },
     [dispatch]
   );
@@ -20,16 +20,16 @@ const ResourceStateless = ({topic}) => {
         <div className="TopTitle">
           {topic.title}
           <div className="TopCreatedBy">
-            {' '}
+            {" "}
             <Link
-              to={'/Contributor/' + topic.createdBy.id}
+              to={"/Contributor/" + topic.createdBy.id}
               className="custom-link"
             >
               {topic.createdBy.name}
             </Link>
           </div>
           <div className="TopCreatedAt">
-            {moment(topic.createdAt).format('MM/DD/YYYY')}
+            {moment(topic.createdAt).format("MM/DD/YYYY")}
           </div>
         </div>
         <div className="TopContent">{topic.text}</div>
@@ -38,7 +38,7 @@ const ResourceStateless = ({topic}) => {
             return (
               <div className="IndTag" key={tag.id}>
                 <Link
-                  to={'/TagPage/'}
+                  to={"/TagPage/"}
                   className="custom-link"
                   onClick={() => addSelectedTags(tag)}
                 >

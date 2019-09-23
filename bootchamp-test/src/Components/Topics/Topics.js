@@ -1,24 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import './Topics.css';
-import {URL} from '../../constants/url';
-import CreateTopic from './CreateTopic';
-import TopicStateless from './TopicStateless';
-
-const axios = require('axios');
+import React, { useState, useEffect } from "react";
+import "./Topics.css";
+import CreateTopic from "./CreateTopic";
+import TopicStateless from "./TopicStateless";
+import { getAllTopics } from "../../API_Front/topic_api";
 
 const Topics = () => {
   const [topics, setTopics] = useState([]);
   useEffect(() => {
-    axios
-      .get(URL + 'topics/')
-      .then(function(response) {
-        setTopics(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    getAllTopics().then(res => setTopics(res));
   }, []);
-  console.log(topics);
   return (
     <React.Fragment>
       <CreateTopic />
