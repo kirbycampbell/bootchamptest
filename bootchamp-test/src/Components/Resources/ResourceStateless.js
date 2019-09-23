@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Link} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
 import '../Topics/Topics.css';
 
 var moment = require('moment');
 
 const ResourceStateless = ({topic}) => {
+  //const tags = useSelector(state => state.tags);
+  const dispatch = useDispatch();
+  const addSelectedTags = useCallback(
+    tags => {
+      dispatch({type: 'SELECT_TAGS', payload: tags});
+    },
+    [dispatch]
+  );
   return (
     <div className="topics">
       <div className="Topic-Container" key={topic.id}>
@@ -23,23 +32,23 @@ const ResourceStateless = ({topic}) => {
             {moment(topic.createdAt).format('MM/DD/YYYY')}
           </div>
         </div>
-        <div className="TopContent">
-          {topic.text}
-          {/* <div className="TopImg">
-            <img src={topic.images} alt={topic.images} />
-          </div> */}
-        </div>
+        <div className="TopContent">{topic.text}</div>
         <div className="TopTags">
           {topic.tags.map(tag => {
             return (
               <div className="IndTag" key={tag.id}>
-                {tag.label}
+                <Link
+                  to={'/TagPage/'}
+                  className="custom-link"
+                  onClick={() => addSelectedTags(tag)}
+                >
+                  {tag.label}
+                </Link>
               </div>
             );
           })}
         </div>
         <div className="TopFooter">
-          {/* <div className="TopLikes">Likes: {topic.likedBy.length}</div> */}
           <div className="TopCity">
             {topic.city.name} - {topic.city.state}
           </div>

@@ -10,6 +10,7 @@ import Index from './Index/Index';
 // import Test from "./P5test/p5.container";
 import Tags from './Tags/Tags';
 import Contributor from './Contributor/Contributor';
+import TagPage from './Tags/TagPage';
 
 const MainRouter = props => {
   return (
@@ -38,6 +39,8 @@ const MainRouter = props => {
             path="/Tags"
             render={() => <Tags user={props.user} auth={props.auth} />}
           />
+
+          <Route exact path="/TagPage" render={() => <TagPage />} />
           <Route
             path="/Contributor/:id"
             render={props => (

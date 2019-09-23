@@ -7,9 +7,12 @@
   margin: auto;
   width: 95%;
 }
+h4 {
+  text-align: center;
+}
 
 .Profile-Title {
-  width: 50%;
+  width: 90%;
   font-size: 24px;
   font-weight: bold;
   margin: auto;
@@ -67,6 +70,12 @@
   text-align: center;
   min-height: 200px;
   width: 100%;
+}
+
+.profile-city {
+  width: 50%;
+  margin: auto;
+  text-align: center;
 }
 
 .logout-btn {

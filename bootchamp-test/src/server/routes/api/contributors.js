@@ -184,8 +184,8 @@ router.patch('/cities/:id', async (req, res) => {
       id: req.params.id,
     },
     {
-      $addToSet: {
-        cities: req.query.city,
+      $set: {
+        cities: req.body.city,
       },
     }
   );

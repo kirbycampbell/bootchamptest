@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import './Profile.css';
 import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
 
 import {URL} from './../../constants/url';
 import TopicStateless from '../Topics/TopicStateless';
@@ -9,8 +10,10 @@ import {
   getContributor,
   getContributorTopics,
   getContributorResources,
+  patchContributorCities,
 } from '../../apiFuncs/contrib_apis'; // move backend calls here - seperate by type
 import ResourceStateless from '../Resources/ResourceStateless';
+import Cities from '../Cities/Cities';
 
 const axios = require('axios');
 
@@ -21,6 +24,7 @@ const Profile = props => {
   const [loaded, setLoaded] = useState(false);
   const [avatar, setAvatar] = useState('');
   const [resourceList, setResourceList] = useState([]);
+  const [city, setCity] = useState(null);
 
   const user = useSelector(state => state.user);
 
@@ -70,6 +74,10 @@ const Profile = props => {
       });
   };
 
+  const addCityToContributor = () => {
+    patchContributorCities(user.id, city).then(res => console.log(res.data));
+  };
+
   if (!props.auth && loggedOut) {
     return <Redirect to="/LogIn" />;
   } else if (!props.auth && !localStorage.getItem('User')) {
@@ -107,7 +115,23 @@ const Profile = props => {
               </div>
             </div>
           )}
-
+          {/*  :::::::::: City Area :::::::::: */}
+          {!contributor.cities ? (
+            <React.Fragment>
+              <Cities setCity={setCity} city={city} />
+              <div className="input-citysbm" onClick={addCityToContributor}>
+                Add City
+              </div>
+            </React.Fragment>
+          ) : (
+            <div className="profile-city">
+              Location: {contributor.cities.name}, {contributor.cities.state}
+            </div>
+          )}
+          <Link to={'/Contributor/' + user.id} className="custom-link">
+            {' '}
+            <h4>View your Profile how Other's see it!</h4>
+          </Link>
           {/* :::::::::: Resource AREA ::::::::::: */}
           <div className="Topic-List">
             <h2>Resources</h2>

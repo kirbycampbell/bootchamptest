@@ -46,7 +46,7 @@ router.get('/usertopics/:id', async (req, res) => {
 });
 
 // 5). Query topic by tag element
-router.get('/tags/:id', async (req, res) => {
+router.get('/tags', async (req, res) => {
   const topics = await loadTopics();
   res.send(
     await topics
@@ -54,6 +54,17 @@ router.get('/tags/:id', async (req, res) => {
         tags: {
           $in: req.body.searchTags,
         },
+      })
+      .toArray()
+  );
+});
+
+router.get('/tags_id/:id', async (req, res) => {
+  const topics = await loadTopics();
+  res.send(
+    await topics
+      .find({
+        'tags.id': {$in: [req.params.id]},
       })
       .toArray()
   );

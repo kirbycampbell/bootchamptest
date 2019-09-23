@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {Link} from 'react-router-dom';
-
+import {useDispatch, useSelector} from 'react-redux';
 import './Topics.css';
 var moment = require('moment');
 
 const TopicStateless = ({topic}) => {
+  const dispatch = useDispatch();
+  const addSelectedTags = useCallback(
+    tags => {
+      dispatch({type: 'SELECT_TAGS', payload: tags});
+    },
+    [dispatch]
+  );
   return (
     <div className="topics">
       <div className="Topic-Container" key={topic.id}>
@@ -33,7 +40,13 @@ const TopicStateless = ({topic}) => {
           {topic.tags.map(tag => {
             return (
               <div className="IndTag" key={tag.id}>
-                {tag.label}
+                <Link
+                  to={'/TagPage/'}
+                  className="custom-link"
+                  onClick={() => addSelectedTags(tag)}
+                >
+                  {tag.label}
+                </Link>
               </div>
             );
           })}
