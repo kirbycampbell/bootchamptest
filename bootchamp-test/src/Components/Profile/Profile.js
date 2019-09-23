@@ -1,28 +1,28 @@
-import React, {useState, useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import './Profile.css';
-import {Redirect} from 'react-router';
-import {Link} from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./Profile.css";
+import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 
-import {URL} from './../../constants/url';
-import TopicStateless from '../Topics/TopicStateless';
+import { URL } from "./../../constants/url";
+import TopicStateless from "../Topics/TopicStateless";
 import {
   getContributor,
   getContributorTopics,
   getContributorResources,
-  patchContributorCities,
-} from '../../apiFuncs/contrib_apis'; // move backend calls here - seperate by type
-import ResourceStateless from '../Resources/ResourceStateless';
-import Cities from '../Cities/Cities';
+  patchContributorCities
+} from "../../API_Front/contrib_apis"; // move backend calls here - seperate by type
+import ResourceStateless from "../Resources/ResourceStateless";
+import Cities from "../Cities/Cities";
 
-const axios = require('axios');
+const axios = require("axios");
 
 const Profile = props => {
   const [loggedOut, setLoggedOut] = useState(false);
   const [contributor, setContributor] = useState([]);
   const [topics, setTopics] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState("");
   const [resourceList, setResourceList] = useState([]);
   const [city, setCity] = useState(null);
 
@@ -31,7 +31,7 @@ const Profile = props => {
   const dispatch = useDispatch();
   const logUserOut = useCallback(
     user => {
-      dispatch({type: 'LOGOUT_USER'});
+      dispatch({ type: "LOGOUT_USER" });
       setLoggedOut(true);
     },
     [dispatch]
@@ -48,7 +48,7 @@ const Profile = props => {
   useEffect(() => {
     if (user.name !== undefined) {
       axios
-        .get(URL + 'topics/usertopics/' + user.id)
+        .get(URL + "topics/usertopics/" + user.id)
         .then(function(res) {
           setTopics(res.data);
           setLoaded(true);
@@ -62,8 +62,8 @@ const Profile = props => {
   const addAvatar = () => {
     setLoaded(false);
     axios
-      .patch(URL + 'contributors/avatar/' + user.id, {
-        avatar: avatar,
+      .patch(URL + "contributors/avatar/" + user.id, {
+        avatar: avatar
       })
       .then(function(res) {
         console.log(res);
@@ -80,7 +80,7 @@ const Profile = props => {
 
   if (!props.auth && loggedOut) {
     return <Redirect to="/LogIn" />;
-  } else if (!props.auth && !localStorage.getItem('User')) {
+  } else if (!props.auth && !localStorage.getItem("User")) {
     return <div>Please Login Properly!</div>;
   } else {
     return (
@@ -128,8 +128,8 @@ const Profile = props => {
               Location: {contributor.cities.name}, {contributor.cities.state}
             </div>
           )}
-          <Link to={'/Contributor/' + user.id} className="custom-link">
-            {' '}
+          <Link to={"/Contributor/" + user.id} className="custom-link">
+            {" "}
             <h4>View your Profile how Other's see it!</h4>
           </Link>
           {/* :::::::::: Resource AREA ::::::::::: */}

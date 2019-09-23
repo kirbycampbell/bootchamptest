@@ -1,9 +1,8 @@
 import React, { useCallback } from "react";
-import { URL } from "../../constants/url";
 import { useDispatch } from "react-redux";
+import { SigninQuery } from "../../API_Front/login_api";
 
 var bcrypt = require("bcryptjs");
-const axios = require("axios");
 
 const SignIn = props => {
   const dispatch = useDispatch();
@@ -14,12 +13,7 @@ const SignIn = props => {
 
   const signInUser = () => {
     props.setLoading(true);
-    axios
-      .get(URL + "contributors/login", {
-        params: {
-          email: props.email
-        }
-      })
+    SigninQuery(props)
       .then(function(response) {
         console.log(response);
         bcrypt.compare(props.password, response.data.password, function(

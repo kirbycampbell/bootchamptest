@@ -1,11 +1,12 @@
 import React, { useCallback } from "react";
 import { GoogleLogin } from "react-google-login";
 import "./AuthUser.css";
-import { URL } from "../../constants/url";
 import { useDispatch } from "react-redux";
-
+import {
+  createGoogleContributorMutate,
+  GoogleSigninQuery
+} from "../../API_Front/login_api";
 var bcrypt = require("bcryptjs");
-const axios = require("axios");
 
 const GoogleComp = props => {
   const dispatch = useDispatch();
@@ -16,13 +17,7 @@ const GoogleComp = props => {
 
   const successSignIn = res => {
     props.setLoading(true);
-
-    axios
-      .get(URL + "contributors/login", {
-        params: {
-          email: res.profileObj.email
-        }
-      })
+    GoogleSigninQuery(res)
       .then(function(query) {
         if (query.data !== "") {
           bcrypt.compare(res.tokenId, query.data.password, function(err, res) {
@@ -44,14 +39,8 @@ const GoogleComp = props => {
           bcrypt.genSalt(10, function(err, salt) {
             bcrypt.hash(res.tokenId, salt, function(err, hash) {
               console.log("hashing bb");
-              axios
-                .post(URL + "contributors/", {
-                  name: res.profileObj.name,
-                  password: hash,
-                  email: res.profileObj.email,
-                  online: true,
-                  id: res.googleId
-                })
+
+              createGoogleContributorMutate(res, hash)
                 .then(function(res) {
                   console.log(res);
                   props.setMessage("Successfully Created!");

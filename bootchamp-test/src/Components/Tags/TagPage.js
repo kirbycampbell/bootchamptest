@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getTopicsByTag} from '../../apiFuncs/tag_api';
-import TopicStateless from '../Topics/TopicStateless';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getTopicsByTag } from "../../API_Front/tag_api";
+import TopicStateless from "../Topics/TopicStateless";
 
 const TagPage = () => {
   const tags = useSelector(state => state.tagsSelected);

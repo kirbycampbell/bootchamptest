@@ -1,10 +1,8 @@
 import React, { useCallback } from "react";
-import { URL } from "../../constants/url";
 import { useDispatch } from "react-redux";
+import { createContributorMutate } from "../../API_Front/login_api";
 
-const uuidv1 = require("uuid/v1");
 var bcrypt = require("bcryptjs");
-const axios = require("axios");
 
 const CreateUser = props => {
   const dispatch = useDispatch();
@@ -21,14 +19,7 @@ const CreateUser = props => {
       props.setLoading(true);
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(props.password, salt, function(err, hash) {
-          axios
-            .post(URL + "contributors/", {
-              name: props.userName,
-              password: hash,
-              email: props.email,
-              online: true,
-              id: uuidv1()
-            })
+          createContributorMutate(props, hash)
             .then(function(response) {
               props.setMessage("Successfully Created!");
               props.setLoading(false);

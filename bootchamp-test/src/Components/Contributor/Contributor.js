@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import './Contributor.css';
-import TopicStateless from '../Topics/TopicStateless';
+import React, { useState, useEffect } from "react";
+import "./Contributor.css";
+import TopicStateless from "../Topics/TopicStateless";
 import {
   getContributor,
   getContributorTopics,
-  getContributorResources,
-} from '../../apiFuncs/contrib_apis'; // move backend calls here - seperate by type
-import ResourceStateless from '../Resources/ResourceStateless';
+  getContributorResources
+} from "../../API_Front/contrib_apis"; // move backend calls here - seperate by type
+import ResourceStateless from "../Resources/ResourceStateless";
 
 const Contributor = props => {
   const [contributor, setContributor] = useState([]);
