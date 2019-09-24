@@ -9,6 +9,7 @@ const Topics = () => {
   useEffect(() => {
     getAllTopics().then(res => setTopics(res));
   }, []);
+  console.table(topics);
   return (
     <React.Fragment>
       <CreateTopic />
