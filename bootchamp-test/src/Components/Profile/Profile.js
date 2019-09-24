@@ -92,7 +92,7 @@ const Profile = () => {
                 {/* <button className="btn">Upload a file</button>
                 <input type="file" name="myfile" /> */}
                 <input
-                  className="input-resource"
+                  className="input-txt"
                   type="text"
                   placeholder="Image Link"
                   onChange={e => setAvatar(e.target.value)}

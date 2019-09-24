@@ -61,7 +61,7 @@ const Resources = () => {
       {/* :::::::::::: City Input Form ::::::::::::: */}
       <div className="resource-form">
         <input
-          className="input-resource"
+          className="input-txt"
           type="text"
           placeholder="Title"
           onChange={e => setTitle(e.target.value)}
@@ -84,7 +84,7 @@ const Resources = () => {
           maxLength="260"
         />
 
-        <div className="input-resourcesbm" onClick={handleResourceForm}>
+        <div className="input-txt-sbm" onClick={handleResourceForm}>
           <i className="fas fa-check check"></i>
           Submit
         </div>

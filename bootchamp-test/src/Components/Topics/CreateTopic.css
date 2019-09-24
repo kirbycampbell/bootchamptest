@@ -34,7 +34,7 @@ h2 {
   margin: auto;
 }
 
-.submit-btn {
+/* .submit-btn {
   width: 60%;
   height: 10%;
   min-height: 34px;
@@ -43,7 +43,7 @@ h2 {
   font-size: 22px;
   margin: auto;
   cursor: pointer;
-}
+} */
 
 .CheckSection {
   display: flex;

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import './ImageForm.css';
+import React, { useState } from "react";
+import "./ImageForm.css";
 
-const ImageForm = ({setImgLink, setImgCheck}) => {
-  const [imgURL, setImgURL] = useState('');
+const ImageForm = ({ setImgLink, setImgCheck }) => {
+  const [imgURL, setImgURL] = useState("");
   const [imgQuestion, setImgQuestion] = useState(true);
   const [uploadImg, setUploadImg] = useState(false);
   const [linkImg, setLinkImg] = useState(false);
@@ -36,7 +36,7 @@ const ImageForm = ({setImgLink, setImgCheck}) => {
       <div className="Outer-ImgForm">
         <div className="Inner-ImgForm">
           <input
-            className="input-resource"
+            className="input-txt"
             type="text"
             placeholder="Image Link"
             onChange={e => setImgURL(e.target.value)}
@@ -62,7 +62,7 @@ const ImageForm = ({setImgLink, setImgCheck}) => {
       <div className="Outer-ImgForm">
         <div className="Inner-ImgForm">
           <input
-            className="input-resource"
+            className="input-txt"
             type="file"
             placeholder="Upload Image"
             onChange={e => setImgLink(e.target.value)}

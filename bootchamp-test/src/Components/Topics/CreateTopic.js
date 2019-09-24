@@ -60,7 +60,7 @@ const CreateTopic = () => {
       <h2>Create Topic Form</h2>
       <div className="topic-form" onSubmit={createTopic}>
         <input
-          className="input-resource"
+          className="input-txt"
           type="text"
           placeholder="Title"
           onChange={e => setName(e.target.value)}
