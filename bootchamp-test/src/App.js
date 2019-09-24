@@ -3,8 +3,9 @@ import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 const App = () => {
-  const user = useSelector(state => state.user);
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.UserStore.auth);
+  const user = useSelector(state => state.UserStore.user);
+
   const dispatch = useDispatch();
   const loginUser = useCallback(
     user => dispatch({ type: "LOGIN_USER", payload: user }),

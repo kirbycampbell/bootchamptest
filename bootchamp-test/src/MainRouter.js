@@ -12,7 +12,7 @@ import Contributor from "./Components/Contributor/Contributor";
 import TagPage from "./Components/Tags/TagPage";
 
 const MainRouter = () => {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.UserStore.auth);
   return (
     <Router>
       <div className="App">

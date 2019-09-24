@@ -5,7 +5,7 @@ import logo from "./BootchampLogo.png";
 import { useSelector } from "react-redux";
 
 const TopNav = () => {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.UserStore.auth);
   const LinkBtns = () => {
     return (
       <div className="Inner-TopNav">

@@ -22,8 +22,8 @@ const Profile = () => {
   const [avatar, setAvatar] = useState("");
   const [resourceList, setResourceList] = useState([]);
   const [city, setCity] = useState(null);
-  const auth = useSelector(state => state.auth);
-  const user = useSelector(state => state.user);
+  const auth = useSelector(state => state.UserStore.auth);
+  const user = useSelector(state => state.UserStore.user);
 
   const dispatch = useDispatch();
   const logUserOut = useCallback(

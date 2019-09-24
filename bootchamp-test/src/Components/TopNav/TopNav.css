@@ -8,7 +8,7 @@
   border-bottom: 1px solid black;
   overflow: hidden;
   background-color: rgb(26, 26, 26);
-
+  z-index: 100;
   top: 0;
 }
 
@@ -21,6 +21,7 @@
   width: 100%;
   color: rgb(66, 62, 62);
   height: 80%;
+  z-index: 100;
 }
 
 .Nav-Grps-Outer {

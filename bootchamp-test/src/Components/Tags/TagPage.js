@@ -4,7 +4,7 @@ import { getTopicsByTag } from "../../API_Front/tag_api";
 import TopicStateless from "../Topics/TopicStateless";
 
 const TagPage = () => {
-  const tags = useSelector(state => state.tagsSelected);
+  const tags = useSelector(state => state.Tags.selected);
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {

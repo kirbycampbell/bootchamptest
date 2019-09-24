@@ -17,7 +17,7 @@ const AuthUser = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector(state => state.UserStore.auth);
 
   useEffect(() => {
     setError("");

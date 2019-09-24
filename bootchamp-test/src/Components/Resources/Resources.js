@@ -9,7 +9,7 @@ import {
 } from "../../API_Front/resource_api";
 
 const Resources = () => {
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state.UserStore.user);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [link, setLink] = useState("");

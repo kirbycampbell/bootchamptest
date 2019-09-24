@@ -1,16 +1,12 @@
-import { createStore } from "redux";
-
-const initialState = {
+const initUserState = {
   user: {},
-  auth: false,
-  tagsSelected: []
+  auth: false
 };
 
-export const store = createStore(reducer, initialState);
-
-function reducer(state, action) {
+export const UserStore = (state = initUserState, action) => {
   switch (action.type) {
     case "LOGIN_USER":
+      console.log("logging in user!");
       localStorage.setItem("User", JSON.stringify(action.payload));
       return {
         user: action.payload,
@@ -22,25 +18,15 @@ function reducer(state, action) {
         user: {},
         auth: false
       };
-    case "SELECT_TAGS":
-      let tagsSelected = state.tagsSelected;
-      tagsSelected = action.payload;
-      let newState = { ...state, tagsSelected };
-      return newState;
 
     default:
       return state;
   }
-}
+};
 
 export const loginUserAction = user => ({
   type: "LOGIN_USER",
   payload: user
-});
-
-export const addTagSelection = tags => ({
-  type: "SELECT_TAGS",
-  payload: tags
 });
 
 export const logoutUserAction = user => ({

@@ -1,21 +1,21 @@
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
-import './CreateTopic.css';
-import {URL} from './../../constants/url';
-import Cities from '../Cities/Cities';
-import Tags from '../Tags/Tags';
-import ImageForm from '../Forms/ImageForm';
-const uuidv1 = require('uuid/v1');
-const axios = require('axios');
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import "./CreateTopic.css";
+import { URL } from "./../../constants/url";
+import Cities from "../Cities/Cities";
+import Tags from "../Tags/Tags";
+import ImageForm from "../Forms/ImageForm";
+const uuidv1 = require("uuid/v1");
+const axios = require("axios");
 
 const CreateTopic = () => {
   // logged in User state
-  const user = useSelector(state => state.user);
+  const user = useSelector(state => state.UserStore.user);
 
   // Form state
-  const [name, setName] = useState('');
-  const [content, setContent] = useState('');
-  const [imgLink, setImgLink] = useState('');
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [imgLink, setImgLink] = useState("");
   const [city, setCity] = useState([]);
   const [tags, setTags] = useState([]);
 
@@ -24,32 +24,32 @@ const CreateTopic = () => {
   const [cityCheck, setCityCheck] = useState(false);
 
   const resetForm = () => {
-    setName('');
-    setContent('');
+    setName("");
+    setContent("");
     setCity([]);
     setTags([]);
-    setImgLink('');
+    setImgLink("");
   };
 
   const createTopic = () => {
-    if (name !== '') {
+    if (name !== "") {
       axios
-        .post(URL + 'topics/', {
+        .post(URL + "topics/", {
           id: uuidv1(),
           name: name,
           content: content,
           images: imgLink,
-          cities: {id: city.id, name: city.name, state: city.state},
+          cities: { id: city.id, name: city.name, state: city.state },
           tags: tags,
-          createdBy: {id: user.id, name: user.name},
+          createdBy: { id: user.id, name: user.name }
         })
         .then(function(response) {
-          console.log('success');
+          console.log("success");
           console.log(response);
           resetForm();
         })
         .catch(function(error) {
-          console.log('error');
+          console.log("error");
           console.log(error);
         });
     }
