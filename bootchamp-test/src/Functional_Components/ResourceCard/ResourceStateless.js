@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "../Topics/Topics.css";
 
 var moment = require("moment");
 

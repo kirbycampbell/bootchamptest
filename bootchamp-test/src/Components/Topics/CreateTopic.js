@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./CreateTopic.css";
-import { URL } from "./../../constants/url";
+import { URL } from "../../Variable_Constants/url";
 import Cities from "../Cities/Cities";
 import Tags from "../Tags/Tags";
-import ImageForm from "../Forms/ImageForm";
+import ImageForm from "../../Functional_Components/Forms/ImageUploadForms/ImageForm";
 const uuidv1 = require("uuid/v1");
 const axios = require("axios");
 

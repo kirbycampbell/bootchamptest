@@ -3,10 +3,7 @@ import { useSelector } from "react-redux";
 import "./Resources.css";
 import Tags from "../Tags/Tags";
 import Cities from "../Cities/Cities";
-import {
-  createResourceMutate,
-  getResources
-} from "../../API_Front/resource_api";
+import { createResourceMutate, getResources } from "../../API/resource_api";
 
 const Resources = () => {
   const user = useSelector(state => state.UserStore.user);

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { createContributorMutate } from "../../API_Front/login_api";
+import { createContributorMutate } from "../../API/login_api";
 
 var bcrypt = require("bcryptjs");
 

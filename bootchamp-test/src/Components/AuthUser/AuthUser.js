@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import GoogleComp from "./GoogleComp";
 import SignIn from "./SignIn";
 import CreateUser from "./CreateUser";
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "../../Functional_Components/Forms/User/SignUpForm";
 import "./AuthUser.css";
-import AuthButtons from "./AuthButtons";
-import Loader from "./../Loader/Loader";
+import AuthButtons from "../../Functional_Components/Buttons/AuthButtons";
+import Loader from "../../Functional_Components/Loader/Loader";
 import { Redirect } from "react-router";
 
 const AuthUser = () => {

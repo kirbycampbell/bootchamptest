@@ -1,15 +1,15 @@
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { SigninQuery } from "../../API_Front/login_api";
+import { SigninQuery } from "../../API/login_api";
+import { loginUserAction } from "../../Redux/actions";
 
 var bcrypt = require("bcryptjs");
 
 const SignIn = props => {
   const dispatch = useDispatch();
-  const loginUser = useCallback(
-    user => dispatch({ type: "LOGIN_USER", payload: user }),
-    [dispatch]
-  );
+  const loginUser = useCallback(user => dispatch(loginUserAction(user)), [
+    dispatch
+  ]);
 
   const signInUser = () => {
     props.setLoading(true);

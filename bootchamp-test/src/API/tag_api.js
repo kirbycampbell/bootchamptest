@@ -1,8 +1,8 @@
-import { URL } from "../constants/url";
+import { URL } from "../Variable_Constants/url";
 const axios = require("axios");
 const uuidv1 = require("uuid/v1");
 
-export async function getTopicsByTag(id, tags) {
+export async function getTopicsByTag(id) {
   console.log(id);
   return await axios
     .get(URL + "topics/tags_id/" + id, {
@@ -19,8 +19,6 @@ export async function searchAllTags(query) {
   return await axios.get(URL + "tags/").then(res => {
     res.data.filter(tag => {
       if (tag.label === query.toLowerCase()) {
-        //found = true;
-        //handleForm(tag);
         return tag;
       } else return null;
     });

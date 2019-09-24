@@ -1,4 +1,4 @@
-import { URL } from "../constants/url";
+import { URL } from "../Variable_Constants/url";
 const axios = require("axios");
 
 export async function getContributor(id) {

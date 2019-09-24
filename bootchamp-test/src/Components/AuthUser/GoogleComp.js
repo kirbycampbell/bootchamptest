@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   createGoogleContributorMutate,
   GoogleSigninQuery
-} from "../../API_Front/login_api";
+} from "../../API/login_api";
 var bcrypt = require("bcryptjs");
 
 const GoogleComp = props => {

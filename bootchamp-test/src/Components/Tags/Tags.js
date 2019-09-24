@@ -4,7 +4,7 @@ import {
   searchTagsByRegex,
   searchAllTags,
   createTagMutate
-} from "../../API_Front/tag_api";
+} from "../../API/tag_api";
 
 // When calling this component, switch chosen tags to props
 // method so that the array of objs can be sent.

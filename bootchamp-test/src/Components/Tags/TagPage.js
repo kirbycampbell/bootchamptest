@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { getTopicsByTag } from "../../API_Front/tag_api";
-import TopicStateless from "../Topics/TopicStateless";
+import { getTopicsByTag } from "../../API/tag_api";
+import TopicStateless from "../../Functional_Components/TopicCard/TopicStateless";
 
 const TagPage = () => {
   const tags = useSelector(state => state.Tags.selected);
@@ -9,7 +9,7 @@ const TagPage = () => {
 
   useEffect(() => {
     //console.log(tags);
-    getTopicsByTag(tags.id, tags.id).then(res => setTopics(res.data));
+    getTopicsByTag(tags.id).then(res => setTopics(res.data));
   }, [tags]);
   console.log(tags);
   return (

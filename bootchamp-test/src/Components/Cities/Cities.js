@@ -5,7 +5,7 @@ import {
   searchByCityName,
   searchByState,
   createNewCityState
-} from "../../API_Front/cities_api";
+} from "../../API/cities_api";
 
 const Cities = ({ city, setCity, setCityCheck }) => {
   const [cityName, setCityName] = useState("");

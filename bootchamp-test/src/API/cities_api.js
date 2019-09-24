@@ -1,4 +1,4 @@
-import { URL } from "../constants/url";
+import { URL } from "../Variable_Constants/url";
 const axios = require("axios");
 const uuidv1 = require("uuid/v1");
 

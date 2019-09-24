@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Profile.css";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
-import TopicStateless from "../Topics/TopicStateless";
+import TopicStateless from "../../Functional_Components/TopicCard/TopicStateless";
 import {
   getContributor,
   getContributorTopics,
   getContributorResources,
   patchContributorCities
-} from "../../API_Front/contrib_apis"; // move backend calls here - seperate by type
-import ResourceStateless from "../Resources/ResourceStateless";
+} from "../../API/contrib_apis"; // move backend calls here - seperate by type
+import ResourceStateless from "../../Functional_Components/ResourceCard/ResourceStateless";
 import Cities from "../Cities/Cities";
-import { getUserTopics, patchUserAvatar } from "../../API_Front/topic_api";
+import { getUserTopics, patchUserAvatar } from "../../API/topic_api";
 
 const Profile = () => {
   const [loggedOut, setLoggedOut] = useState(false);
