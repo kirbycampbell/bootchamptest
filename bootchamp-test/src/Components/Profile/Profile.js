@@ -128,7 +128,9 @@ const Profile = () => {
           <div className="Topic-List">
             <h2>Resources</h2>
             {resourceList.map(resource => {
-              return <ResourceStateless topic={resource} key={resource.id} />;
+              return (
+                <ResourceStateless resource={resource} key={resource.id} />
+              );
             })}
           </div>
 

@@ -2,6 +2,7 @@ import MainRouter from "./MainRouter";
 import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./Styles/formStyles.css";
+import "./Styles/cardStyle.css";
 
 const App = () => {
   const auth = useSelector(state => state.UserStore.auth);

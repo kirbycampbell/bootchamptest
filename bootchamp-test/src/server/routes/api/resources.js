@@ -1,53 +1,53 @@
-const express = require('express');
-const mongodb = require('mongodb');
+const express = require("express");
+const mongodb = require("mongodb");
 const router = express.Router();
-const {loadResources} = require('./databases');
+const { loadResources } = require("./databases");
 
 // Resources are only created in
 // City Models... Always joined together!
 
 // 1). Query All Resources:
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const resources = await loadResources();
   res.send(await resources.find({}).toArray());
 });
 
 // 2). Get Specific Resource by id
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   const resources = await loadResources();
   res.send(
     await resources.findOne({
-      id: req.params.id,
+      id: req.params.id
     })
   );
 });
 
 // 3). Find Resources by City id
-router.get('/find/:city', async (req, res) => {
+router.get("/find/:city", async (req, res) => {
   const resources = await loadResources();
   res.send(
     await resources
       .find({
-        city: req.params.city,
+        city: req.params.city
       })
       .toArray()
   );
 });
 
 // 3.5). Find Resources by Contributor id
-router.get('/contributor/:id', async (req, res) => {
+router.get("/contributor/:id", async (req, res) => {
   const resources = await loadResources();
   res.send(
     await resources
       .find({
-        'createdBy.id': req.params.id,
+        "createdBy.id": req.params.id
       })
       .toArray()
   );
 });
 
 // 4).  Create New Resource - POST
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   let r = req.body;
   const resources = await loadResources();
   await resources.insertOne({
@@ -59,48 +59,49 @@ router.post('/', async (req, res) => {
     city: {
       name: r.city.name,
       state: r.city.state,
-      id: r.city.id,
+      id: r.city.id
     },
     tags: r.tags,
     createdBy: {
       name: r.createdBy.name,
-      id: r.createdBy.id,
+      id: r.createdBy.id
     },
+    likes: []
   });
   res.status(201).send(
     await resources.findOne({
-      id: r.id,
+      id: r.id
     })
   );
 });
 
 // 5). Delete Resource by id
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const resources = await loadResources();
-  await resources.deleteOne({id: req.params.id});
+  await resources.deleteOne({ id: req.params.id });
   res.status(200).send();
 });
 
 // 6). Search for Resource by tags
-router.get('/find-tag/:tag', async (req, res) => {
+router.get("/find-tag/:tag", async (req, res) => {
   const resources = await loadResources();
   res.send(
     await resources
       .find({
-        tags: req.params.tag,
+        tags: req.params.tag
       })
       .toArray()
   );
 });
 
 // 7). Search for Resource by tags & city
-router.get('/find-tag/:tag/:city', async (req, res) => {
+router.get("/find-tag/:tag/:city", async (req, res) => {
   const resources = await loadResources();
   res.send(
     await resources
       .find({
         tags: req.params.tag,
-        city: req.params.city,
+        city: req.params.city
       })
       .toArray()
   );

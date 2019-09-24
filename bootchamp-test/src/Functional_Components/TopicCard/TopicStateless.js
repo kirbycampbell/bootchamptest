@@ -12,11 +12,11 @@ const TopicStateless = ({ topic }) => {
     [dispatch]
   );
   return (
-    <div className="topics">
-      <div className="Topic-Container" key={topic.id}>
-        <div className="TopTitle">
+    <div className="card">
+      <div className="Card-Container" key={topic.id}>
+        <div className="CardTitle">
           {topic.name}
-          <div className="TopCreatedBy">
+          <div className="CardCreatedBy">
             {" "}
             <Link
               to={"/Contributor/" + topic.createdBy.id}
@@ -25,17 +25,17 @@ const TopicStateless = ({ topic }) => {
               {topic.createdBy.name}
             </Link>
           </div>
-          <div className="TopCreatedAt">
+          <div className="CardCreatedAt">
             {moment(topic.createdAt).format("MM/DD/YYYY")}
           </div>
         </div>
-        <div className="TopContent">
+        <div className="CardContent">
           {topic.content}
-          <div className="TopImg">
+          <div className="CardImg">
             <img src={topic.images} alt={topic.images} />
           </div>
         </div>
-        <div className="TopTags">
+        <div className="CardTags">
           {topic.tags.map(tag => {
             return (
               <div className="IndTag" key={tag.id}>
@@ -50,9 +50,9 @@ const TopicStateless = ({ topic }) => {
             );
           })}
         </div>
-        <div className="TopFooter">
-          <div className="TopLikes">Likes: {topic.likedBy.length}</div>
-          <div className="TopCity">
+        <div className="CardFooter">
+          <div className="CardLikes">Likes: {topic.likedBy.length}</div>
+          <div className="CardCity">
             {topic.cities.name} - {topic.cities.state}
           </div>
         </div>

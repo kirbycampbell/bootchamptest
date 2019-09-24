@@ -1,0 +1,105 @@
+.card {
+  width: 100%;
+  display: flex;
+  min-height: 100px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.Card-Container {
+  height: 25vh;
+  width: 50%;
+  border: 1px solid white;
+  margin: auto;
+  border-radius: 3px;
+  box-shadow: 3px 4px 9px 2px rgb(44, 53, 65);
+  position: relative;
+}
+.CardTitle {
+  font-size: 24px;
+  height: 16%;
+  padding-top: 2%;
+  position: relative;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(78, 78, 78);
+  text-align: center;
+  /* margin: 1.5% 0%; */
+  /* 18% height of top */
+}
+.CardCreatedAt {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  color: rgb(231, 154, 186);
+  left: 0;
+  margin-left: 10px;
+}
+
+.CardCreatedBy {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  color: rgb(154, 154, 231);
+  right: 0;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.CardCreatedBy:hover {
+  color: rgb(92, 92, 221);
+  transition: color 0.2s ease;
+}
+.CardContent {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.CardImg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -10;
+}
+.CardTags {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin: auto;
+
+  width: 80%;
+  height: 20%;
+}
+.IndTag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  color: rgb(76, 144, 245);
+  cursor: pointer;
+}
+.IndTag:hover {
+  color: rgb(34, 116, 240);
+}
+.CardFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 18%;
+  bottom: 0;
+  background: rgba(77, 77, 240, 0.192);
+}
+.CardCity {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+}
+.CardLikes {
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
+}

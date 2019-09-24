@@ -1,10 +1,11 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import "./ResourceCard.css";
 
 var moment = require("moment");
 
-const ResourceStateless = ({ topic }) => {
+const ResourceStateless = ({ resource }) => {
   //const tags = useSelector(state => state.tags);
   const dispatch = useDispatch();
   const addSelectedTags = useCallback(
@@ -14,26 +15,26 @@ const ResourceStateless = ({ topic }) => {
     [dispatch]
   );
   return (
-    <div className="topics">
-      <div className="Topic-Container" key={topic.id}>
-        <div className="TopTitle">
-          {topic.title}
-          <div className="TopCreatedBy">
+    <div className="card ">
+      <div className="Card-Container rs-crd" key={resource.id}>
+        <div className="CardTitle rs-title">
+          <div>{resource.title}</div>
+          <div className="CardCreatedBy">
             {" "}
             <Link
-              to={"/Contributor/" + topic.createdBy.id}
+              to={"/Contributor/" + resource.createdBy.id}
               className="custom-link"
             >
-              {topic.createdBy.name}
+              {resource.createdBy.name}
             </Link>
           </div>
-          <div className="TopCreatedAt">
-            {moment(topic.createdAt).format("MM/DD/YYYY")}
+          <div className="CardCreatedAt">
+            {moment(resource.createdAt).format("MM/DD/YYYY")}
           </div>
         </div>
-        <div className="TopContent">{topic.text}</div>
-        <div className="TopTags">
-          {topic.tags.map(tag => {
+        <div className="CardContent">{resource.text}</div>
+        <div className="CardTags">
+          {resource.tags.map(tag => {
             return (
               <div className="IndTag" key={tag.id}>
                 <Link
@@ -47,9 +48,9 @@ const ResourceStateless = ({ topic }) => {
             );
           })}
         </div>
-        <div className="TopFooter">
-          <div className="TopCity">
-            {topic.city.name} - {topic.city.state}
+        <div className="CardFooter">
+          <div className="CardCity">
+            {resource.city.name} - {resource.city.state}
           </div>
         </div>
       </div>

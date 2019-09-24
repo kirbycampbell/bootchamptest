@@ -12,13 +12,12 @@ const Resources = () => {
   const [link, setLink] = useState("");
   const [city, setCity] = useState([]);
   const [tags, setTags] = useState([]);
-  const [resourceList, setResourceList] = useState([]);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
     getResources().then(function(res) {
-      setResourceList(res.data);
+      console.table(res.data);
     });
   }, []);
 
@@ -46,7 +45,7 @@ const Resources = () => {
       .then(function(res) {
         setMsg("Created New Resource");
         getResources().then(function(res) {
-          setResourceList(res.data);
+          console.table(res.data);
         });
         resetForm();
       })
@@ -92,26 +91,6 @@ const Resources = () => {
       {/* :::::::::  Message  :::::::::: */}
       {error && <div className="resourceError">{error}</div>}
       {msg && <div className="resourcemsg">{msg}</div>}
-      {/* List of all Resources that Exist in DB - TEMP FEATURE*/}
-      <div className="resourceList">
-        List of All Resources (Temporary Feature):
-        <br />
-        <br />
-        {resourceList.map(r => {
-          return (
-            <div className="resource-render" key={r.id}>
-              {r.title} <br /> Text: {r.text} <br />
-              Link: {r.link} <br /> City: {r.city.name}, {r.city.state} <br />
-              Tags:
-              {r.tags.map(tag => (
-                <span key={tag.id}>{tag.label} </span>
-              ))}
-              <br />
-              Created By: {r.createdBy.name} - - {r.createdBy.id}
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 };
