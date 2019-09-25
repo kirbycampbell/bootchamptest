@@ -125,8 +125,8 @@ const Profile = () => {
             <h4>View your Profile how Other's see it!</h4>
           </Link>
           {/* :::::::::: Resource AREA ::::::::::: */}
-          <div className="Topic-List">
-            <h2>Resources</h2>
+          <h2>Resources</h2>
+          <div className="Resource-List">
             {resourceList.map(resource => {
               return (
                 <ResourceStateless resource={resource} key={resource.id} />

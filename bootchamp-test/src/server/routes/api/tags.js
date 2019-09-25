@@ -47,7 +47,8 @@ router.post("/", async (req, res) => {
   const tags = await loadTags();
   await tags.insertOne({
     id: req.body.id,
-    label: req.body.label
+    label: req.body.label,
+    used: req.body.used
   });
   res.status(201).send(
     await tags.findOne({

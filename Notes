@@ -1,0 +1,19 @@
+
+Bootchamp Notes:::
+
+
+-Every topic or resource that uses that tag, add 1 to it. (make a function for this in front api)
+-Once the above is done, add a list of tags ordered by use frequency.
+
+-Regex the content of topic.contents and resource.text for links.  When these links are found, turn them into links.
+
+- Add likes to topics and resources. Button, patch, query, etc..
+-When liking a topic or resource, add that topic to contributor's liked topics. Add user's id to topicLikes.
+-Return Topics in order of likes.
+-Return Topics created in past week, ordered by likes.
+
+-Remove Contributor's Topics data portion. 
+
+-Layout General sections on main Home page. Borders, and headings. Tag choice being main option. Label as "Choose Topic", automatic sort by recent and likes. Side bar containing City Choices. Block ability to like/create unless logged in. Add plus button to each section, plus button should bring up creation modal.
+
+-Add examples to topics. Examples will be code snippets. Or call them projects.

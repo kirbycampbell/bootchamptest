@@ -14,43 +14,42 @@ const ResourceStateless = ({ resource }) => {
     },
     [dispatch]
   );
+
   return (
-    <div className="card ">
-      <div className="Card-Container rs-crd" key={resource.id}>
-        <div className="CardTitle rs-title">
+    <div className="rsce">
+      <div className="rsce-Container " key={resource.id}>
+        <div className="rsce-Title ">
           <div>{resource.title}</div>
-          <div className="CardCreatedBy">
-            {" "}
+          <div className="rsce-CreatedBy">
             <Link
               to={"/Contributor/" + resource.createdBy.id}
-              className="custom-link"
+              className="link-creator"
             >
               {resource.createdBy.name}
             </Link>
           </div>
-          <div className="CardCreatedAt">
-            {moment(resource.createdAt).format("MM/DD/YYYY")}
-          </div>
         </div>
-        <div className="CardContent">{resource.text}</div>
-        <div className="CardTags">
-          {resource.tags.map(tag => {
-            return (
-              <div className="IndTag" key={tag.id}>
+        <div className="rsce-Content">{resource.text}</div>
+
+        <div className="rsce-Footer">
+          <div className="rsce-Tags">
+            {resource.tags.map(tag => {
+              return (
                 <Link
+                  key={tag.id}
                   to={"/TagPage/"}
-                  className="custom-link"
+                  className="link-tag"
                   onClick={() => addSelectedTags(tag)}
                 >
-                  {tag.label}
+                  #{tag.label}
                 </Link>
-              </div>
-            );
-          })}
-        </div>
-        <div className="CardFooter">
-          <div className="CardCity">
-            {resource.city.name} - {resource.city.state}
+              );
+            })}
+          </div>
+          <div className="rsce-City">
+            <div className="rsce-citystate">
+              {resource.city.name} , {resource.city.state}
+            </div>
           </div>
         </div>
       </div>

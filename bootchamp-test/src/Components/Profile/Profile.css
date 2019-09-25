@@ -56,7 +56,7 @@ h4 {
   font-weight: bold;
 }
 
-.upload-btn-wrapper input[type='file'] {
+.upload-btn-wrapper input[type="file"] {
   font-size: 100px;
   position: absolute;
   left: 0;
@@ -70,6 +70,16 @@ h4 {
   text-align: center;
   min-height: 200px;
   width: 100%;
+}
+
+.Resource-List {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  min-height: 200px;
+  width: 98%;
+  flex-wrap: wrap;
+  padding: 1%;
 }
 
 .profile-city {

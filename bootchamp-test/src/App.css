@@ -24,3 +24,10 @@ body {
 .App-link {
   color: #61dafb;
 }
+.custom-link {
+  text-decoration: none;
+  color: rgb(4, 112, 235);
+  font-weight: bold;
+  letter-spacing: 2.4px;
+  padding: 1% 2%;
+}

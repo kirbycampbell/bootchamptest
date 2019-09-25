@@ -17,7 +17,6 @@ const TopicStateless = ({ topic }) => {
         <div className="CardTitle">
           {topic.name}
           <div className="CardCreatedBy">
-            {" "}
             <Link
               to={"/Contributor/" + topic.createdBy.id}
               className="custom-link"
