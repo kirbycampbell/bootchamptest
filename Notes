@@ -17,3 +17,5 @@ Bootchamp Notes:::
 -Layout General sections on main Home page. Borders, and headings. Tag choice being main option. Label as "Choose Topic", automatic sort by recent and likes. Side bar containing City Choices. Block ability to like/create unless logged in. Add plus button to each section, plus button should bring up creation modal.
 
 -Add examples to topics. Examples will be code snippets. Or call them projects.
+
+Add bulma -    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">

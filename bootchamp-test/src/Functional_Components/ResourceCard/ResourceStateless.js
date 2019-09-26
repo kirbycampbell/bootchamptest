@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "./ResourceCard.css";
 
-var moment = require("moment");
-
 const ResourceStateless = ({ resource }) => {
   //const tags = useSelector(state => state.tags);
   const dispatch = useDispatch();
