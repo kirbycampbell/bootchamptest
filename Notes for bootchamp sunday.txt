@@ -1,0 +1,17 @@
+
+Start laying out the main page which lays out topics, tags, resources based on city choices. 
+
+-- Make little assignments for merideth!
+
+Respond to Jesse's Notesand extra songs
+
+-Make create topic and resource become a modal popup on the main page.
+
+--Add a search bar, and add checkboxes for what to search by!
+
+-- Add a count to the tags - number of times its been used.
+
+--Add likes to resources and topics - add like button!
+
+
+https://pickaface.net/gallery/avatar/20151001_155815_3152_anon.png
