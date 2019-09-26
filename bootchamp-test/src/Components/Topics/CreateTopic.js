@@ -108,7 +108,7 @@ const CreateTopic = () => {
         </div>
 
         <input
-          className="submit-btn"
+          className="button is-primary is-large"
           placeholder="Post Topic"
           onClick={createTopic}
           type="submit"

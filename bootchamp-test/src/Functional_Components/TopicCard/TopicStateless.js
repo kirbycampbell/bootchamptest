@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import "./TopicCard.css";
 var moment = require("moment");
 
 const TopicStateless = ({ topic }) => {
@@ -12,9 +13,9 @@ const TopicStateless = ({ topic }) => {
     [dispatch]
   );
   return (
-    <div className="card">
-      <div className="Card-Container" key={topic.id}>
-        <div className="CardTitle">
+    <div className="container">
+      <div className="card">
+        <div className="card-header-title">
           {topic.name}
           <div className="CardCreatedBy">
             <Link
@@ -28,11 +29,12 @@ const TopicStateless = ({ topic }) => {
             {moment(topic.createdAt).format("MM/DD/YYYY")}
           </div>
         </div>
-        <div className="CardContent">
+        <div className="card-content ">
           {topic.content}
-          <div className="CardImg">
-            <img src={topic.images} alt={topic.images} />
-          </div>
+
+          <figure className="card-image is-48x48 max-pic">
+            <img className="max-pic" src={topic.images} alt={topic.images} />
+          </figure>
         </div>
         <div className="CardTags">
           {topic.tags.map(tag => {
@@ -49,9 +51,9 @@ const TopicStateless = ({ topic }) => {
             );
           })}
         </div>
-        <div className="CardFooter">
-          <div className="CardLikes">Likes: {topic.likedBy.length}</div>
-          <div className="CardCity">
+        <div className="card-footer">
+          <div className="card-footer-item">Likes: {topic.likedBy.length}</div>
+          <div className="card-footer-item">
             {topic.cities.name} - {topic.cities.state}
           </div>
         </div>
