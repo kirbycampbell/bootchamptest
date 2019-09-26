@@ -1,6 +1,16 @@
 
 Bootchamp Notes:::
 
+Start laying out the main page which lays out topics, tags, resources based on city choices. 
+
+-Make create topic and resource become a modal popup on the main page.
+
+--Add a search bar, and add checkboxes for what to search by!
+
+-- Add a count to the tags - number of times its been used.
+
+--Add likes to resources and topics - add like button!
+
 
 -Every topic or resource that uses that tag, add 1 to it. (make a function for this in front api)
 -Once the above is done, add a list of tags ordered by use frequency.
@@ -19,3 +29,13 @@ Bootchamp Notes:::
 -Add examples to topics. Examples will be code snippets. Or call them projects.
 
 Add bulma -    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+
+resources:
+
+Move link section below and as a button switch on and off.
+
+regex for website links: 
+^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$
+
+kribbles@gmail.com
+test1test1

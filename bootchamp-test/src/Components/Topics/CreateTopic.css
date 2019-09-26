@@ -34,17 +34,6 @@ h2 {
   margin: auto;
 }
 
-/* .submit-btn {
-  width: 60%;
-  height: 10%;
-  min-height: 34px;
-  background-color: rgb(39, 105, 226);
-  color: white;
-  font-size: 22px;
-  margin: auto;
-  cursor: pointer;
-} */
-
 .CheckSection {
   display: flex;
   flex-direction: row;
