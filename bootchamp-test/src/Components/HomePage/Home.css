@@ -3,3 +3,6 @@
   width: 100%;
   background: blue;
 }
+.border-card {
+  border: 1px solid white;
+}

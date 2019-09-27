@@ -1,21 +1,4 @@
-.App {
-  minheight: 100vh;
-  width: 100vw;
-  margin: auto;
-  max-width: 95vw;
-}
-body {
-  max-width: 97vw;
-  margin: auto;
-}
-#root {
-  max-width: 97vw;
-  margin: auto;
-}
-.Main-Content {
-  margin-top: 40px;
-}
-@media all and (max-width: 700px) {
+/* @media all and (max-width: 700px) {
   .Main-Content {
     margin-top: 20px;
   }
@@ -23,11 +6,11 @@ body {
 
 .App-link {
   color: #61dafb;
-}
-.custom-link {
+} */
+/* .custom-link {
   text-decoration: none;
   color: rgb(4, 112, 235);
   font-weight: bold;
   letter-spacing: 2.4px;
   padding: 1% 2%;
-}
+} */
