@@ -1,8 +1,8 @@
-import React from "react";
-import "./TopNav.css";
-import { Link } from "react-router-dom";
-import logo from "./BootchampLogo.png";
-import { useSelector } from "react-redux";
+import React from 'react';
+import './TopNav.css';
+import {Link} from 'react-router-dom';
+import logo from './BootchampLogo.png';
+import {useSelector} from 'react-redux';
 
 const TopNav = () => {
   const auth = useSelector(state => state.UserStore.auth);
@@ -10,7 +10,7 @@ const TopNav = () => {
     return (
       <div className="Inner-TopNav">
         <div className="Nav-Grps-Outer">
-          <Link to="/" className="custom-link Nav-Grps">
+          <Link to="/Home" className="custom-link Nav-Grps">
             BootChamp
           </Link>
           <Link to="/Topics" className="custom-link Nav-Grps">
@@ -20,11 +20,11 @@ const TopNav = () => {
             Resources
           </Link>
           <Link
-            to={auth ? "/Profile" : "/Login"}
+            to={auth ? '/Profile' : '/Login'}
             className="custom-link Nav-Grps"
           >
-            {auth && "Profile"}
-            {!auth && "Login"}
+            {auth && 'Profile'}
+            {!auth && 'Login'}
           </Link>
         </div>
       </div>
