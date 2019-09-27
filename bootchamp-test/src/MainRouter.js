@@ -34,6 +34,7 @@ const MainRouter = () => {
             render={props => <Contributor {...props} />}
           />
         </div> */}
+        <Route exact path="/Topics" render={() => <Topics />} />
       </body>
     </Router>
   );

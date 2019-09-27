@@ -69,40 +69,52 @@ const Tags = ({ tags, setTags }) => {
   };
 
   return (
-    <div className="Outer-TagComp">
-      <div className="input-card">
-        {/* ::::::::::: Chosen Tags :::::::::::::: */}
-        {tags.length > 0 &&
-          tags.map(tag => {
-            return (
-              <span key={tag.id} className="chosen-tag">
-                {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
+    <div className="">
+      <div className="field ">
+        {/* <div className="input-card"> */}
+        <div className="tags">
+          {/* ::::::::::: Chosen Tags :::::::::::::: */}
+          {tags.length > 0 &&
+            tags.map(tag => {
+              return (
+                <span key={tag.id} className="tag  is-link">
+                  {tag.label.charAt(0).toUpperCase() + tag.label.slice(1)}
 
-                <div className="x-out" onClick={() => removeTag(tag)}>
-                  <i className="far fa-times-circle iconb" />
-                </div>
-              </span>
-            );
-          })}
-        {/* ::::::::::: Input Section :::::::::::::: */}
-        <input
-          className="input-form"
-          id="tagInput"
-          type="text"
-          name="tag"
-          placeholder="Enter Tags..."
-          onChange={handleTyping}
-          onKeyPress={handleKeyPress}
-          value={typeTag}
-          autoComplete="off"
-        />
-        {/* ::::::::::: Create Button :::::::::::::: */}
-        {typeTag.length > 2 && (
-          <i onClick={createTag} className="fas fa-check create"></i>
-        )}
+                  <button
+                    class="delete"
+                    onClick={() => removeTag(tag)}
+                  ></button>
+                </span>
+              );
+            })}{" "}
+        </div>
+        <div className="control has-icons-right">
+          {/* ::::::::::: Input Section :::::::::::::: */}
+          <input
+            className="input has-text-white"
+            id="tagInput"
+            type="text is-primary"
+            name="tag"
+            placeholder="Enter Tags..."
+            onChange={handleTyping}
+            onKeyPress={handleKeyPress}
+            value={typeTag}
+            autoComplete="off"
+          />
+          {/* ::::::::::: Create Check Button :::::::::::::: */}
+          {typeTag.length > 2 && (
+            <span class="icon is-small is-right  ">
+              <i
+                class="fas fa-check has-text-success pointer"
+                onClick={createTag}
+              ></i>
+            </span>
+          )}
+        </div>
       </div>
       {/* ::::::::::: List of Search Matches :::::::::::::: */}
-      <div className="Tag-Results">
+
+      <div className="field">
         {queryMatch.length > 0 && typeTag.length > 2 && (
           <div className="Tag-search-results">
             {queryMatch.map(tag => {

@@ -3,9 +3,9 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <section className="hero  is-fullheight is-desktop ">
+    <section className="hero   is-desktop ">
       {/* ::::::::::::::: NAVBAR Section ::::::::::::::: */}
-      <div className="hero-head  ">
+      <div className="hero-head ">
         <nav className="navbar is-fixed-top has-background-black-ter ">
           <div className="container ">
             <div className="navbar-brand ">
@@ -27,14 +27,15 @@ const Home = () => {
             <div id="navbarMenuHeroA" className="navbar-menu">
               <div className="navbar-end">
                 <a className="navbar-item is-active">Home</a>
-                <a className="navbar-item">Examples</a>
-                <a className="navbar-item">Documentation</a>
+                <a className="navbar-item">Topics</a>
+                <a className="navbar-item">Resources</a>
+                <a className="navbar-item">Profile</a>
                 <span className="navbar-item">
                   <a className="button is-primary is-inverted">
                     <span className="icon">
                       <i className="fab fa-github"></i>
                     </span>
-                    <span>Download</span>
+                    <span>Source Code</span>
                   </a>
                 </span>
               </div>
@@ -42,43 +43,64 @@ const Home = () => {
           </div>
         </nav>
       </div>
-      {/* ::::::::::::::: LEFT MIDDLE SECTION ::::::::::::::: */}
-      <div class="tile is-ancestor">
-        <div class="tile is-parent ">
-          <article class="tile is-child notification is-info ">
-            <p class="title ">Middle tile</p>
-            <p class="subtitle">With an image</p>
-            <figure class="image is-4by3">
-              <img src="https://bulma.io/images/placeholders/640x480.png" />
-            </figure>
+      {/* ::::::::::::::::::::::::: OVERALL MIDDLE SECTION ::::::::::::::::::::::::: */}
+      <div className="tile is-ancestor ">
+        {/* ::::::::::::::: LEFT MIDDLE SECTION ::::::::::::::: */}
+        <div className="tile is-parent is-fixed-top">
+          <article className="tile is-child notification is-info ">
+            <div className="container sidebar ">
+              <p className="title ">Filter</p>
+              <div className="tags">
+                <span className="tag is-light">Topic</span>
+                <span className="tag is-light">City</span>
+                <span className="tag is-light">Resource</span>
+              </div>
+            </div>
           </article>
         </div>
 
         {/* :::::::::::: RIGHT MIDDLE SECTION :::::::::::: */}
-        <div class="tile is-vertical is-8">
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification is-dark is-bordered border-card">
-                <p class="title">...tiles</p>
-                <p class="container">
-                  <nav class="level is-mobile is-fluid">
-                    <div class="level-item  ">
-                      <div>
-                        <p class="heading">Tweets</p>
-                        <p class="title">3,456</p>
+        <div className="tile is-vertical is-8">
+          {/* :::::::::::: TOPIC CARD SECTION :::::::::::: */}
+          <div className="is-ancestor ">
+            <div className="tile is-parent is-vertical ">
+              <article className=" is-child notification is-dark is-bordered border-card ">
+                <div className="title has-text-centered">Topic</div>
+                <p className="tile is-ancestor">
+                  <nav className="tile is-parent ">
+                    <div className="is-child ">
+                      incididunt ut labore et dolore magna aliqua. Libero
+                      volutpat sed cras ornare arcu dui. Sit amet justo donec
+                      enim diam vulputate ut. Convallis a cras semper auctor
+                      neque vitae tempus. Elit at imperdi t sed cras ornare arcu
+                      dui. Sit amet justo donec enim diam vulputate ut.
+                      Convallis a cras semper auctor neque vitae tempus. Elit at
+                      imperdi
+                    </div>
+                  </nav>
+                </p>
+                <p className="container">
+                  <nav className="level is-mobile is-fluid">
+                    <div className="level-item  ">
+                      <div className="tags">
+                        <span className="tag is-light">React</span>
+                        <span className="tag is-light">Vue</span>
                       </div>
                     </div>
-
-                    <div class="level-item has-text-centered">
+                    <div className="level-item has-text-centered">
                       <div>
-                        <p class="heading">Followers</p>
-                        <p class="title">456K</p>
+                        <p className="heading">Likes</p>
+                        <p className="title">789</p>
                       </div>
                     </div>
-                    <div class="level-item has-text-centered">
+                    <div className="level-item has-text-centered">
                       <div>
-                        <p class="heading">Likes</p>
-                        <p class="title">789</p>
+                        <p className="heading">King Worthen</p>
+                      </div>
+                    </div>
+                    <div className="level-item has-text-centered">
+                      <div>
+                        <p className="heading">Portland, Oregon</p>
                       </div>
                     </div>
                   </nav>
@@ -86,10 +108,11 @@ const Home = () => {
               </article>
             </div>
           </div>
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-danger">
-              <p class="title">Wide tile</p>
-              <p class="subtitle">
+          {/* :::::::::::: BIG RED SECTION :::::::::::: */}
+          <div className="tile is-parent">
+            <article className="tile is-child notification is-danger">
+              <p className="title">Wide tile</p>
+              <p className="subtitle">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Libero volutpat sed cras ornare arcu dui. Sit amet justo donec
@@ -173,7 +196,7 @@ const Home = () => {
                 pretium. Maecenas accumsan lacus vel facilisis volutpat est
                 velit. Id cursus metus aliquam eleifend mi in nulla posuere.
               </p>
-              <div class="content"></div>
+              <div className="content"></div>
             </article>
           </div>
         </div>

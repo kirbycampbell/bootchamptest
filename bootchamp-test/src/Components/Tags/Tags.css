@@ -41,18 +41,21 @@
 
 /*: Form Buttons :*/
 .iconb {
-  font-size: 15px;
-}
-.x-out {
   font-size: 12px;
-  font-weight: bold;
+}
+/* .x-out {
   color: rgb(119, 0, 0);
-  margin: 0px 5px;
+  margin: 4px 0px 5px 4px;
   margin-bottom: 5px;
   cursor: pointer;
 }
 .x-out:hover {
   color: red;
+} */
+
+.pointer {
+  cursor: pointer;
+  z-index: 10;
 }
 
 /*:::::::::::::::::::::::::::*/
@@ -63,6 +66,7 @@
 }
 .Tag-search-results {
   display: flex;
+  /* position: absolute; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -93,8 +97,8 @@
   align-items: center;
   color: green;
   margin-left: 10px;
-  position: absolute;
-  right: 0;
+  /* position: absolute; */
+
   margin-right: 20px;
 }
 .create:hover {

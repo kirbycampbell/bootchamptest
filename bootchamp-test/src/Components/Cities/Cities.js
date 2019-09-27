@@ -113,7 +113,7 @@ const Cities = ({ city, setCity, setCityCheck }) => {
   };
 
   return (
-    <div className="Outer-City">
+    <div className="">
       {/* :::::::::::: City Input Form ::::::::::::: */}
       {!selCity && (
         <form className="city-form">

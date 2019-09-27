@@ -7,6 +7,17 @@
   border-radius: 4px;
   margin-bottom: 20px;
 }
+.input {
+  background-color: #363636;
+}
+.input::placeholder {
+  background-color: #363636;
+  color: white;
+  opacity: 0.4;
+}
+/* input {
+  background-color: #363636;
+} */
 
 h2 {
   text-decoration: underline;

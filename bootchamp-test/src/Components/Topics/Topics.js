@@ -14,9 +14,9 @@ const Topics = () => {
     <React.Fragment>
       <CreateTopic />
 
-      {topics.map(topic => (
+      {/* {topics.map(topic => (
         <TopicStateless topic={topic} key={topic.id} />
-      ))}
+      ))} */}
     </React.Fragment>
   );
 };
