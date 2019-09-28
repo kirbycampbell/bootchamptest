@@ -33,3 +33,6 @@
 .bg_mid {
   background-color: rgba(24, 27, 36, 0.425);
 }
+.lf-space {
+  margin-left: 5px;
+}
