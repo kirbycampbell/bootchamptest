@@ -17,7 +17,7 @@ const MainRouter = () => {
   return (
     <Router>
       <body className="hero is-dark column has-navbar-fixed-top">
-        <Route exact path="/Home" render={() => <Home />} />
+        <Route exact path="/" render={() => <Home />} />
         <Route exact path="/Resources" render={() => <Resources />} />
 
         {/* 

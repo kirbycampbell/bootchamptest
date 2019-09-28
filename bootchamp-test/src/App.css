@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=B612+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web&display=swap");
 .input {
   background-color: #363636;
 }
@@ -11,4 +13,23 @@
   color: rgb(4, 112, 235);
   font-weight: bold;
   padding: 1% 2%;
+}
+.border-right {
+  border-right: 1px solid rgb(44, 44, 44);
+}
+.border-left {
+  border-left: 1px solid rgb(44, 44, 44);
+}
+.border-top {
+  border-top: 1px solid rgb(44, 44, 44);
+}
+.nav-font {
+  font-family: "Titillium Web", sans-serif;
+  font-size: 22px;
+}
+.back_gr_lighter {
+  background-color: rgba(55, 58, 70, 0.425);
+}
+.bg_mid {
+  background-color: rgba(24, 27, 36, 0.425);
 }

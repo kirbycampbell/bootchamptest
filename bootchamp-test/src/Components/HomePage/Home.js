@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <section className="hero is-desktop ">
       {/* ::::::::::::::: NAVBAR Section ::::::::::::::: */}
-      <div className="hero-head ">
+      <div className="hero-head is-fullwidth">
         <nav className="navbar is-fixed-top has-background-black-ter ">
           <div className="container ">
             <div className="navbar-brand ">
@@ -30,30 +30,64 @@ const Home = () => {
                 <span></span>
               </span>
             </div>
-            <div id="navbarMenuHeroA" className="navbar-menu">
-              <div className="navbar-end">
+            <div id="navbarMenuHeroA" className="navbar-menu nav-font">
+              <div className="navbar-start">
                 <a className="navbar-item is-active">Home</a>
-                <a className="navbar-item">Topics</a>
+                <a className="navbar-item">
+                  <div>Topics</div>
+                </a>{" "}
+                <div className="item">
+                  <i class="fas fa-plus-square"></i>{" "}
+                </div>
                 <a className="navbar-item">Resources</a>
+              </div>
+              <div className="navbar-end">
                 <a className="navbar-item">Profile</a>
-                <span className="navbar-item">
-                  <a className="button is-primary is-inverted">
-                    <span className="icon">
-                      <i className="fab fa-github"></i>
-                    </span>
-                    <span>Source Code</span>
-                  </a>
-                </span>
               </div>
             </div>
           </div>
         </nav>
       </div>
       {/* ::::::::::::::::::::::::: OVERALL MIDDLE SECTION ::::::::::::::::::::::::: */}
-      <div className="tile is-ancestor ">
+      <div className="tile is-ancestor columns">
         {/* ::::::::::::::: LEFT MIDDLE SECTION ::::::::::::::: */}
-        <div className="tile is-parent is-fixed-top">
-          <article className="tile is-child notification is-info ">
+        {/* <div className="tile is-parent column border-right">
+          <div className="tile is-child content is-danger">Left</div>
+        </div> */}
+        <div className="tile column is-parent is-fixed-top  border-right bg_mid">
+          <article className="tile is-child  is-info  ">
+            <div className="container sidebar ">
+              <p className="heading ">Sort By</p>
+              <p className="title ">
+                <i className="fas fa-fire"></i>
+              </p>
+              <p className="title ">
+                <i className="fas fa-glass-cheers"></i>
+              </p>
+              <p className="title ">
+                <i className="fas fa-sort-numeric-down"></i>
+              </p>
+              <p className="title ">
+                <i className="fas fa-thumbs-up"></i>
+              </p>
+            </div>
+          </article>
+        </div>
+
+        {/* :::::::::::: RIGHT MIDDLE SECTION :::::::::::: */}
+        <div className="tile is-vertical is-8 column is-three-quarters">
+          <div className="tile is-parent">
+            <div className="tile is-child  is-danger">
+              <div className="content">
+                {topics.map(topic => (
+                  <TopicStateless topic={topic} key={topic.id} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="tile column is-parent is-fixed-top is-one-quarter border-left back_gr_lighter">
+          <article className="tile is-child  is-info  ">
             <div className="container sidebar ">
               <p className="title ">Filter</p>
               <div className="tags">
@@ -64,42 +98,36 @@ const Home = () => {
             </div>
           </article>
         </div>
-
-        {/* :::::::::::: RIGHT MIDDLE SECTION :::::::::::: */}
-        <div className="tile is-vertical is-8">
-          <div className="tile is-parent">
-            <article className="tile is-child notification is-danger">
-              <div className="content">
-                {topics.map(topic => (
-                  <TopicStateless topic={topic} key={topic.id} />
-                ))}
-              </div>
-            </article>
-          </div>
-        </div>
       </div>
       {/* ::::::::::::::: FOOTER SECTION ::::::::::::::: */}
-      <div className="hero-foot">
+      <div className="hero-foot border-top">
         <nav className="tabs">
           <div className="container">
             <ul>
               <li className="is-active">
-                <a>Overview</a>
+                <a>About BootChamp</a>
               </li>
               <li>
-                <a>Modifiers</a>
+                <a>Creators</a>
               </li>
               <li>
-                <a>Grid</a>
+                <a>Documentation</a>
               </li>
               <li>
-                <a>Elements</a>
+                <a>Endpoints</a>
               </li>
               <li>
-                <a>Components</a>
+                <a>Jobs</a>
               </li>
               <li>
-                <a>Layout</a>
+                <span className="navbar-item">
+                  <a className="button is-primary ">
+                    <span className="icon">
+                      <i className="fab fa-github"></i>
+                    </span>
+                    <span>Source Code</span>
+                  </a>
+                </span>
               </li>
             </ul>
           </div>
