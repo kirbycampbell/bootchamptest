@@ -6,3 +6,9 @@
   color: white;
   opacity: 0.4;
 }
+.custom-link {
+  text-decoration: none;
+  color: rgb(4, 112, 235);
+  font-weight: bold;
+  padding: 1% 2%;
+}

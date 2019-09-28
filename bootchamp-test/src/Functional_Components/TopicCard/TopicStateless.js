@@ -14,7 +14,7 @@ const TopicStateless = ({ topic }) => {
   );
   return (
     <div className="is-ancestor ">
-      <div className="tile is-parent is-vertical ">
+      <div className="tile is-parent is-vertical is-fullwidth">
         <article className=" is-child notification is-dark is-bordered border-card ">
           <div className="CardCreatedAt">
             {moment(topic.createdAt).fromNow()}
@@ -22,13 +22,8 @@ const TopicStateless = ({ topic }) => {
           <div className="title has-text-centered"> {topic.name}</div>
           <p className="tile is-ancestor">
             <nav className="tile is-parent ">
-              <div className="is-child ">
-                incididunt ut labore et dolore magna aliqua. Libero volutpat sed
-                cras ornare arcu dui. Sit amet justo donec enim diam vulputate
-                ut. Convallis a cras semper auctor neque vitae tempus. Elit at
-                imperdi t sed cras ornare arcu dui. Sit amet justo donec enim
-                diam vulputate ut. Convallis a cras semper auctor neque vitae
-                tempus. Elit at imperdi
+              <div className=" tile is-child ">
+                {topic.content}
                 {topic.images && (
                   <figure className="card-image is-48x48 max-pic">
                     <img
@@ -45,8 +40,21 @@ const TopicStateless = ({ topic }) => {
             <nav className="level is-mobile is-fluid">
               <div className="level-item  ">
                 <div className="tags">
-                  <span className="tag is-light">React</span>
-                  <span className="tag is-light">Vue</span>
+                  {/* <span className="tag is-light">React</span>
+                  <span className="tag is-light">Vue</span> */}
+                  {topic.tags.map(tag => {
+                    return (
+                      <div className="tag" key={tag.id}>
+                        <Link
+                          to={"/TagPage/"}
+                          className="custom-link"
+                          onClick={() => addSelectedTags(tag)}
+                        >
+                          {tag.label}
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="level-item has-text-centered">

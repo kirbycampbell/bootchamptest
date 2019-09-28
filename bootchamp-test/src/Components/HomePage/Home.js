@@ -9,7 +9,7 @@ const Home = () => {
     getAllTopics().then(res => setTopics(res));
   }, []);
   return (
-    <section className="hero   is-desktop ">
+    <section className="hero is-desktop ">
       {/* ::::::::::::::: NAVBAR Section ::::::::::::::: */}
       <div className="hero-head ">
         <nav className="navbar is-fixed-top has-background-black-ter ">
