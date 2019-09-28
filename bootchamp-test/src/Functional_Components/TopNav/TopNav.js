@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TopNav.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import TopicCreateModal from "../Modals/TopicCreateModal";
+import ResCreateModal from "../Modals/ResCreateModal";
 
 const TopNav = () => {
   const auth = useSelector(state => state.UserStore.auth);
+  const [topicModal, setTopicModal] = useState(false);
+  const [resModal, setResModal] = useState(false);
+  let modalProps = { topicModal, resModal, setTopicModal, setResModal };
 
   const NavBar = () => {
     return (
@@ -32,14 +37,21 @@ const TopNav = () => {
                 <Link to="/" className="navbar-item is-active">
                   Home
                 </Link>
+                <TopicCreateModal {...modalProps} />
+                <ResCreateModal {...modalProps} />
+                <div
+                  onClick={() => setTopicModal(!topicModal)}
+                  className="navbar-item is-active pointer"
+                >
+                  Topics <i className="fas fa-plus-square lf-space"></i>
+                </div>
 
-                <Link to="/Topics" className="navbar-item is-active">
-                  Topics <i class="fas fa-plus-square lf-space"></i>
-                </Link>
-
-                <Link to="/Resources" className="navbar-item is-active">
-                  Resources <i class="fas fa-plus-square lf-space"></i>
-                </Link>
+                <div
+                  onClick={() => setResModal(!resModal)}
+                  className="navbar-item is-active pointer"
+                >
+                  Resources <i className="fas fa-plus-square lf-space"></i>
+                </div>
               </div>
               <div className="navbar-end">
                 <Link to={auth ? "/Profile" : "/Login"} className="navbar-item">

@@ -20,7 +20,7 @@ const TopicStateless = ({ topic }) => {
             {moment(topic.createdAt).fromNow()}
           </div>
           <div className="title has-text-centered"> {topic.name}</div>
-          <p className="tile is-ancestor">
+          <div className="tile is-ancestor">
             <nav className="tile is-parent ">
               <div className=" tile is-child ">
                 {topic.content}
@@ -35,8 +35,8 @@ const TopicStateless = ({ topic }) => {
                 )}
               </div>
             </nav>
-          </p>
-          <p className="container">
+          </div>
+          <div className="container">
             <nav className="level is-mobile is-fluid">
               <div className="level-item  ">
                 <div className="tags">
@@ -59,8 +59,8 @@ const TopicStateless = ({ topic }) => {
               </div>
               <div className="level-item has-text-centered">
                 <div>
-                  <p className="heading">Likes</p>
-                  <p className="title">{topic.likedBy.length}</p>
+                  <div className="heading">Likes</div>
+                  <div className="title">{topic.likedBy.length}</div>
                 </div>
               </div>
               <div className="level-item has-text-centered">
@@ -75,13 +75,13 @@ const TopicStateless = ({ topic }) => {
               </div>
               <div className="level-item has-text-centered">
                 <div>
-                  <p className="heading">
+                  <div className="heading">
                     {topic.cities.name} , {topic.cities.state}
-                  </p>
+                  </div>
                 </div>
               </div>
             </nav>
-          </p>
+          </div>
         </article>
       </div>
     </div>

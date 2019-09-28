@@ -109,7 +109,7 @@ const Resources = () => {
                   className="button is-success has-text-dark is-fullwidth"
                   onClick={handleResourceForm}
                 >
-                  Post Resource
+                  Post
                 </button>
               </div>
             </div>

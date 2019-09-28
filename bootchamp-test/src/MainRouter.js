@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AuthUser from "./Components/AuthUser/AuthUser";
@@ -15,16 +15,19 @@ import Footer from "./Functional_Components/Footer/Footer";
 
 const MainRouter = () => {
   const auth = useSelector(state => state.UserStore.auth);
+
   return (
     <Router>
       <body className="hero is-dark column has-navbar-fixed-top">
         <section className="hero is-desktop ">
           <TopNav />
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/LogIn" render={() => <AuthUser />} />
+
           {auth && <Route exact path="/Profile" render={() => <Profile />} />}
-          <Route exact path="/Resources" render={() => <Resources />} />
+          <Route exact path="/LogIn" render={() => <AuthUser />} />
+
+          <Route exact path="/" render={() => <Home />} />
           <Route exact path="/Topics" render={() => <Topics />} />
+          <Route exact path="/Resources" render={() => <Resources />} />
 
           <Route exact path="/About" render={() => <Index />} />
 
