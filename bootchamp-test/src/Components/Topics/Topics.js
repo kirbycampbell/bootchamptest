@@ -13,10 +13,6 @@ const Topics = () => {
   return (
     <React.Fragment>
       <CreateTopic />
-
-      {/* {topics.map(topic => (
-        <TopicStateless topic={topic} key={topic.id} />
-      ))} */}
     </React.Fragment>
   );
 };
