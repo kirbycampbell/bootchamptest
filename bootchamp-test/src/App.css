@@ -39,3 +39,25 @@
 .pointer {
   cursor: pointer;
 }
+
+.resourceError {
+  width: 60%;
+  margin: auto;
+  color: red;
+  font-size: 16px;
+  text-align: center;
+}
+.resourcemsg {
+  width: 60%;
+  margin: auto;
+  color: green;
+  font-size: 16px;
+  text-align: center;
+}
+
+.resource-render {
+  margin-bottom: 10px;
+}
+.max-pic {
+  max-height: 100px;
+}

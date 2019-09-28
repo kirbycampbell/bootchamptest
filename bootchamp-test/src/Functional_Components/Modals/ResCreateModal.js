@@ -1,5 +1,5 @@
 import React from "react";
-import Resources from "../../Components/Resources/Resources";
+import ResourceCreate from "../../Components/Resources/ResourceCreate";
 
 const ResCreateModal = ({ resModal, setResModal }) => {
   return (
@@ -9,7 +9,7 @@ const ResCreateModal = ({ resModal, setResModal }) => {
         onClick={() => setResModal(false)}
       ></div>
       <div className="modal-content has-text-centered">
-        <Resources />
+        <ResourceCreate />
       </div>
       <button
         className="modal-close is-large"

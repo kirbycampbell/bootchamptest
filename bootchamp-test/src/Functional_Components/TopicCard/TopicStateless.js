@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "./TopicCard.css";
 var moment = require("moment");
 
 const TopicStateless = ({ topic }) => {
