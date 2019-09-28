@@ -21,11 +21,11 @@ const Cities = ({ city, setCity, setCityCheck }) => {
   const [selCity, setSelCity] = useState(null); // Replace with props
 
   // Queries All Cities - Temp Feature
-  useEffect(() => {
-    if (cityList.length < 2) {
-      getAllCities().then(res => setCityList(res));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (cityList.length < 2) {
+  //     getAllCities().then(res => setCityList(res));
+  //   }
+  // }, []);
 
   useEffect(() => {
     setError("");

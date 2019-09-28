@@ -1,4 +1,4 @@
-.Outer-resource {
+/* .Outer-resource {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,7 +25,7 @@
   text-align: center;
   margin: auto;
   margin-top: 40px;
-}
+} */
 .resourceError {
   width: 60%;
   margin: auto;
@@ -43,8 +43,4 @@
 
 .resource-render {
   margin-bottom: 10px;
-}
-
-.x-out {
-  position: relative;
 }

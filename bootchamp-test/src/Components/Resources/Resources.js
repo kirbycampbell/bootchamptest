@@ -4,6 +4,7 @@ import "./Resources.css";
 import Tags from "../Tags/Tags";
 import Cities from "../Cities/Cities";
 import { createResourceMutate, getResources } from "../../API/resource_api";
+import CityResource from "../Cities/CityResource";
 
 const Resources = () => {
   const user = useSelector(state => state.UserStore.user);
@@ -14,7 +15,7 @@ const Resources = () => {
   const [tags, setTags] = useState([]);
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
-
+  console.log(user);
   useEffect(() => {
     getResources().then(function(res) {
       console.table(res.data);
@@ -55,43 +56,144 @@ const Resources = () => {
   };
 
   return (
-    <div className="Outer-resource">
-      <h1>Create Resource</h1>
-      {/* :::::::::::: City Input Form ::::::::::::: */}
-      <div className="resource-form">
-        <input
-          className="input-txt"
-          type="text"
-          placeholder="Title"
-          onChange={e => setTitle(e.target.value)}
-          value={title}
-          name="title"
-          autoComplete="off"
-          maxLength="60"
-        />
+    <div>
+      <div className="is-ancestor ">
+        <div className="tile is-parent is-vertical ">
+          <article className=" is-child notification is-dark is-bordered border-card ">
+            <div className="field">
+              <label className="label has-text-white has-text-centered">
+                Create New Resource
+              </label>
+              <div className="control">
+                <input
+                  className="input is-large has-text-white"
+                  type="text"
+                  placeholder="Title"
+                  onChange={e => setTitle(e.target.value)}
+                  value={title}
+                  name="title"
+                  autoComplete="off"
+                  maxLength="60"
+                />
+              </div>
+            </div>
 
-        <Cities setCity={setCity} city={city} />
+            <div className="field">
+              <div className="control">
+                <textarea
+                  className="textarea is-primary input has-text-white"
+                  placeholder="Add Resource Text..."
+                  onChange={e => setText(e.target.value)}
+                  value={text}
+                  autoComplete="off"
+                  maxLength="260"
+                />
+              </div>
+            </div>
+            <div className="columns is-vcentered ">
+              <div className="column is-three-fifths ">
+                <Tags setTags={setTags} tags={tags} />
+              </div>
 
-        <Tags setTags={setTags} tags={tags} />
-        <textarea
-          className="text-inp-box"
-          type="textarea"
-          placeholder="Something to Say? ..."
-          onChange={e => setText(e.target.value)}
-          value={text}
-          autoComplete="off"
-          maxLength="260"
-        />
-
-        <div className="input-txt-sbm" onClick={handleResourceForm}>
-          <i className="fas fa-check check"></i>
-          Submit
+              <div className="column is-one-fifth ">
+                {user.cities && (
+                  <CityResource
+                    setCity={setCity}
+                    city={city}
+                    cities={user.cities}
+                  />
+                )}
+              </div>
+              <div className="column is-one-fifth">
+                <button
+                  className="button is-success has-text-dark is-fullwidth"
+                  onClick={handleResourceForm}
+                >
+                  Post Resource
+                </button>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
-      {/* :::::::::  Message  :::::::::: */}
       {error && <div className="resourceError">{error}</div>}
       {msg && <div className="resourcemsg">{msg}</div>}
     </div>
+    // <div className="Outer-resource">
+    //   <h1>Create Resource</h1>
+    //   {/* :::::::::::: City Input Form ::::::::::::: */}
+    //   <div className="resource-form">
+    //     <input
+    //       className="input-txt"
+    //       type="text"
+    //       placeholder="Title"
+    //       onChange={e => setTitle(e.target.value)}
+    //       value={title}
+    //       name="title"
+    //       autoComplete="off"
+    //       maxLength="60"
+    //     />
+
+    //     <Cities setCity={setCity} city={city} />
+
+    //     <Tags setTags={setTags} tags={tags} />
+    //     <textarea
+    //       className="text-inp-box"
+    //       type="textarea"
+    //       placeholder="Something to Say? ..."
+    //       onChange={e => setText(e.target.value)}
+    //       value={text}
+    //       autoComplete="off"
+    //       maxLength="260"
+    //     />
+
+    //     <div className="input-txt-sbm" onClick={handleResourceForm}>
+    //       <i className="fas fa-check check"></i>
+    //       Submit
+    //     </div>
+    //   </div>
+    //   {/* :::::::::  Message  :::::::::: */}
+    //   {error && <div className="resourceError">{error}</div>}
+    //   {msg && <div className="resourcemsg">{msg}</div>}
+    // </div>
   );
 };
 export default Resources;
+
+// <div className="Outer-resource">
+// <h1>Create Resource</h1>
+// {/* :::::::::::: City Input Form ::::::::::::: */}
+// <div className="resource-form">
+//   <input
+//     className="input-txt"
+//     type="text"
+//     placeholder="Title"
+//     onChange={e => setTitle(e.target.value)}
+//     value={title}
+//     name="title"
+//     autoComplete="off"
+//     maxLength="60"
+//   />
+
+//   <Cities setCity={setCity} city={city} />
+
+//   <Tags setTags={setTags} tags={tags} />
+//   <textarea
+//     className="text-inp-box"
+//     type="textarea"
+//     placeholder="Something to Say? ..."
+//     onChange={e => setText(e.target.value)}
+//     value={text}
+//     autoComplete="off"
+//     maxLength="260"
+//   />
+
+//   <div className="input-txt-sbm" onClick={handleResourceForm}>
+//     <i className="fas fa-check check"></i>
+//     Submit
+//   </div>
+// </div>
+// {/* :::::::::  Message  :::::::::: */}
+// {error && <div className="resourceError">{error}</div>}
+// {msg && <div className="resourcemsg">{msg}</div>}
+// </div>
