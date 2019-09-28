@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Topics.css";
+
 import CreateTopic from "./CreateTopic";
-import TopicStateless from "../../Functional_Components/TopicCard/TopicStateless";
+//import TopicStateless from "../../Functional_Components/TopicCard/TopicStateless";
 import { getAllTopics } from "../../API/topic_api";
 
 const Topics = () => {

@@ -16,13 +16,11 @@ export async function searchTagsByRegex(query) {
 }
 
 export async function searchAllTags(query) {
-  return await axios.get(URL + "tags/").then(res => {
-    res.data.filter(tag => {
-      if (tag.label === query.toLowerCase()) {
-        return tag;
-      } else return null;
+  return await axios
+    .get(URL + "tags/search/" + query.toLowerCase())
+    .then(res => {
+      return res.data;
     });
-  });
 }
 
 export async function createTagMutate(tag) {

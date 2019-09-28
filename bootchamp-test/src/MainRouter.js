@@ -18,6 +18,7 @@ const MainRouter = () => {
     <Router>
       <body className="hero is-dark column has-navbar-fixed-top">
         <Route exact path="/Home" render={() => <Home />} />
+        <Route exact path="/Resources" render={() => <Resources />} />
 
         {/* 
          <TopNav />
@@ -26,7 +27,6 @@ const MainRouter = () => {
        
           <Route exact path="/LogIn" render={() => <AuthUser />} />
           <Route exact path="/Topics" render={() => <Topics />} />
-          <Route exact path="/Resources" render={() => <Resources />} />
           {auth && <Route exact path="/Profile" render={() => <Profile />} />}
           <Route exact path="/TagPage" render={() => <TagPage />} />
           <Route

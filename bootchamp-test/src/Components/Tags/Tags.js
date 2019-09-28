@@ -12,7 +12,6 @@ import {
 const Tags = ({ tags, setTags }) => {
   const [typeTag, setTypeTag] = useState("");
   const [queryMatch, setQueryMatch] = useState([]);
-  //const [tags, settags] = useState([]);
 
   useEffect(() => {
     if (typeTag.length > 2) {
@@ -47,11 +46,12 @@ const Tags = ({ tags, setTags }) => {
     setTags(newList);
   };
 
-  const createTag = () => {
-    searchAllTags(typeTag).then(res => {
+  const createTag = async () => {
+    await searchAllTags(typeTag).then(res => {
+      console.log(res);
       if (res) {
         handleForm(res);
-      } else {
+      } else if (res.data) {
         createTagMutate(typeTag).then(function(res) {
           handleForm(res.data);
           console.log(res.data);
@@ -70,7 +70,7 @@ const Tags = ({ tags, setTags }) => {
 
   return (
     <div className="">
-      <div className="field ">
+      <div className="field">
         {/* <div className="input-card"> */}
         <div className="tags">
           {/* ::::::::::: Chosen Tags :::::::::::::: */}
@@ -88,28 +88,27 @@ const Tags = ({ tags, setTags }) => {
               );
             })}{" "}
         </div>
-        <div className="control has-icons-right">
-          {/* ::::::::::: Input Section :::::::::::::: */}
-          <input
-            className="input has-text-white"
-            id="tagInput"
-            type="text is-primary"
-            name="tag"
-            placeholder="Enter Tags..."
-            onChange={handleTyping}
-            onKeyPress={handleKeyPress}
-            value={typeTag}
-            autoComplete="off"
-          />
-          {/* ::::::::::: Create Check Button :::::::::::::: */}
-          {typeTag.length > 2 && (
-            <span class="icon is-small is-right  ">
-              <i
-                class="fas fa-check has-text-success pointer"
-                onClick={createTag}
-              ></i>
-            </span>
-          )}
+        <div className="field ">
+          <div className="control has-icons-right ">
+            {/* ::::::::::: Input Section :::::::::::::: */}
+            <input
+              className="input is-danger has-text-white"
+              id="tagInput"
+              type="text"
+              name="tag"
+              placeholder="Enter Tags..."
+              onChange={handleTyping}
+              onKeyPress={handleKeyPress}
+              value={typeTag}
+              autoComplete="off"
+            />
+            {/* ::::::::::: Create Check Button :::::::::::::: */}
+            {typeTag.length > 2 && (
+              <span class="icon  is-right  ">
+                <i class="fas fa-check is-info pointer" onClick={createTag}></i>
+              </span>
+            )}
+          </div>
         </div>
       </div>
       {/* ::::::::::: List of Search Matches :::::::::::::: */}

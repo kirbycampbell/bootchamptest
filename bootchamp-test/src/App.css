@@ -1,16 +1,8 @@
-/* @media all and (max-width: 700px) {
-  .Main-Content {
-    margin-top: 20px;
-  }
+.input {
+  background-color: #363636;
 }
-
-.App-link {
-  color: #61dafb;
-} */
-/* .custom-link {
-  text-decoration: none;
-  color: rgb(4, 112, 235);
-  font-weight: bold;
-  letter-spacing: 2.4px;
-  padding: 1% 2%;
-} */
+.input::placeholder {
+  background-color: #363636;
+  color: white;
+  opacity: 0.4;
+}
