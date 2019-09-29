@@ -39,8 +39,6 @@ const TopicStateless = ({ topic }) => {
             <nav className="level is-mobile is-fluid">
               <div className="level-item  ">
                 <div className="tags">
-                  {/* <span className="tag is-light">React</span>
-                  <span className="tag is-light">Vue</span> */}
                   {topic.tags.map(tag => {
                     return (
                       <div className="tag" key={tag.id}>
