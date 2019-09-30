@@ -1,25 +1,26 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import "./Profile.css";
-import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
-import TopicStateless from "../../Functional_Components/TopicCard/TopicStateless";
+import React, {useState, useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import './Profile.css';
+import {Redirect} from 'react-router';
+import {Link} from 'react-router-dom';
+import TopicStateless from '../../Functional_Components/TopicCard/TopicStateless';
 import {
   getContributor,
   getContributorTopics,
   getContributorResources,
-  patchContributorCities
-} from "../../API/contrib_apis"; // move backend calls here - seperate by type
-import ResourceStateless from "../../Functional_Components/ResourceCard/ResourceStateless";
-import Cities from "../Cities/Cities";
-import { getUserTopics, patchUserAvatar } from "../../API/topic_api";
+  patchContributorCities,
+} from '../../API/contrib_apis'; // move backend calls here - seperate by type
+import ResourceStateless from '../../Functional_Components/ResourceCard/ResourceStateless';
+import Cities from '../Cities/Cities';
+import {getUserTopics, patchUserAvatar} from '../../API/topic_api';
+import LeftProfileBar from '../../Functional_Components/LeftSortBar/LeftProfileBar';
 
 const Profile = () => {
   const [loggedOut, setLoggedOut] = useState(false);
   const [contributor, setContributor] = useState([]);
   const [topics, setTopics] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState('');
   const [resourceList, setResourceList] = useState([]);
   const [city, setCity] = useState(null);
   const auth = useSelector(state => state.UserStore.auth);
@@ -28,7 +29,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const logUserOut = useCallback(
     user => {
-      dispatch({ type: "LOGOUT_USER" });
+      dispatch({type: 'LOGOUT_USER'});
       setLoggedOut(true);
     },
     [dispatch]
@@ -72,12 +73,14 @@ const Profile = () => {
 
   if (!auth && loggedOut) {
     return <Redirect to="/LogIn" />;
-  } else if (!auth && !localStorage.getItem("User")) {
+  } else if (!auth && !localStorage.getItem('User')) {
     return <div>Please Login Properly!</div>;
   } else {
     return (
       <div className="Outer-Profile">
         <div className="Inner-Profile">
+          <LeftProfileBar />
+
           <div className="Profile-Title"> {contributor.name}'s Profile</div>
 
           {/* ::::::::::: AVATAR AREA :::::::::: */}
@@ -120,8 +123,8 @@ const Profile = () => {
               Location: {contributor.cities.name}, {contributor.cities.state}
             </div>
           )}
-          <Link to={"/Contributor/" + user.id} className="custom-link">
-            {" "}
+          <Link to={'/Contributor/' + user.id} className="custom-link">
+            {' '}
             <h4>View your Profile how Other's see it!</h4>
           </Link>
           {/* :::::::::: Resource AREA ::::::::::: */}

@@ -21,8 +21,6 @@ const MainRouter = () => {
     <Router>
       <div className="Main-Div">
         <TopNav />
-        <LeftSortBar />
-        <RightFilterBox />
 
         <div className="Center-Section">
           <Route exact path="/" render={() => <Home />} />
@@ -33,6 +31,7 @@ const MainRouter = () => {
         {auth && <Route exact path="/Profile" render={() => <Profile />} />}
         <Route exact path="/LogIn" render={() => <AuthUser />} />
         <Route
+          exact
           path="/Contributor/:id"
           render={props => <Contributor {...props} />}
         />
