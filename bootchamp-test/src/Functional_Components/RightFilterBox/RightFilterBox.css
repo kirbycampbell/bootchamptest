@@ -1,0 +1,31 @@
+.Outer-RightBox {
+  padding-top: 20px;
+  height: 96vh;
+
+  width: 25vw;
+  right: 0;
+  position: fixed;
+  background-color: rgb(44, 46, 49);
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+.Filter-Title {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.Filter-Opt {
+  width: 100%;
+}
+.tag {
+  display: flex;
+  width: 24%;
+  margin-left: 3%;
+  margin-right: 3%;
+  cursor: pointer;
+}
+.tag:hover {
+  background-color: rgb(212, 212, 212);
+}

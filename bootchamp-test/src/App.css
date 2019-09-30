@@ -1,5 +1,17 @@
-@import url("https://fonts.googleapis.com/css?family=B612+Mono&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Titillium+Web&display=swap");
+@import url('https://fonts.googleapis.com/css?family=B612+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+
+.Main-Div {
+  min-height: 94vh;
+  width: 100vw;
+  background-color: rgb(40, 42, 45);
+}
+
+.Center-Section {
+  width: 65vw;
+  margin-left: 8vw;
+  margin-right: 26vw;
+}
 .input {
   background-color: #363636;
 }
@@ -24,7 +36,7 @@
   border-top: 1px solid rgb(44, 44, 44);
 }
 .nav-font {
-  font-family: "Titillium Web", sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 22px;
 }
 .back_gr_lighter {

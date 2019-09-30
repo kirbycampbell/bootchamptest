@@ -4,97 +4,36 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100px;
+  height: 6vh;
   border-bottom: 1px solid black;
   overflow: hidden;
-  /* background-color: rgb(26, 26, 26); */
+  background-color: rgb(40, 42, 45);
   z-index: 100;
   top: 0;
-}
-
-.Inner-TopNav {
-  display: flex;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  color: rgb(66, 62, 62);
-  height: 80%;
-  z-index: 100;
-}
-
-.Nav-Grps-Outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
   font-size: calc(1.8vh * 4px);
-  height: 80%;
-  width: 98%;
 }
 
-.Nav-Grps {
+.Nav-Left {
   display: flex;
+  flex-direction: row;
+  float: left;
+  width: 90%;
+}
+.Nav-Piece {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 10%;
-  margin: 0% 2.5%;
-  padding: 1% 1%;
-  max-height: 20px;
-  border: 1.6px solid rgb(0, 0, 0);
-  border-radius: 4px;
+  min-width: 50px;
+  font-size: 20px;
+  margin-left: 25px;
+  color: white;
+}
+.Nav-Piece:hover {
+  color: rgb(44, 135, 255);
   cursor: pointer;
-  box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, 0.445);
-  transition: box-shadow 0.1s ease-in-out;
 }
-.Nav-Grps:hover {
-  background: rgba(199, 199, 199, 0.719);
-  color: rgb(37, 105, 253);
-}
-
-.Nav-Grps:active {
-  box-shadow: 4px 2px 12px 0px rgba(0, 0, 0, 0.664);
-  transition: box-shadow 0.05s ease-in-out;
-}
-
-.Mobile-Nav {
-  display: none;
-}
-.icon-bars {
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-}
-
-@media all and (max-width: 700px) {
-  .Inner-TopNav {
-    display: none;
-  }
-  .Mobile-Nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-  }
-  .BC-logo {
-    height: 150%;
-    width: 60%;
-  }
-  .Btn-Outer {
-    width: 20%;
-    text-align: center;
-  }
-
-  .fas.icon-bars {
-    font-size: 30px;
-    width: 50%;
-    height: 50%;
-    cursor: pointer;
-  }
-  .fas.icon-bars:active {
-    color: blue;
-    background-color: rgb(255, 255, 255);
-  }
+.Nav-Right {
+  float: right;
+  margin-right: 28px;
 }

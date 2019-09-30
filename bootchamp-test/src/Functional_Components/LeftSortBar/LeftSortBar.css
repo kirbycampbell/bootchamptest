@@ -1,0 +1,15 @@
+.Outer-LeftBar {
+  padding-top: 20px;
+  height: 96vh;
+  width: 7vw;
+  left: 0;
+  position: fixed;
+  background-color: rgb(44, 46, 49);
+  text-align: center;
+  color: white;
+}
+.sort-icon {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 20px;
+}

@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import Tags from "../Tags/Tags";
-import Cities from "../Cities/Cities";
-import { createResourceMutate, getResources } from "../../API/resource_api";
-import CityResource from "../Cities/CityResource";
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import Tags from '../Tags/Tags';
+import {createResourceMutate, getResources} from '../../API/resource_api';
+import CityResource from '../Cities/CityResource';
 
 const ResourceCreate = () => {
   const user = useSelector(state => state.UserStore.user);
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [link, setLink] = useState("");
+  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
+  const [link, setLink] = useState('');
   const [city, setCity] = useState([]);
   const [tags, setTags] = useState([]);
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
+  const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
   console.log(user);
   useEffect(() => {
     getResources().then(function(res) {
@@ -22,9 +21,9 @@ const ResourceCreate = () => {
   }, []);
 
   const resetForm = () => {
-    setTitle("");
-    setText("");
-    setLink("");
+    setTitle('');
+    setText('');
+    setLink('');
     setCity([]);
     setTags([]);
   };
@@ -38,12 +37,12 @@ const ResourceCreate = () => {
       tags: tags,
       createdBy: {
         name: user.name,
-        id: user.id
-      }
+        id: user.id,
+      },
     };
     createResourceMutate(data)
       .then(function(res) {
-        setMsg("Created New Resource");
+        setMsg('Created New Resource');
         getResources().then(function(res) {
           console.table(res.data);
         });
