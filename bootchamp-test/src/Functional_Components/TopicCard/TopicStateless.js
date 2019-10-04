@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 var moment = require("moment");
 
 const TopicStateless = ({ topic }) => {
+
   const dispatch = useDispatch();
   const addSelectedTags = useCallback(
     tags => {
@@ -11,14 +12,32 @@ const TopicStateless = ({ topic }) => {
     },
     [dispatch]
   );
+
+
+    //  make a topicApi function that calls the topic like endpoint, and sends the user id in the body, and the topic id in the url
+
+    const handleClick = () => (
+      // event.preventDefault()
+  
+      console.log('touched my heart')
+  
+    )
+
+
+
   return (
     <div className="is-ancestor ">
       <div className="tile is-parent is-vertical is-fullwidth">
         <article className=" is-child notification is-dark is-bordered border-card ">
+
+          {/* /////////////////////TIME CREATED/////////////////////// */}
           <div className="CardCreatedAt">
             {moment(topic.createdAt).fromNow()}
           </div>
+
           <div className="title has-text-centered"> {topic.name}</div>
+
+          {/* ////////////////////IMAGE AND CONTENT//////////////////// */}
           <div className="tile is-ancestor">
             <nav className="tile is-parent ">
               <div className=" tile is-child ">
@@ -35,6 +54,8 @@ const TopicStateless = ({ topic }) => {
               </div>
             </nav>
           </div>
+
+          {/* /////////////////////////////TAGS///////////////////////// */}
           <div className="container">
             <nav className="level is-mobile is-fluid">
               <div className="level-item  ">
@@ -54,12 +75,21 @@ const TopicStateless = ({ topic }) => {
                   })}
                 </div>
               </div>
+              {/* ///////////////////////LIKES/////////////////////// */}
               <div className="level-item has-text-centered">
                 <div>
-                  <div className="heading">Likes</div>
-                  <div className="title">{topic.likedBy.length}</div>
+                  <div className="heading">
+                    <i class="far fa-heart" 
+                    onClick={handleClick}></i>
+                  </div>
+
+                  <span className="title">
+                  {topic.likedBy.length}
+                  </span>
                 </div>
               </div>
+
+              {/* /////////////////CREATED BY////////////// */}
               <div className="level-item has-text-centered">
                 <div>
                   <Link
@@ -70,13 +100,13 @@ const TopicStateless = ({ topic }) => {
                   </Link>
                 </div>
               </div>
-              <div className="level-item has-text-centered">
+              {/* <div className="level-item has-text-centered">
                 <div>
                   <div className="heading">
                     {topic.cities.name} , {topic.cities.state}
                   </div>
                 </div>
-              </div>
+              </div> */}
             </nav>
           </div>
         </article>
