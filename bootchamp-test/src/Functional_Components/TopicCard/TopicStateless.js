@@ -1,9 +1,17 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
+
+
+
+
 var moment = require("moment");
 
 const TopicStateless = ({ topic }) => {
+
+  const [likes, increaseLikes] = useState(0)
+  const [liked, setLiked] = useState(false)
 
   const dispatch = useDispatch();
   const addSelectedTags = useCallback(
@@ -19,7 +27,10 @@ const TopicStateless = ({ topic }) => {
     const handleClick = () => (
       // event.preventDefault()
   
-      console.log('touched my heart')
+      // console.log('touched my heart')
+      setLiked(!liked),
+      increaseLikes(likes + 1),
+      console.log({liked})
   
     )
 
@@ -79,12 +90,14 @@ const TopicStateless = ({ topic }) => {
               <div className="level-item has-text-centered">
                 <div>
                   <div className="heading">
+                    <p>This has been liked {likes} times</p>
                     <i class="far fa-heart" 
                     onClick={handleClick}></i>
                   </div>
 
                   <span className="title">
-                  {topic.likedBy.length}
+                  {/* {topic.likedBy.length} */}
+                  {likes}
                   </span>
                 </div>
               </div>
@@ -100,13 +113,6 @@ const TopicStateless = ({ topic }) => {
                   </Link>
                 </div>
               </div>
-              {/* <div className="level-item has-text-centered">
-                <div>
-                  <div className="heading">
-                    {topic.cities.name} , {topic.cities.state}
-                  </div>
-                </div>
-              </div> */}
             </nav>
           </div>
         </article>
@@ -116,50 +122,3 @@ const TopicStateless = ({ topic }) => {
 };
 
 export default TopicStateless;
-
-// <div className="container">
-//   <div className="card">
-//     <div className="card-header-title">
-//       {topic.name}
-//       <div className="CardCreatedBy">
-//         <Link
-//           to={"/Contributor/" + topic.createdBy.id}
-//           className="custom-link"
-//         >
-//           {topic.createdBy.name}
-//         </Link>
-//       </div>
-//       <div className="CardCreatedAt">
-//         {moment(topic.createdAt).format("MM/DD/YYYY")}
-//       </div>
-//     </div>
-//     <div className="card-content ">
-//       {topic.content}
-
-//       <figure className="card-image is-48x48 max-pic">
-//         <img className="max-pic" src={topic.images} alt={topic.images} />
-//       </figure>
-//     </div>
-//     <div className="CardTags">
-//       {topic.tags.map(tag => {
-//         return (
-//           <div className="IndTag" key={tag.id}>
-//             <Link
-//               to={"/TagPage/"}
-//               className="custom-link"
-//               onClick={() => addSelectedTags(tag)}
-//             >
-//               {tag.label}
-//             </Link>
-//           </div>
-//         );
-//       })}
-//     </div>
-//     <div className="card-footer">
-//       <div className="card-footer-item">Likes: {topic.likedBy.length}</div>
-//       <div className="card-footer-item">
-//         {topic.cities.name} - {topic.cities.state}
-//       </div>
-//     </div>
-//   </div>
-// </div>
