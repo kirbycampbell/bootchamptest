@@ -1,5 +1,5 @@
-import React from 'react';
-import './LeftSortBar.css';
+import React from 'react'
+import './LeftSortBar.css'
 
 const LeftSortBar = () => {
   return (
@@ -20,7 +20,7 @@ const LeftSortBar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LeftSortBar;
+export default LeftSortBar

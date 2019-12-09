@@ -1,5 +1,5 @@
-import React from 'react';
-import './RightFilterBox.css';
+import React from 'react'
+import './RightFilterBox.css'
 
 const RightProfileBox = () => {
   return (
@@ -11,7 +11,7 @@ const RightProfileBox = () => {
         <span className="tag">Resource</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default RightProfileBox;
+export default RightProfileBox

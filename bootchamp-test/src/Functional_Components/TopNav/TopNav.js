@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import './TopNav.css';
-import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import TopicCreateModal from '../Modals/TopicCreateModal';
-import ResCreateModal from '../Modals/ResCreateModal';
+import React, { useState } from 'react'
+import './TopNav.css'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import TopicCreateModal from '../Modals/TopicCreateModal'
+import ResCreateModal from '../Modals/ResCreateModal'
 
 const TopNav = () => {
-  const auth = useSelector(state => state.UserStore.auth);
-  const [topicModal, setTopicModal] = useState(false);
-  const [resModal, setResModal] = useState(false);
-  let modalProps = {topicModal, resModal, setTopicModal, setResModal};
+  const auth = useSelector(state => state.UserStore.auth)
+  const [topicModal, setTopicModal] = useState(false)
+  const [resModal, setResModal] = useState(false)
+  let modalProps = { topicModal, resModal, setTopicModal, setResModal }
 
   const NavBar = () => {
     return (
@@ -36,9 +36,9 @@ const TopNav = () => {
           </Link>
         </div>
       </div>
-    );
-  };
-  return <NavBar />;
-};
+    )
+  }
+  return <NavBar />
+}
 
-export default TopNav;
+export default TopNav

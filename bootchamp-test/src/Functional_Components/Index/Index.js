@@ -1,5 +1,5 @@
-import React from "react";
-import "./Index.css";
+import React from 'react'
+import './Index.css'
 
 const Index = () => {
   return (
@@ -42,6 +42,6 @@ const Index = () => {
         </a>
       </h3>
     </div>
-  );
-};
-export default Index;
+  )
+}
+export default Index

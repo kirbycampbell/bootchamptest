@@ -23,10 +23,16 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-s tab:backend tab:start:js open:page",
     "build": "react-scripts build",
+    "start:js": "react-scripts start",
+    "backend": "nodemon src/server/index",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tab:start:js": "ttab -t 'Build Js' npm run start:js",
+    "tab:backend": "ttab -t 'Express Server' npm run backend",
+    "open:page": "open 'http://localhost:3000'",
+    "dev": "nodemon src/server/index & npm start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,5 +48,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": true
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1",
+    "npm-run-all": "^4.1.5",
+    "ttab": "^0.6.1"
   }
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import './LeftSortBar.css';
+import React from 'react'
+import './LeftSortBar.css'
 
 const LeftProfileBar = () => {
   return (
@@ -20,7 +20,7 @@ const LeftProfileBar = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LeftProfileBar;
+export default LeftProfileBar

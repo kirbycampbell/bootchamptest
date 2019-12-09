@@ -1,5 +1,5 @@
-import React from 'react';
-import './Loader.css';
+import React from 'react'
+import './Loader.css'
 
 const Roller = () => {
   return (
@@ -13,7 +13,7 @@ const Roller = () => {
       <div />
       <div />
     </div>
-  );
-};
+  )
+}
 
-export default Roller;
+export default Roller

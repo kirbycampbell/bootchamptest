@@ -1,21 +1,21 @@
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import {useSelector} from 'react-redux';
-import AuthUser from './Components/AuthUser/AuthUser';
-import TopNav from './Functional_Components/TopNav/TopNav';
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import AuthUser from './Components/AuthUser/AuthUser'
+import TopNav from './Functional_Components/TopNav/TopNav'
 
-import Profile from './Components/Profile/Profile';
-import './App.css';
-import Index from './Functional_Components/Index/Index';
-import Contributor from './Components/Contributor/Contributor';
-import TagPage from './Components/Tags/TagPage';
-import Home from './Components/HomePage/Home';
-import Footer from './Functional_Components/Footer/Footer';
-import LeftSortBar from './Functional_Components/LeftSortBar/LeftSortBar';
-import RightFilterBox from './Functional_Components/RightFilterBox/RightFilterBox';
+import Profile from './Components/Profile/Profile'
+import './App.css'
+import Index from './Functional_Components/Index/Index'
+import Contributor from './Components/Contributor/Contributor'
+import TagPage from './Components/Tags/TagPage'
+import Home from './Components/HomePage/Home'
+import Footer from './Functional_Components/Footer/Footer'
+import LeftSortBar from './Functional_Components/LeftSortBar/LeftSortBar'
+import RightFilterBox from './Functional_Components/RightFilterBox/RightFilterBox'
 
 const MainRouter = () => {
-  const auth = useSelector(state => state.UserStore.auth);
+  const auth = useSelector(state => state.UserStore.auth)
 
   return (
     <Router>
@@ -38,7 +38,7 @@ const MainRouter = () => {
       </div>
       <Footer />
     </Router>
-  );
-};
+  )
+}
 
-export default MainRouter;
+export default MainRouter

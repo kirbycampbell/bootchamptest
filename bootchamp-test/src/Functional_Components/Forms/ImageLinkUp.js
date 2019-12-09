@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const ImageLinkUp = ({ setImgLink }) => {
-  const [imgURL, setImgURL] = useState("");
+  const [imgURL, setImgURL] = useState('')
   return (
     <div className="columns is-mobile is-vcentered ">
       <div className="control column is-three-quarters">
@@ -40,7 +40,7 @@ const ImageLinkUp = ({ setImgLink }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ImageLinkUp;
+export default ImageLinkUp

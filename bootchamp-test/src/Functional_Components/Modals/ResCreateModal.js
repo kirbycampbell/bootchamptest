@@ -1,9 +1,9 @@
-import React from "react";
-import ResourceCreate from "../../Components/Resources/ResourceCreate";
+import React from 'react'
+import ResourceCreate from '../../Components/Resources/ResourceCreate'
 
 const ResCreateModal = ({ resModal, setResModal }) => {
   return (
-    <div className={"modal " + (resModal ? "is-active" : null)}>
+    <div className={'modal ' + (resModal ? 'is-active' : null)}>
       <div
         className="modal-background"
         onClick={() => setResModal(false)}
@@ -17,7 +17,7 @@ const ResCreateModal = ({ resModal, setResModal }) => {
         onClick={() => setResModal(!resModal)}
       ></button>
     </div>
-  );
-};
+  )
+}
 
-export default ResCreateModal;
+export default ResCreateModal

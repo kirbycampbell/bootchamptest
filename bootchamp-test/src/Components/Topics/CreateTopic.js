@@ -1,34 +1,34 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { URL } from "../../Variable_Constants/url";
-import Tags from "../Tags/Tags";
-import ImageLinkUp from "../../Functional_Components/Forms/ImageLinkUp";
-const uuidv1 = require("uuid/v1");
-const axios = require("axios");
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { URL } from '../../Variable_Constants/url'
+import Tags from '../Tags/Tags'
+import ImageLinkUp from '../../Functional_Components/Forms/ImageLinkUp'
+const uuidv1 = require('uuid/v1')
+const axios = require('axios')
 
 const CreateTopic = () => {
   // logged in User state
-  const user = useSelector(state => state.UserStore.user);
+  const user = useSelector(state => state.UserStore.user)
 
   // Form state
-  const [name, setName] = useState("");
-  const [content, setContent] = useState("");
-  const [imgLink, setImgLink] = useState("");
-  const [city, setCity] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [name, setName] = useState('')
+  const [content, setContent] = useState('')
+  const [imgLink, setImgLink] = useState('')
+  const [city, setCity] = useState([])
+  const [tags, setTags] = useState([])
 
   const resetForm = () => {
-    setName("");
-    setContent("");
-    setCity([]);
-    setTags([]);
-    setImgLink("");
-  };
+    setName('')
+    setContent('')
+    setCity([])
+    setTags([])
+    setImgLink('')
+  }
 
   const createTopic = () => {
-    if (name !== "") {
+    if (name !== '') {
       axios
-        .post(URL + "topics/", {
+        .post(URL + 'topics/', {
           id: uuidv1(),
           name: name,
           content: content,
@@ -38,16 +38,16 @@ const CreateTopic = () => {
           createdBy: { id: user.id, name: user.name }
         })
         .then(function(response) {
-          console.log("success");
-          console.log(response);
-          resetForm();
+          console.log('success')
+          console.log(response)
+          resetForm()
         })
         .catch(function(error) {
-          console.log("error");
-          console.log(error);
-        });
+          console.log('error')
+          console.log(error)
+        })
     }
-  };
+  }
 
   return (
     <div>
@@ -104,7 +104,7 @@ const CreateTopic = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateTopic;
+export default CreateTopic
