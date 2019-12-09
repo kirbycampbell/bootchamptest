@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
-import "./Cities.css";
+import React, { useState, useEffect } from 'react'
+import './Cities.css'
 import {
   getAllCities,
   searchByCityName,
   searchByState,
   createNewCityState
-} from "../../API/cities_api";
+} from '../../API/cities_api'
 
 const Cities = ({ city, setCity, setCityCheck }) => {
-  const [cityName, setCityName] = useState("");
-  const [state, setState] = useState("");
+  const [cityName, setCityName] = useState('')
+  const [state, setState] = useState('')
   const [cityForm, setCityForm] = useState({
-    city: "",
-    state: ""
-  });
-  const [cityQuery, setCityQuery] = useState([]);
-  const [cityList, setCityList] = useState([]);
-  const [error, setError] = useState("");
-  const [msg, setMsg] = useState("");
-  const [selCity, setSelCity] = useState(null); // Replace with props
+    city: '',
+    state: ''
+  })
+  const [cityQuery, setCityQuery] = useState([])
+  const [cityList, setCityList] = useState([])
+  const [error, setError] = useState('')
+  const [msg, setMsg] = useState('')
+  const [selCity, setSelCity] = useState(null) // Replace with props
 
   // Queries All Cities - Temp Feature
   // useEffect(() => {
@@ -28,89 +28,89 @@ const Cities = ({ city, setCity, setCityCheck }) => {
   // }, []);
 
   useEffect(() => {
-    setError("");
-    setMsg("");
-  }, [selCity]);
+    setError('')
+    setMsg('')
+  }, [selCity])
 
   // Type into CityName and return Regex Cities
   useEffect(() => {
     if (cityName.length <= 2 && state.length <= 2) {
-      setCityQuery([]);
+      setCityQuery([])
     } else if (cityName.length > 2) {
-      searchByCityName(cityName).then(res => setCityQuery(res));
+      searchByCityName(cityName).then(res => setCityQuery(res))
     } else if (state.length <= 2 && cityName.length === 0) {
-      setCityQuery([]);
+      setCityQuery([])
     } else if (
       state.length > 2 &&
       cityName.length === 0 &&
       cityForm.name.length === 0
     ) {
-      searchByState(state).then(res => setCityQuery(res));
+      searchByState(state).then(res => setCityQuery(res))
     }
-  }, [cityName, state]);
+  }, [cityName, state])
 
   //  Create New City
   useEffect(() => {
     if (cityName.length > 3 && state.length > 2) {
       createNewCityState(cityName, state).then(function(res) {
-        getAllCities().then(res => setCityList(res));
-        setMsg("Successfully Created City!");
-        setCity(res.data);
-        setSelCity(res.data);
-        resetForm();
-      });
+        getAllCities().then(res => setCityList(res))
+        setMsg('Successfully Created City!')
+        setCity(res.data)
+        setSelCity(res.data)
+        resetForm()
+      })
     } else if (cityName.length > 0) {
-      setError("Enter Proper City & State Name");
+      setError('Enter Proper City & State Name')
     }
-  }, [cityForm]);
+  }, [cityForm])
 
   // Reset Form and Query List
   const resetForm = () => {
-    setCityName("");
-    setState("");
-    setCityQuery([]);
-    setCityForm({ city: "", state: "" });
-    setError("");
-  };
+    setCityName('')
+    setState('')
+    setCityQuery([])
+    setCityForm({ city: '', state: '' })
+    setError('')
+  }
 
   // Error Checks before submitting new City
   const handleForm = e => {
-    let found = false;
-    let foundCity = {};
-    e.preventDefault();
+    let found = false
+    let foundCity = {}
+    e.preventDefault()
     cityList.filter(el => {
       if (
         el.name.toLowerCase() === cityName.toLowerCase() &&
         el.state.toLowerCase() === state.toLocaleLowerCase()
       ) {
-        found = true;
-        foundCity = el;
-        resetForm();
+        found = true
+        foundCity = el
+        resetForm()
       }
-      return null;
-    });
+      return null
+    })
     if (!found) {
       setCityForm({
         name: cityName,
         state: state
-      });
+      })
     } else {
-      setCity(foundCity);
-      console.log(city);
-      setMsg("Successfully Added!");
-      console.log(foundCity);
+      setCity(foundCity)
+      console.log(city)
+      setMsg('Successfully Added!')
+      console.log(foundCity)
     }
-  };
+  }
 
   // Selecting Existing City - Temp - Props call above
   const handleSelect = c => {
-    console.log(c);
-    setMsg("Successfully Added!");
-    setCity(c);
-    setSelCity(c);
-    resetForm();
-    setCityQuery([]);
-  };
+    console.log(c)
+    setMsg('Successfully Added!')
+    setCity(c)
+    setSelCity(c)
+    resetForm()
+    setCityQuery([])
+  }
 
   return (
     <div className="">
@@ -175,13 +175,13 @@ const Cities = ({ city, setCity, setCityCheck }) => {
                 >
                   {c.name.charAt(0).toUpperCase() + c.name.slice(1)} - {c.state}
                 </div>
-              );
+              )
             })}
           </div>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cities;
+export default Cities

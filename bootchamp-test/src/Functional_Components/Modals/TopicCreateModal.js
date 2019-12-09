@@ -1,9 +1,9 @@
-import React from "react";
-import CreateTopic from "../../Components/Topics/CreateTopic";
+import React from 'react'
+import CreateTopic from '../../Components/Topics/CreateTopic'
 
 const TopicCreateModal = ({ topicModal, setTopicModal }) => {
   return (
-    <div className={"modal " + (topicModal ? "is-active" : null)}>
+    <div className={'modal ' + (topicModal ? 'is-active' : null)}>
       <div
         className="modal-background"
         onClick={() => setTopicModal(false)}
@@ -17,7 +17,7 @@ const TopicCreateModal = ({ topicModal, setTopicModal }) => {
         onClick={() => setTopicModal(!topicModal)}
       ></button>
     </div>
-  );
-};
+  )
+}
 
-export default TopicCreateModal;
+export default TopicCreateModal

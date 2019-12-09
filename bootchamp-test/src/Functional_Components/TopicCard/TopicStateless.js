@@ -1,46 +1,34 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useCallback, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-
-
-
-
-var moment = require("moment");
+var moment = require('moment')
 
 const TopicStateless = ({ topic }) => {
-
   const [likes, increaseLikes] = useState(0)
   const [liked, setLiked] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const addSelectedTags = useCallback(
     tags => {
-      dispatch({ type: "SELECT_TAGS", payload: tags });
+      dispatch({ type: 'SELECT_TAGS', payload: tags })
     },
     [dispatch]
-  );
+  )
 
+  //  make a topicApi function that calls the topic like endpoint, and sends the user id in the body, and the topic id in the url
 
-    //  make a topicApi function that calls the topic like endpoint, and sends the user id in the body, and the topic id in the url
+  const handleClick = () => (
+    // event.preventDefault()
 
-    const handleClick = () => (
-      // event.preventDefault()
-  
-      // console.log('touched my heart')
-      setLiked(!liked),
-      increaseLikes(likes + 1),
-      console.log({liked})
-  
-    )
-
-
+    // console.log('touched my heart')
+    setLiked(!liked), increaseLikes(likes + 1), console.log({ liked })
+  )
 
   return (
     <div className="is-ancestor ">
       <div className="tile is-parent is-vertical is-fullwidth">
         <article className=" is-child notification is-dark is-bordered border-card ">
-
           {/* /////////////////////TIME CREATED/////////////////////// */}
           <div className="CardCreatedAt">
             {moment(topic.createdAt).fromNow()}
@@ -75,14 +63,14 @@ const TopicStateless = ({ topic }) => {
                     return (
                       <div className="tag" key={tag.id}>
                         <Link
-                          to={"/TagPage/"}
+                          to={'/TagPage/'}
                           className="custom-link"
                           onClick={() => addSelectedTags(tag)}
                         >
                           {tag.label}
                         </Link>
                       </div>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -91,13 +79,12 @@ const TopicStateless = ({ topic }) => {
                 <div>
                   <div className="heading">
                     <p>This has been liked {likes} times</p>
-                    <i class="far fa-heart" 
-                    onClick={handleClick}></i>
+                    <i class="far fa-heart" onClick={handleClick}></i>
                   </div>
 
                   <span className="title">
-                  {/* {topic.likedBy.length} */}
-                  {likes}
+                    {/* {topic.likedBy.length} */}
+                    {likes}
                   </span>
                 </div>
               </div>
@@ -106,7 +93,7 @@ const TopicStateless = ({ topic }) => {
               <div className="level-item has-text-centered">
                 <div>
                   <Link
-                    to={"/Contributor/" + topic.createdBy.id}
+                    to={'/Contributor/' + topic.createdBy.id}
                     className="custom-link"
                   >
                     {topic.createdBy.name}
@@ -118,7 +105,7 @@ const TopicStateless = ({ topic }) => {
         </article>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TopicStateless;
+export default TopicStateless

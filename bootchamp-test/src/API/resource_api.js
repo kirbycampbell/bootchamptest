@@ -1,14 +1,14 @@
-import { URL } from "../Variable_Constants/url";
-const axios = require("axios");
-const uuidv1 = require("uuid/v1");
+import { URL } from '../Variable_Constants/url'
+const axios = require('axios')
+const uuidv1 = require('uuid/v1')
 
 export async function getResources() {
-  return await axios.get(URL + "resources/").then(res => res);
+  return await axios.get(URL + 'resources/').then(res => res)
 }
 
 export async function createResourceMutate(data) {
   return await axios
-    .post(URL + "resources/", {
+    .post(URL + 'resources/', {
       id: uuidv1(),
       title: data.title,
       text: data.text,
@@ -17,5 +17,5 @@ export async function createResourceMutate(data) {
       tags: data.tags,
       createdBy: data.createdBy
     })
-    .then(res => res);
+    .then(res => res)
 }

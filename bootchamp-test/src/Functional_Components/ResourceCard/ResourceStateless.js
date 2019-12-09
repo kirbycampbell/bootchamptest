@@ -1,17 +1,17 @@
-import React, { useCallback } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import "./ResourceCard.css";
+import React, { useCallback } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import './ResourceCard.css'
 
 const ResourceStateless = ({ resource }) => {
   //const tags = useSelector(state => state.tags);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const addSelectedTags = useCallback(
     tags => {
-      dispatch({ type: "SELECT_TAGS", payload: tags });
+      dispatch({ type: 'SELECT_TAGS', payload: tags })
     },
     [dispatch]
-  );
+  )
 
   return (
     <div className="rsce">
@@ -20,7 +20,7 @@ const ResourceStateless = ({ resource }) => {
           <div>{resource.title}</div>
           <div className="rsce-CreatedBy">
             <Link
-              to={"/Contributor/" + resource.createdBy.id}
+              to={'/Contributor/' + resource.createdBy.id}
               className="link-creator"
             >
               {resource.createdBy.name}
@@ -35,13 +35,13 @@ const ResourceStateless = ({ resource }) => {
               return (
                 <Link
                   key={tag.id}
-                  to={"/TagPage/"}
+                  to={'/TagPage/'}
                   className="link-tag"
                   onClick={() => addSelectedTags(tag)}
                 >
                   #{tag.label}
                 </Link>
-              );
+              )
             })}
           </div>
           <div className="rsce-City">
@@ -52,7 +52,7 @@ const ResourceStateless = ({ resource }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResourceStateless;
+export default ResourceStateless

@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 
 const SignUpForm = props => {
   return (
     <div className="Inner-SignUp">
       <div className="signUp-Title">
-        {props.signType === "SignIn" ? (
+        {props.signType === 'SignIn' ? (
           <div>Welcome Back, Sign In Below!</div>
         ) : (
           <div>Sign Up to Post on BootChamp!</div>
         )}
-      </div>{" "}
+      </div>{' '}
       <form>
         <input
           type="email"
@@ -18,7 +18,7 @@ const SignUpForm = props => {
           value={props.email}
           onChange={e => props.setEmail(e.target.value)}
         />
-        {props.signType === "Create" && (
+        {props.signType === 'Create' && (
           <input
             type="text"
             placeholder="Name"
@@ -37,7 +37,7 @@ const SignUpForm = props => {
         />
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm
